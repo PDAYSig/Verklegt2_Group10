@@ -1,2 +1,22 @@
-/venv
-/DS_Store
+# PyCharm / JetBrains
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# OS
+#  -macOS
+.DS_Store
+
+#  -Windows
+Thumbs.db
+Desktop.ini
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+
