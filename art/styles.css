@@ -58,7 +58,6 @@ body {
     flex: 1;
 }
 
-
 .header-left {
     flex: 1;
 }
@@ -71,7 +70,6 @@ body {
     align-items: center;
     display: flex;
     justify-content: center;
-
 }
 
 .header-right {
@@ -106,7 +104,6 @@ body {
     display: flex;
     width: 100%;
     background-color: #730e31;
-
 }
 
 .nav a {
@@ -129,21 +126,29 @@ body {
 
 .container {
     display: flex;
+    align-items: center;
     justify-content: space-between;
     padding: 2rem;
 }
 
+.control-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1rem;
+}
+
 .control-panel {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
+    align-items: stretch;
     gap: 1rem;
-    width: 40%;
-    margin: 1rem auto;
-    padding: 1rem;
+    width: 20rem;
+    padding: 1.25rem 1.5rem;
     background: white;
-    border: 2px solid maroon;
-    border-radius: 0.5rem;
+    border: 2px solid #ccc;
+    border-radius: 1rem;
+    box-sizing: border-box;
 }
 
 .box {
@@ -187,12 +192,13 @@ body {
 }
 
 .search-bar {
-    flex: 1;
-    width: auto;
-    min-width: 0;
-    padding: 0.5rem;
-    border: 2px solid black;
-    border-radius: 0.3rem;
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    border: 1.5px solid #ccc;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    background-color: #f0f0f0;
+    box-sizing: border-box;
 }
 
 .filter {
@@ -203,21 +209,26 @@ body {
     border-radius: 0.3rem;
 }
 
-.search-bar, filter {
-    font-size: 1rem;
-}
-
 .filter-wrapper {
     position: relative;
-    margin-top: 1rem;
 }
 
 .filter-btn {
+    width: 100%;
     padding: 0.5rem 1rem;
-    border: 2px solid maroon;
+    border: 1.5px solid #ccc;
     background: white;
     cursor: pointer;
-    border-radius: 0.4rem;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+}
+
+.filter-btn:hover {
+    background-color: #f0f0f0;
+}
+
+.filter-btn:active {
+    
 }
 
 .filter-panel {
