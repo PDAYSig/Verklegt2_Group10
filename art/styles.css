@@ -1,0 +1,100 @@
+html, body {
+    margin: 0;
+    font-family: Times New Roman, sans-serif;
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.65rem 1.25rem;
+    background-color: maroon;
+    color: white;
+    position: relative;
+}
+
+.footer {
+    background-color: maroon;
+    color: white;
+    padding: 1rem;
+}
+
+.footer-content {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.content {
+    flex: 1;
+    min-width: 12rem;
+}
+
+.contact {
+    flex: 1;
+    text-align: center;
+}
+
+.map {
+    flex: 1;
+    min-width: 12rem;
+    justify-content: flex-end;
+}
+
+.map iframe {
+    width: 100%;
+    max-width: 18rem;
+    height: 12rem;
+    border: 0;
+    border-radius: 0.5rem;
+}
+
+.main-content {
+    flex: 1;
+}
+
+
+.header-left {
+    flex: 1;
+}
+
+.logo {
+    height: 2.5rem;
+}
+
+.header-center {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+
+}
+
+.header-right {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.login-btn {
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    background-color: dodgerblue;
+    border-radius: 0.3rem;
+    font-size: 1rem;
+}
+
+.profile-pic {
+    height: 2.5rem;
+    width: 2.5rem;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+
