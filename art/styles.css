@@ -58,7 +58,6 @@ body {
     flex: 1;
 }
 
-
 .header-left {
     flex: 1;
 }
@@ -71,7 +70,6 @@ body {
     align-items: center;
     display: flex;
     justify-content: center;
-
 }
 
 .header-right {
@@ -106,7 +104,6 @@ body {
     display: flex;
     width: 100%;
     background-color: #730e31;
-
 }
 
 .nav a {
@@ -129,9 +126,29 @@ body {
 
 .container {
     display: flex;
-    gap: 1.5rem;
+    align-items: center;
     justify-content: space-between;
     padding: 2rem;
+}
+
+.control-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1rem;
+}
+
+.control-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+    width: 20rem;
+    padding: 1.25rem 1.5rem;
+    background: white;
+    border: 2px solid #ccc;
+    border-radius: 1rem;
+    box-sizing: border-box;
 }
 
 .box {
@@ -145,6 +162,12 @@ body {
     padding: 1rem;
     background-color: maroon;
     box-sizing: border-box;
+}
+
+.box2 {
+    display: flex;
+    align-items: center;
+    border: 2px solid black;
 }
 
 .box-title {
@@ -166,4 +189,76 @@ body {
     flex: 1;
     object-fit: cover;
     border-radius: 0.5rem;
+}
+
+.search-bar {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    border: 1.5px solid #ccc;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    background-color: #f0f0f0;
+    box-sizing: border-box;
+}
+
+.filter {
+    width: 90%;
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+    border: 2px solid black;
+    border-radius: 0.3rem;
+}
+
+.filter-wrapper {
+    position: relative;
+}
+
+.filter-btn {
+    width: 100%;
+    padding: 0.5rem 1rem;
+    border: 1.5px solid #ccc;
+    background: white;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+}
+
+.filter-btn:hover {
+    background-color: #f0f0f0;
+}
+
+.filter-btn:active {
+    
+}
+
+.filter-panel {
+    display: none;
+    position: absolute;
+    top: 3rem;
+    left: 0;
+    width: 16rem;
+    background: white;
+    color: black;
+    border: 2px solid maroon;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    z-index: 100;
+}
+
+.filter-wrapper:hover .filter-panel {
+    display: block;
+}
+
+.filter-panel h4 {
+    margin: 0.5rem 0;
+}
+
+.filter-panel label {
+    display: block;
+    font-size: 0.9rem;
+    margin: 0.2rem 0;
+}
+
+.prize-slider {
+    width: 100%;
 }
