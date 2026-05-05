@@ -29,7 +29,7 @@
 <nav class="nav">
     <a href="#">placeholder</a>
     <a href="#">placeholder</a>
-    <a href="#">placeholder</a>
+    <a href="#" style="background-color: cadetblue">Create listing</a>
 </nav>
 
 <div class="container">
@@ -42,38 +42,46 @@
         </div>
     </div>
 
-    <div class="control-wrapper">
-        <div class="control-panel">
-            <input type="text" class="search-bar" placeholder="Search...">
-            <div class="filter-wrapper">
-                <button class="filter-btn">Filters</button>
-                <div class="filter-panel">
-                    <h4>Sort by</h4>
-                    <select name="sort">
-                        <option value="">-- Select --</option>
-                        <option value="newest">Newest</option>
-                        <option value="oldest">Oldest</option>
-                    </select>
+<div class="control-wrapper">
+    <div class="control-panel">
+        <input type="text" class="search-bar" placeholder="Search...">
+        <div class="filter-wrapper">
+            <button class="filter-btn">Filters</button>
+            <div class="filter-panel">
+                <h4>Sort by</h4>
+                <select name="sort">
+                    <option value="">-- Select --</option>
+                    <option value="newest">Newest</option>
+                    <option value="oldest">Oldest</option>
+                </select>
 
-                    <h4>Size</h4>
-                    <label><input type="checkbox"> Small</label>
-                    <label><input type="checkbox"> Medium</label>
-                    <label><input type="checkbox"> Large</label>
+                <h4>Size</h4>
+                <label><input type="checkbox"> Small</label>
+                <label><input type="checkbox"> Medium</label>
+                <label><input type="checkbox"> Large</label>
 
-                    <h4>Medium</h4>
-                    <select name="medium">
-                        <option value="">-- Select --</option>
-                        <option value="oil">Oil painting</option>
-                        <option value="acrylic">Acrylic</option>
-                        <option value="digital">Digital</option>
-                    </select>
+                <h4>Medium</h4>
+                <select name="medium">
+                    <option value="">-- Select --</option>
+                    <option value="oil">Oil painting</option>
+                    <option value="acrylic">Acrylic</option>
+                    <option value="digital">Digital</option>
+                </select>
 
-                    <h4>Price</h4>
-                    <input type="range" min="0" max="1000">
-                </div>
+                <h4>Price</h4>
+                <input type="range" min="0" max="1000">
             </div>
         </div>
     </div>
+
+    <div class="sold-box">
+        <h2 class="sold-title">Newly sold</h2>
+        <div class="sold-image-row">
+            <img src="image7.jpg" alt="Image 7">
+            <img src="image8.jpg" alt="Image 8">
+        </div>
+    </div>
+</div>
 
     <div class="box">
         <h2 class="box-title">Active bids</h2>
