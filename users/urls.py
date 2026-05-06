@@ -20,5 +20,6 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='users-index'),
+    path('all_art/', views.all_art, name="all_art"),
     path('<int:id>', views.user_by_id, name='user_by_id')
 ]
