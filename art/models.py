@@ -9,7 +9,11 @@ class art_listing(models.Model):
     description = models.TextField(max_length=500)
     seller_id = models.ForeignKey(sellers, on_delete=models.CASCADE)
     artist_name = models.CharField(max_length=255)
+    style = models.CharField(max_length=255)
     medium = models.CharField(max_length=255)
+    year_created = models.DateField(default=date.today)
+    edition = models.CharField(max_length=255)
+    provenance = models.TextField(max_length=500)
     date_added = models.DateField(default=date.today)
     starting_price = models.IntegerField(default=0)
     current_bid = models.IntegerField(default=0)
@@ -17,7 +21,6 @@ class art_listing(models.Model):
     # height_cm = models.FloatField(default=0)
     # width_cm = models.FloatField(default=0)
     # weight_kg = models.FloatField(default=0)
-    # date_of_creation = models.DateField(default=date.today)
     # thumbnail_image_url = models.ForeignKey("art_image", on_delete=models.CASCADE)
 
     def __str__(self):
