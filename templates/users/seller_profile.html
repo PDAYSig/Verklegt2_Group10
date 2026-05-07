@@ -5,16 +5,12 @@
 <div class="profile-container">
 
     <div class="profile-header">
-
         <img src="{{ user.profile.image }}" class="profile-big">
 
         <div class="profile-info">
             <h2>{{ user.username }}</h2>
-
             <p class="seller-type">{{ user.profile.seller_type }}</p>
-
             <p>{{ user.profile.bio|default:"no bio yet" }}</p>
-
         </div>
     </div>
 
@@ -24,7 +20,9 @@
     <div class="bid-grid">
         {% for item in art %}
         <div class="bid-card">
-            <img src="{{ item.image.url }}">
+            <a href="{% url 'artwork' item.id %}">
+                <img src="{{ item.image.url }}">
+            </a>
 
             <div class="bid-info">
                 <h4>{{ item.title }}</h4>

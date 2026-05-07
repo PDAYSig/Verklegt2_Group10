@@ -33,15 +33,24 @@
 
                 <h4>Price</h4>
                 <input type="range" min="0" max="1000">
+
+                <button type="submit">Submit</button>
             </div>
         </div>
     </div>
 
-<div class="image-grid">
-    {% for img in images %}
-        <img src="{{ img }}">
-    {% endfor %}
-</div>
+    <div class="image-grid">
+
+        {% for item in listings %}
+            <a href="{% url 'artwork' item.id %}">
+                <div class="card">
+                    <h3>{{ item.title }}</h3>
+                    <p>{{ item.artist_name }}</p>
+                    <p>${{ item.current_bid }}</p>
+                </div>
+            </a>
+        {% endfor %}
+    </div>
 
 </div>
 

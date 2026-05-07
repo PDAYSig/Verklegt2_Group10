@@ -468,3 +468,63 @@ body {
     gap: 1rem;
     margin-top: 1rem;
 }
+
+.artwork-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    padding: 2.5rem;
+}
+
+.artwork-images {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-art-image {
+    width: 100%;
+    max-width: 32rem;
+    border-radius: 0.75rem;
+    object-fit: cover;
+}
+
+.artwork-info {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+}
+
+.artwork-info h1 {
+    margin-top: 0;
+    font-size: 1.75rem;
+}
+
+.artwork-info p {
+    font-size: 1rem;
+}
+
+.bid-box {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.bid-box input {
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    border: 2px solid black;
+    font-size: 1rem;
+}
+
+.bid-box button {
+    background: dodgerblue;
+}
+
+.artwork-about {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: whitesmoke;
+    border-radius: 0.75rem;
+}

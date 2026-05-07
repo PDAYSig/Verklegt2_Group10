@@ -25,8 +25,9 @@
     <div class="bid-grid">
         {% for bid in bids %}
         <div class="bid-card">
-            <img src="{{ bid.item.image.url }}">
-
+            <a href="{% url 'artwork' bid.item.id %}">
+                <img src="{{ bid.item.image.url }}">
+            </a>
             <div class="bid-info">
                 <h4>{{ bid.item.title }}</h4>
                 <p class="price-tag">${{ bid.amount }}</p>

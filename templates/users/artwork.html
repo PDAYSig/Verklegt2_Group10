@@ -1,0 +1,60 @@
+{% extends 'users/../base.html' %}
+
+{% block content %}
+
+<div class="artwork-container">
+
+    <div class="artwork-images">
+        {% for img in images %}
+            {% if img.is_thumbnail %}
+                <img src="{{ img.image.url }}" alt="{{ img.title }}" class="main-art-image">
+            {% endif %}
+        {% empty %}
+            <p>No images available</p>
+        {% endfor %}
+    </div>
+
+    <div class="artwork-info">
+
+        <h1>{{ item.title }}</h1>
+
+        <p><strong>Artist:</strong> {{ item.artist_name }}</p>
+        <p><strong>Medium:</strong> {{ item.medium }}</p>
+
+        <p><strong>Year:</strong> {{ item.year_created }}</p>
+
+        <p><strong>Dimensions:</strong> ? x ? cm</p>
+
+        <p>
+            <strong>Seller:</strong>
+            <a href="{% url 'seller_profile' %}">
+                View seller profile
+            </a>
+        </p>
+
+        <p><strong>Auction status:</strong> Active</p>
+
+        <hr>
+
+        <p><strong>Starting price:</strong> ${{ item.starting_price }}</p>
+        <p><strong>Current bid:</strong> ${{ item.current_bid }}</p>
+
+        <hr>
+
+        <div class="bid-box">
+            <label>Place your bid:</label>
+            <input type="number" name="bid_amount" placeholder="Enter amount">
+            <button type="submit">Place bid</button>
+        </div>
+
+    </div>
+
+    <div class="artwork-about">
+        <h2>About the artwork</h2>
+        <p>{{ item.description }}</p>
+        <p>{{ item.provenance }}</p>
+    </div>
+
+</div>
+
+{% endblock %}
