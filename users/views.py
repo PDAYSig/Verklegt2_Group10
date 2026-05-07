@@ -35,6 +35,9 @@ def edit_profile(request):
 
 def seller_profile(request):
     return render(request, "users/seller_profile.html")
+
+def artwork(request):
+    return render(request, "users/artwork.html")
 def user_by_id(request, id):
     return HttpResponse(f"response from {request.path} with id {id}")
 
