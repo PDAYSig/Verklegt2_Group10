@@ -32,6 +32,9 @@ def edit_profile(request):
         profile.save()
         return redirect("profile")
     return render(request, "users/edit_profile.html")
+
+def seller_profile(request):
+    return render(request, "users/seller_profile.html")
 def user_by_id(request, id):
     return HttpResponse(f"response from {request.path} with id {id}")
 
