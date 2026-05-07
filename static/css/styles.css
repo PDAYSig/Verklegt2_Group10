@@ -345,11 +345,11 @@ body {
 
 .uppload-profile-pic-outer {
     position: absolute;
-    top: 1rem;   /* adjust spacing from top */
-    left: 1rem;  /* adjust spacing from left */
+    top: 10rem;   /* adjust spacing from top */
+    left: 2rem;  /* adjust spacing from left */
 
     width: 14rem;
-    height: 16rem;
+    height: 14rem;
     background-color: #e7d0d5; /* outer circle color */
     border-radius: 50%;
     display: flex;
@@ -363,11 +363,31 @@ body {
     border: 1px solid black;
     border-radius: 50%;
 }
+.uppload-image-box-outer{
+    position: absolute;
+    top: 10rem;   /* adjust spacing from top */
+    left: 2rem;  /* adjust spacing from left */
+
+    width: 14rem;
+    height: 14rem;
+    background-color: #e7d0d5; /* outer circle color */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.uppload-image-box--inner {
+    width: 12rem;
+    height: 12rem;
+    background-color: white;
+    border: 1px solid black;
+}
 
 .cross {
-    position: relative;
-    width: 8rem;
-    height: 8rem;
+    position: absolute;
+    top: 4rem;
+    left: 5.5rem;
+    width: 3rem;
+    height: 3rem;
 }
 
 .cross::before,
@@ -375,25 +395,29 @@ body {
     content: "";
     position: absolute;
     background: black;
+
+    /*top: 50%;
+    left: 50%;
+    transform-origin: center;*/
 }
 
 .cross::before {
     width: 100%;
-    height: 1rem;
+    height: 0.15rem;
     top: 50%;
     left: 0;
-    transform: translateY(-50%);
+    transform: translateY( -50%);
 }
 
 .cross::after {
-    width: 1rem;
+    width: 0.15rem;
     height: 100%;
     left: 50%;
     top: 0;
-    transform: translateX(-50%);
+    transform: translateX( -50%);
 }
 .profile-container {
-    padding: 2rem;
+    padding: 1rem;
 }
 
 .profile-header {
