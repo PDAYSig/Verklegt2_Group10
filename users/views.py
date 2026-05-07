@@ -44,3 +44,5 @@ def recently_sold(request):
 def user_by_id(request, id):
     return HttpResponse(f"response from {request.path} with id {id}")
 
+def create_user(request):
+    return render(request, "users/create_profile.html")
