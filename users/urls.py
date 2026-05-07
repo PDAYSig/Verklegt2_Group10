@@ -26,6 +26,8 @@ urlpatterns = [
 
     path('profile/', views.profile, name="profile"),
 
+    path('seller_profile/', views.seller_profile, name="seller_profile"),
+
     path('edit_profile/', views.edit_profile, name="edit_profile"),
     path('<int:id>', views.user_by_id, name='user_by_id')
 ]
