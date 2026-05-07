@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <form method="POST" action="{% url 'create_listing' %}">
+    {% csrf_token %}
+    {{ form }}
+
+    <input type="submit" class="submit-btn" value="Create Listing" formmethod="POST">
+    </form>
+
+{% endblock %}
