@@ -38,6 +38,9 @@ def seller_profile(request):
 
 def artwork(request):
     return render(request, "users/artwork.html")
+
+def recently_sold(request):
+    return render(request, "users/recently_sold.html")
 def user_by_id(request, id):
     return HttpResponse(f"response from {request.path} with id {id}")
 

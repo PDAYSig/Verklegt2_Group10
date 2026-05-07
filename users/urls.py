@@ -31,5 +31,7 @@ urlpatterns = [
     path('artwork/', views.artwork, name='artwork'),
 
     path('edit_profile/', views.edit_profile, name="edit_profile"),
+
+    path('recently_sold/', views.recently_sold, name="recently_sold"),
     path('<int:id>', views.user_by_id, name='user_by_id')
 ]

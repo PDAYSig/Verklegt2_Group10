@@ -56,7 +56,9 @@
     </div>
 
     <div class="sold-box">
-        <h2 class="sold-title">Newly sold</h2>
+        <a href="{% url 'recently_sold' %}">
+            <h2 class="sold-title">Recently sold</h2>
+        </a>
         <div class="sold-image-row">
             <a href="{% url 'artwork' %}">
                 <img src="image7.jpg" alt="Image 7">
