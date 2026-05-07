@@ -22,12 +22,14 @@ body {
     background-color: maroon;
     color: white;
     position: relative;
+
 }
 
 .footer {
     background-color: maroon;
     color: white;
     padding: 1rem;
+    margin-top: auto;
 }
 
 .footer-content {
@@ -309,4 +311,34 @@ body {
     height: 6rem;
     object-fit: cover;
     border-radius: 0.4rem;
+}
+
+.login-page{
+    min-height: 100%;
+    min-width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5rem;
+}
+
+.login-window {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 28rem;
+    width: 28rem;
+    background: #730e31;
+    border: 1px solid black;
+}
+
+.login-window .login-form {
+    display: flex;
+    flex-direction: column;
+    height: 70%;
+    width: 70%;
+    align-items: center;
+    gap: 0.5rem;
+    background: #e7d0d5;
 }
