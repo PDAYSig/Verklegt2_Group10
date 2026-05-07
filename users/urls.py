@@ -23,5 +23,9 @@ urlpatterns = [
 
     path('login/', views.login, name='login'),
     path('all_art/', views.all_art, name="all_art"),
+
+    path('profile/', views.profile, name="profile"),
+
+    path('edit_profile/', views.edit_profile, name="edit_profile"),
     path('<int:id>', views.user_by_id, name='user_by_id')
 ]
