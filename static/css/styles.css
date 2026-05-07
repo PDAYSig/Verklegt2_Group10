@@ -343,26 +343,8 @@ body {
     background: #e7d0d5;
 }
 
-.uppload-profile-pic-outer {
-    position: absolute;
-    top: 10rem;   /* adjust spacing from top */
-    left: 2rem;  /* adjust spacing from left */
 
-    width: 14rem;
-    height: 14rem;
-    background-color: #e7d0d5; /* outer circle color */
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.uppload-profile-pic-inner {
-    width: 12rem;
-    height: 12rem;
-    background-color: white;
-    border: 1px solid black;
-    border-radius: 50%;
-}
+
 .uppload-image-box-outer{
     position: absolute;
     top: 10rem;   /* adjust spacing from top */
@@ -375,13 +357,18 @@ body {
     align-items: center;
     justify-content: center;
 }
-.uppload-image-box--inner {
-    width: 12rem;
-    height: 12rem;
+.uppload-image-box-inner {
+    width: 13rem;
+    height: 13rem;
     background-color: white;
     border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-
+#special-shape {
+  border-radius: 50%;
+}
 .cross {
     position: absolute;
     top: 4rem;
@@ -416,6 +403,92 @@ body {
     top: 0;
     transform: translateX( -50%);
 }
+
+/*stuff for create listing*/
+.box-listing-basic{
+    background-color: #e7d0d5;
+    border-radius: 0.5rem;
+    position: absolute;
+}
+#box-title{
+    top: 10rem;
+    right: 13rem;
+    width: 20rem;
+    height: 2rem;
+}
+/*second row*/
+#box-medium{
+    top: 13rem;
+    right: 27rem;
+    width: 6rem;
+    height: 2rem;
+}
+#box-height{
+    top: 13rem;
+    right: 20rem;
+    width: 6rem;
+    height: 2rem;
+}
+#box-with{
+    top: 13rem;
+    right: 13rem;
+    width: 6rem;
+    height: 2rem;
+}
+/*third row*/
+#box-artist{
+    top:16rem;
+    right: 23.5rem;
+    width: 9.5rem;
+    height: 2rem;
+}
+#box-edition{
+    top: 16rem;
+    right: 13rem;
+    width: 9.5rem;
+    height: 2rem;
+}
+#box-SB{
+    top:24rem;
+    right: 23.5rem;
+    width: 9.5rem;
+    height: 3rem;
+}
+#box-MB{
+    top:24rem;
+    right: 13rem;
+    width: 9.5rem;
+    height: 3rem;
+}
+.box-date{
+    background-color: white;
+    border: 0.1rem solid black;
+    border-radius: 0.5rem;
+    position: absolute;
+    top: 20rem;
+    width: 6rem;
+    height: 2rem;
+}
+#box-dd{
+    right: 27rem;
+}
+#box-mm{
+    right: 20rem;
+}
+#box-yyyy{
+    right: 13rem;
+}
+
+.box-publishlisting{
+    background-color: #730e31;
+    position: absolute;
+    color: white;
+    top: 29rem;
+    right: 13rem;
+    width: 20rem;
+    height: 3rem;
+}
+
 .profile-container {
     padding: 1rem;
 }
