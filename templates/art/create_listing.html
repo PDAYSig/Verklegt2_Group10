@@ -1,6 +1,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
+     <div class="uppload-image-box-outer">
+        <div class="uppload-image-box-inner">
+            <div class="cross"></div>
+        </div>
+    </div>
     <form method="POST" action="{% url 'create_listing' %}">
     {% csrf_token %}
     {{ form }}
