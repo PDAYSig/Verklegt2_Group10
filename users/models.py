@@ -1,23 +1,23 @@
 from django.db import models
 
+from django.contrib.auth.models import User
 # Create your models here.
 
 
 
-class users(models.Model):
+class Profile(models.Model):
     id = models.AutoField(primary_key=True)
-    username = models.CharField(max_length=255)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     password = models.CharField(max_length=255)
-    user_profile_image = models.ImageField(upload_to="images/")
-
+    user_address = models.CharField(max_length=255)
+    profile_image = models.TextField(max_length=9999)
     def __str__(self):
-        return f" {self.username} {str(self.id)}"
+        return f" {self.user_id.username} {self.profile_image}"
 
-class sellers(models.Model):
+class Seller(models.Model):
     id = models.AutoField(primary_key=True)
-    user_id = models.ForeignKey(users, on_delete=models.CASCADE)
+    user_id = models.ForeignKey(Profile, on_delete=models.CASCADE)
     is_gallery = models.BooleanField(default=False)
     rating = models.FloatField(default=0)
-    address = models.CharField(max_length=255)
     def __str__(self):
         return f"{self.user_id.username} {str(self.id)}"

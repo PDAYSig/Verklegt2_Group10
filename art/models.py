@@ -1,13 +1,13 @@
 from datetime import date
 
 from django.db import models
-from users.models import sellers
+from users.models import Seller
 # Create your models here.
 class art_listing(models.Model):
     id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=255)
     description = models.TextField(max_length=500)
-    seller_id = models.ForeignKey(sellers, on_delete=models.CASCADE)
+    seller_id = models.ForeignKey(Seller, on_delete=models.CASCADE)
     artist_name = models.CharField(max_length=255)
     style = models.CharField(max_length=255)
     medium = models.CharField(max_length=255)
@@ -18,8 +18,6 @@ class art_listing(models.Model):
     starting_price = models.IntegerField(default=0)
     current_bid = models.IntegerField(default=0)
     mimimum_bid = models.IntegerField(default=0)
-    # height_cm = models.FloatField(default=0)
-    # width_cm = models.FloatField(default=0)
     # weight_kg = models.FloatField(default=0)
     # thumbnail_image_url = models.ForeignKey("art_image", on_delete=models.CASCADE)
 
