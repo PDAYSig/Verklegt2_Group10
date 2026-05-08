@@ -1,3 +1,4 @@
+from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 from django.urls import path
 from django.http import HttpResponse
@@ -44,5 +45,16 @@ def recently_sold(request):
 def user_by_id(request, id):
     return HttpResponse(f"response from {request.path} with id {id}")
 
-def create_user(request):
-    return render(request, "users/create_profile.html")
+def register(request):
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("login")
+        else:
+            return render(request, "users/register.html", {
+                "form": form,
+                "message": "form is invalid"})
+    return render(request, "users/register.html", {
+        "form": UserCreationForm()
+    })
