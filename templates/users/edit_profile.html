@@ -10,8 +10,10 @@
 
 
         <div class="edit-preview">
-            <img src="{{ user.profile.image.url }}" class="profile-big">
-            <h3>{{ user.username }}</h3>
+            {% if user.profile.image %}
+                <img src="{{ user.user_profile_image.url }}" class="profile-big">
+            {% endif %}
+            <h3>{{ user_obj.username }}</h3>
         </div>
 
         <form method="POST" enctype="multipart/form-data" class="edit-form">
@@ -21,7 +23,7 @@
             <input type="file" name="image">
 
             <label>Bio</label>
-            <textarea name="bio" rows="4">{{ user.profile.bio }}</textarea>
+            <textarea name="bio" rows="4">{{ user.profile.bio|default:'' }}</textarea>
 
 
             <div class="edit-actions">
