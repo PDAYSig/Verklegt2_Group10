@@ -35,6 +35,6 @@ urlpatterns = [
     path('recently_sold/', views.recently_sold, name="recently_sold"),
     path('<int:id>', views.user_by_id, name='user_by_id'),
 
-    path('login/create_user/', views.create_user, name='create_user'),
+    path('login/register/', views.register, name='register'),
 
 ]
