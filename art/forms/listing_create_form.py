@@ -5,7 +5,7 @@ class ListingCreateForm(ModelForm):
     image = forms.ImageField(required=True, widget=forms.FileInput(attrs={'class': 'form-control'}))
     class Meta:
         model = art_listing
-        exclude = ['id']
+        exclude = ['id','seller_id']
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
             'description': forms.Textarea(attrs={'class': 'form-control'}),
@@ -15,4 +15,5 @@ class ListingCreateForm(ModelForm):
             'medium' : forms.Select(attrs={'class': 'form-control'}),
             'style' : forms.Select(attrs={'class': 'form-control'}),
             'mimimum_bid' : forms.NumberInput(attrs={'class': 'form-control'}),
+            'provenance' : forms.Textarea(attrs={'class': 'form-control'}),
         }
