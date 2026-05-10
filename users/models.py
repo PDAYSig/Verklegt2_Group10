@@ -12,13 +12,14 @@ class Profile(models.Model):
     password = models.CharField(max_length=255)
     user_address = models.CharField(max_length=255)
     profile_image = models.TextField(max_length=9999)
+    is_seller = models.BooleanField(default=False)
     def __str__(self):
-        return f" {self.user_id.username} {self.profile_image}"
+        return f" {self.user.username} {self.profile_image}"
 
 class Seller(models.Model):
     id = models.AutoField(primary_key=True)
-    user_id = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     is_gallery = models.BooleanField(default=False)
     rating = models.FloatField(default=0)
     def __str__(self):
-        return f"{self.user_id.username} {str(self.id)}"
+        return f"{self.profile.user.username} {str(self.id)}"
