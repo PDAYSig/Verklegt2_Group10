@@ -7,7 +7,7 @@ class art_listing(models.Model):
     id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=255)
     description = models.TextField(max_length=500)
-    seller_id = models.ForeignKey(Seller, on_delete=models.CASCADE)
+    seller = models.ForeignKey(Seller, on_delete=models.CASCADE)
     artist_name = models.CharField(max_length=255)
     style = models.CharField(max_length=255)
     medium = models.CharField(max_length=255)
@@ -26,7 +26,7 @@ class art_listing(models.Model):
 
 class art_image(models.Model):
     id = models.AutoField(primary_key=True)
-    listing_id = models.ForeignKey(art_listing, on_delete=models.CASCADE)
+    listing = models.ForeignKey(art_listing, on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
     is_thumbnail = models.BooleanField(default=False)
     description = models.TextField(max_length=500)
