@@ -24,7 +24,11 @@
         </div>
 
         <div class="header-right">
+            {% if user.is_authenticated %}
+            <a class="a" href="{% url 'profile' %}"><img alt="user profile" src="img.jpg"></a>
+            {% else %}
             <a href="{% url 'login' %}" class="login-btn">Login</a>
+            {% endif %}
         </div>
     </header>
     <nav class="nav">

@@ -1,7 +1,11 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
-from django.urls import path
 from django.http import HttpResponse
+
+from users.forms.create_user_form import CreateProfileForm
+from users.models import Profile
 # Create your views here.
 
 def index(request):
@@ -14,9 +18,21 @@ def all_art(request):
 def login(request):
     return render(request, "users/login.html")
 
+@login_required
 def profile(request):
+    user_profile = Profile.objects.filter(user_id=request.user).first()
+    if request.method == "POST":
+        form = CreateProfileForm(request.POST, instance=user_profile)
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.user = request.user
+            instance.save()
+            return redirect("profile")
+    else:
+        form = CreateProfileForm(instance=user_profile)
     return render(request, "users/profile.html")
 
+@login_required
 def edit_profile(request):
     profile = request.user.profile
 
@@ -47,14 +63,24 @@ def user_by_id(request, id):
 
 def register(request):
     if request.method == "POST":
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
+        user_form = UserCreationForm(request.POST)
+        profile_form = CreateProfileForm(request.POST)
+        if user_form.is_valid() and profile_form.is_valid():
+            user = user_form.save()
+            users_profile = profile_form.save(commit=False)
+            users_profile.user = user
+            users_profile.save()
             return redirect("login")
         else:
+            print(user_form.errors, profile_form.errors)
             return render(request, "users/register.html", {
-                "form": form,
+                "user_form": user_form,
+                "profile_form": profile_form,
                 "message": "form is invalid"})
+    else:
+        user_form = UserCreationForm(request.POST)
+        profile_form = CreateProfileForm(request.POST)
     return render(request, "users/register.html", {
-        "form": UserCreationForm()
+        "user_form": user_form,
+        "profile_form": profile_form,
     })
