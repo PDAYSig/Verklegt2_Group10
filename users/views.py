@@ -1,11 +1,12 @@
-from django.shortcuts import render, redirect
-from django.urls import path
-from django.http import HttpResponse
-from django.contrib.auth import authenticate, login, get_user_model
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-# Create your views here.
+from django.shortcuts import render, redirect
+from django.http import HttpResponse
 
-user = get_user_model()
+from users.forms.create_user_form import CreateProfileForm
+from users.models import Profile
+# Create your views here.
 
 def index(request):
     return render(request, "users/index.html")
@@ -14,41 +15,40 @@ def all_art(request):
     images = [f"https://picsum.photos/300?{i}" for i in range(1, 17)]
     return render(request, "users/all_art.html", {"images": images})
 
-def login_view(request):
-    if request.method == "POST":
-        username = request.POST.get("username")
-        password = request.POST.get("password")
-
-        print("DEBUG:", username, password)  # check terminal
-
-        user = authenticate(request, username=username, password=password)
-
-        if user is not None:
-            login(request, user)
-            return redirect("users-index")
-        else:
-            return render(request, "users/login.html", {
-                "message": "Invalid username and/or password."
-            })
-
+def login(request):
     return render(request, "users/login.html")
 
-
+@login_required
 def profile(request):
-    return render(request, "users/profile.html", {
-        "user_obj": request.user
-    })
+    user_profile = Profile.objects.filter(user_id=request.user).first()
+    if request.method == "POST":
+        form = CreateProfileForm(request.POST, instance=user_profile)
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.user = request.user
+            instance.save()
+            return redirect("profile")
+    else:
+        form = CreateProfileForm(instance=user_profile)
+    return render(request, "users/profile.html")
+
+@login_required
 def edit_profile(request):
-    user_obj = request.user
+    profile = request.user.profile
 
     if request.method == "POST":
-        user_obj.username = request.POST.get("username", user_obj.username)
-        user_obj.save()
-        return redirect("profile")
+        bio = request.POST.get("bio")
+        image = request.FILES.get("image")
 
-    return render(request, "users/edit_profile.html", {
-        "user_obj": user_obj
-    })
+        if bio is not None:
+            profile.bio = bio
+
+        if image:
+            profile.image = image
+
+        profile.save()
+        return redirect("profile")
+    return render(request, "users/edit_profile.html")
 
 def seller_profile(request):
     return render(request, "users/seller_profile.html")
@@ -61,3 +61,25 @@ def recently_sold(request):
 def user_by_id(request, id):
     return HttpResponse(f"response from {request.path} with id {id}")
 
+def register(request):
+    if request.method == "POST":
+        user_form = UserCreationForm(request.POST)
+        profile_form = CreateProfileForm(request.POST)
+        if user_form.is_valid() and profile_form.is_valid():
+            user = user_form.save()
+            users_profile = profile_form.save(commit=False)
+            users_profile.user = user
+            users_profile.save()
+            return redirect("login")
+        else:
+            return render(request, "users/register.html", {
+                "user_form": user_form,
+                "profile_form": profile_form,
+                "message": "form is invalid"})
+    else:
+        user_form = UserCreationForm(request.POST)
+        profile_form = CreateProfileForm(request.POST)
+    return render(request, "users/register.html", {
+        "user_form": user_form,
+        "profile_form": profile_form,
+    })

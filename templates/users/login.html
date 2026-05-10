@@ -2,24 +2,29 @@
 
 {% block content %}
 
-
-    <div class = "login-page">
-        <div class = "login-window">
-            <form class = "login-form" method = "POST">
-                {% csrf_token %}
-                <h1>Login <br></h1>
-                    <div class="form-floating mb-3">
-                        <input class="form-control" id="floatingInput" placeholder="Username" name="username">
-                        <label for="floatingInput">Username</label>
-                    </div>
-                    <div class="form-floating">
-                        <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password">
-                        <label for="floatingPassword">Password</label>
-                    </div>
-                <label for="submit-btn" class="mb-4"></label>
-                <button type="submit">submit</button>
-            <a href="#">Don't have an account? Register</a>
-            </form>
-        </div>
-    </div>
+    <form method="POST", action={% url 'login' %}>
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Login">
+        <a href="register">Don't have an account? Register</a>
+    </form>
+{#    <div class = "login-page">#}
+{#        <div class = "login-window">#}
+{#            <form class = "login-form" method = "POST">#}
+{#                {% csrf_token %}#}
+{#                <h1>Login <br></h1>#}
+{#                    <div class="form-floating mb-3">#}
+{#                        <input class="form-control" id="floatingInput" placeholder="Username" name="username">#}
+{#                        <label for="floatingInput">Username</label>#}
+{#                    </div>#}
+{#                    <div class="form-floating">#}
+{#                        <input type="password" class="form-control" id="floatingPassword" placeholder="Password">#}
+{#                        <label for="floatingPassword">Password</label>#}
+{#                    </div>#}
+{#                <label for="submit-btn" class="mb-4"></label>#}
+{#                <button type="submit">submit</button>#}
+{#            <a href="register">Don't have an account? Register</a>#}
+{#            </form>#}
+{#        </div>#}
+{#    </div>#}
 {% endblock %}
