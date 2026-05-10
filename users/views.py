@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect
 from django.urls import path
 from django.http import HttpResponse
-from django.contrib.auth import authenticate, login
-from .models import users
+from django.contrib.auth import authenticate, login, get_user_model
+from django.contrib.auth.models import User
 # Create your views here.
+
+user = get_user_model()
 
 def index(request):
     return render(request, "users/index.html")
@@ -31,26 +33,16 @@ def login_view(request):
 
     return render(request, "users/login.html")
 
+
 def profile(request):
-    user_obj = users.objects.first()
-
     return render(request, "users/profile.html", {
-        "user_obj": user_obj
+        "user_obj": request.user
     })
-
 def edit_profile(request):
-    user_obj = users.objects.first()
-
-    if user_obj is None:
-        return HttpResponse("No users exist in database yet.")
+    user_obj = request.user
 
     if request.method == "POST":
         user_obj.username = request.POST.get("username", user_obj.username)
-
-        image = request.FILES.get("image")
-        if image:
-            user_obj.user_profile_image = image
-
         user_obj.save()
         return redirect("profile")
 

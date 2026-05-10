@@ -11,7 +11,7 @@
 
         <div class="edit-preview">
             {% if user.profile.image %}
-                <img src="{{ user.user_profile_image.url }}" class="profile-big">
+                <img src="{{ user_obj.username }}" class="profile-big">
             {% endif %}
             <h3>{{ user_obj.username }}</h3>
         </div>
