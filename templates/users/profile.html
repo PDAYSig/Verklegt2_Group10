@@ -1,8 +1,6 @@
-{% extends 'users/../base.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
-
-<div class="profile-container">
 
     <div class="profile-header">
 
@@ -13,9 +11,16 @@
             <p>{{ user.profile.bio|default:"no bio yet" }}</p>
 
             <div class="profile-actions">
-                <a href="{% url 'edit_profile' %}" class="btn-primary">Edit profile</a>
+                <a href="{% url 'edit_profile' %}" class="btn btn-primary">Edit profile</a>
                 <a>hér mun koma favorites</a>
+                <div class="logout">
+                    <form action="{% url 'logout' %}" method="POST">
+                        {% csrf_token %}
+                    <button type="submit" class="btn-primary">Logout</button>
+                    </form>
+                </div>
             </div>
+
         </div>
     </div>
 
