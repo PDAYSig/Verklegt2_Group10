@@ -72,7 +72,6 @@ def register(request):
             users_profile.save()
             return redirect("login")
         else:
-            print(user_form.errors, profile_form.errors)
             return render(request, "users/register.html", {
                 "user_form": user_form,
                 "profile_form": profile_form,
