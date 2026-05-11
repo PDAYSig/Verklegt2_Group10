@@ -7,7 +7,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // since the submit button is not technically a part of the search bar, it has to be declared separately
             const searchInput = document.getElementById('search-bar').value;
-
             const response = await fetch(`/all_art/?search_filter=${(searchInput)}`);
 
 

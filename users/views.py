@@ -18,20 +18,25 @@ def index(request):
 
 def all_art(request):
     listings = art_listing.objects.all()
-    if 'search_filter' in request.GET:
-        data = [{
-            'id' : item.id,
-            'title' : item.title,
-            'current_bid' : str(item.current_bid),
-            'thumbnail_image' : item.thumbnail_image.url if item.thumbnail_image else '',
-        }
-        for item in art_listing.objects.filter(title__icontains=request.GET['search_filter']).order_by('title')]
-        return JsonResponse(data, safe=False)
-    if 'medium' in request.GET:
-        data = [{
-            'id' : item.id,
-            'title' : item.title,
-        }]
+
+    search_filter = request.GET.get('search_filter')
+    medium = request.GET.get('medium')
+    sort = request.GET.get('sort')
+
+    # if user types a name into the searchbar
+    if search_filter:
+        listings = listings.filter(title__icontains=search_filter)
+    # if user selects a medium
+    if medium:
+        listings = listings.filter(medium=medium)
+    # if user selects to sort by newest first
+    if sort == "newest":
+        listings = listings.order_by('-date_added')
+    # if user selects to sort by oldest first
+    elif sort == "oldest":
+        listings = listings.order_by('date_added')
+    
+    #TODO add extra filters for size and style
     return render(request, "users/all_art.html", {"listings": listings})
 
 def login(request):
