@@ -17,6 +17,8 @@ Including another URLconf
 from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import path, include
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('', views.index, name='users-index'),
@@ -27,9 +29,9 @@ urlpatterns = [
 
     path('profile/', views.profile, name="profile"),
 
-    path('seller_profile/', views.seller_profile, name="seller_profile"),
+    path("seller/<int:id>/", views.seller_profile, name="seller_profile"),
 
-    path('artwork/', views.artwork, name='artwork'),
+    path('artwork/<int:id>/', views.artwork, name='artwork'),
 
     path('edit_profile/', views.edit_profile, name="edit_profile"),
 
@@ -39,3 +41,5 @@ urlpatterns = [
     path('login/register/', views.register, name='register'),
 
 ]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

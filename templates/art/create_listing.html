@@ -18,10 +18,11 @@
 {#    <div class="box-listing-basic" id="box-SB">Starting Bid:</div>#}
 {#    <div class="box-listing-basic" id="box-MB">Min Bid increment:</div>#}
 {#    <div class="box-publishlisting">Publish Listing</div>#}
-    <form method="POST" action="{% url 'create_listing' %}">
+    <form method="POST" action="{% url 'create_listing' %}" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form }}
 
+    <input type="file" name="images" multiple class="form-control">
     <input type="submit" class="submit-btn" value="Create Listing" formmethod="POST">
     </form>
 

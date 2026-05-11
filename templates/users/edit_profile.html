@@ -11,9 +11,9 @@
 
         <div class="edit-preview">
             {% if user.profile.image %}
-                <img src="{{ user_obj.username }}" class="profile-big">
+                <img src="{{ user.profile.image.url }}" class="profile-big">
             {% endif %}
-            <h3>{{ user_obj.username }}</h3>
+            <h3>{{ user.username }}</h3>
         </div>
 
         <form method="POST" enctype="multipart/form-data" class="edit-form">

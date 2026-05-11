@@ -1,16 +1,19 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, JsonResponse
 
 from art.models import art_listing
 from users.forms.create_user_form import CreateProfileForm
-from users.models import Profile
+from users.models import Profile, Seller
 # Create your views here.
 
 def index(request):
-    return render(request, "users/index.html")
+    items = art_listing.objects.all().order_by('-date_added')[:3]
+    return render(request, "users/index.html", {
+        "items": items
+    })
 
 def all_art(request):
     if 'search_filter' in request.GET:
@@ -33,7 +36,8 @@ def login(request):
 
 @login_required
 def profile(request):
-    user_profile = Profile.objects.filter(user_id=request.user).first()
+    user_profile, created = Profile.objects.get_or_create(user=request.user)
+
     if request.method == "POST":
         form = CreateProfileForm(request.POST, instance=user_profile)
         if form.is_valid():
@@ -43,7 +47,11 @@ def profile(request):
             return redirect("profile")
     else:
         form = CreateProfileForm(instance=user_profile)
-    return render(request, "users/profile.html")
+
+    return render(request, "users/profile.html", {
+        "form": form,
+        "user_profile": user_profile
+    })
 
 @login_required
 def edit_profile(request):
@@ -57,17 +65,35 @@ def edit_profile(request):
             profile.bio = bio
 
         if image:
-            profile.image = image
+            profile.profile_image = image
 
         profile.save()
         return redirect("profile")
+
     return render(request, "users/edit_profile.html")
 
-def seller_profile(request):
-    return render(request, "users/seller_profile.html")
 
-def artwork(request):
-    return render(request, "users/artwork.html")
+
+def seller_profile(request, id):
+    seller = get_object_or_404(Seller, profile__user__id=id)
+    user = seller.profile.user
+
+    art = art_listing.objects.filter(seller=seller)
+
+    return render(request, 'users/seller_profile.html', {
+        'user': user,
+        'seller': seller,
+        'art': art
+    })
+def artwork(request, id):
+    item = art_listing.objects.get(id=id)
+    images = item.images.all()
+
+    return render(request, 'users/artwork.html', {
+        'item': item,
+        'images': images,
+        'recently_sold_items': art_listing.objects.none()
+    })
 
 def recently_sold(request):
     return render(request, "users/recently_sold.html")
