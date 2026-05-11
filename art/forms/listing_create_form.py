@@ -1,5 +1,3 @@
-from unittest.mock import DEFAULT
-
 from django.forms import ModelForm
 from django import forms
 from art.models import art_listing
@@ -15,5 +13,6 @@ class ListingCreateForm(ModelForm):
             'year_created' : forms.DateInput(attrs={'class': 'form-control'}),
             'medium' : forms.Select(attrs={ 'class': 'form-control'}),
             'style' : forms.Select(attrs={'class': 'form-control'}),
-            'mimimum_bid' : forms.NumberInput(attrs={'class': 'form-control'}),
+            'minimum_bid' : forms.NumberInput(attrs={'class': 'form-control'}),
+            'provenance' : forms.Textarea(attrs={'class': 'form-control'}),
         }

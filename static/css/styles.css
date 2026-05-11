@@ -4,6 +4,82 @@ html, body {
     height: 100%;
 }
 
+form:has(.form-control){
+    grid-template-columns: repeat(3,auto);
+    margin-left: auto;
+    display: grid;
+
+    gap: 1.5rem;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    justify-content: right;
+    width: fit-content;
+    position: relative;
+
+}
+/*form > div:has(.form-control){*/
+/*    border-radius: 1rem;*/
+/*    padding: 0.75rem 0.5rem 0.4rem;*/
+/*}*/
+/*form > div > label:has(.form-control){*/
+/*    position: relative;*/
+/*    !*font-size: 0.8rem;*!*/
+/*    display: grid;*/
+/*    !*align-items: center;*!*/
+/*    margin-right:auto ;*/
+/*    padding: 0 0.25rem;*/
+/*    pointer-events: none;*/
+
+/*    !*grid-template-columns: auto 1fr;*/
+/*    column-gap: 0.75rem;*!*/
+
+/*}*/
+/*error windo/button*/
+.error-form{
+    background-color: #e7d0d5;
+    border-radius: 0.5rem;
+    border:0.2rem solid black;
+    padding: 1rem;
+    width: 25rem;
+    height: 13rem;
+    justify-content: center;
+    display: grid;
+    margin: auto
+}
+form:has(input.ok-btn) input.ok-btn{
+    background-color: #730e31;
+    position: relative;
+    color: white;
+    width: 7rem;
+    height: 2rem;
+    -webkit-appearance: none;
+    cursor: pointer;
+}
+.login-form{
+    background-color: #e7d0d5;
+    border-radius: 0.5rem;
+    border:0.2rem solid black;
+    padding: 1rem;
+    width: 25rem;
+    height: 13rem;
+    justify-content: center;
+    display: grid;
+    margin: auto;
+}
+#id-username,
+#id-password{
+    border-radius: 0.5rem;
+    background-color: #e7d0d5;
+}
+form:has(input.submit-L) input.submit-L{
+    background-color: #730e31;
+    position: relative;
+    color: white;
+    width: 7rem;
+    height: 2rem;
+    -webkit-appearance: none;
+    cursor: pointer;
+}
 .a {
     text-decoration: none;
     color: white;
@@ -411,89 +487,112 @@ body {
     transform: translateX( -50%);
 }
 
-/*stuff for create listing*/
-.box-listing-basic{
+.helptext{
     background-color: #e7d0d5;
-    border-radius: 0.5rem;
-    position: absolute;
+    position: relative;
 }
-#box-title{
-    top: 10rem;
-    right: 13rem;
+/*#id-username-helptext{
     width: 20rem;
     height: 2rem;
-}
-/*second row*/
-#box-medium{
-    top: 13rem;
-    right: 27rem;
-    width: 6rem;
-    height: 2rem;
-}
-#box-height{
-    top: 13rem;
-    right: 20rem;
-    width: 6rem;
-    height: 2rem;
-}
-#box-with{
-    top: 13rem;
-    right: 13rem;
-    width: 6rem;
-    height: 2rem;
-}
-/*third row*/
-#box-artist{
-    top:16rem;
-    right: 23.5rem;
-    width: 9.5rem;
-    height: 2rem;
-}
-#box-edition{
-    top: 16rem;
-    right: 13rem;
-    width: 9.5rem;
-    height: 2rem;
-}
-#box-SB{
-    top:24rem;
-    right: 23.5rem;
-    width: 9.5rem;
-    height: 3rem;
-}
-#box-MB{
-    top:24rem;
-    right: 13rem;
-    width: 9.5rem;
-    height: 3rem;
-}
-.box-date{
-    background-color: white;
-    border: 0.1rem solid black;
-    border-radius: 0.5rem;
-    position: absolute;
-    top: 20rem;
-    width: 6rem;
-    height: 2rem;
-}
-#box-dd{
-    right: 27rem;
-}
-#box-mm{
-    right: 20rem;
-}
-#box-yyyy{
-    right: 13rem;
+}*/
+.register{
+    background-color: #730e31;
+    color: white;
+    position: relative;
+
 }
 
-.box-publishlisting{
+/*stuff for create listing*/
+.form-control{
+    background-color: #e7d0d5;
+    border-radius: 0.5rem;
+    border-color: black;
+    padding: 0.3rem;
+    height: 2rem;
+}
+textarea.form-control{
+    height: auto;
+    resize: vertical;
+    field-sizing: content;
+}
+
+#id-title{
+    width: 20rem;
+
+    grid-column: 1/-1;
+}
+/*second row*/
+#id-medium{
+
+    width: 6rem;
+    height: 2rem;
+}
+/*#box-height{*/
+/*    top: 13rem;*/
+/*    right: 20rem;*/
+/*    width: 6rem;*/
+/*    height: 2rem;*/
+/*}*/
+/*#box-with{*/
+/*    top: 13rem;*/
+/*    right: 13rem;*/
+/*    width: 6rem;*/
+/*    height: 2rem;*/
+/*}*/
+/*third row*/
+#id-artist-name{
+
+    width: 9.5rem;
+    height: 2rem;
+}
+#id-edition{
+
+    width: 9.5rem;
+    height: 2rem;
+}
+#id-image{
+    width: auto;
+}
+#id-starting-price{
+
+    width: 9.5rem;
+    height: 3rem;
+}
+#id-minimum-bid{
+    width: 9.5rem;
+    height: 3rem;
+}
+/*.box-date{*/
+/*    background-color: white;*/
+/*    border: 0.1rem solid black;*/
+/*    border-radius: 0.5rem;*/
+/*    position: absolute;*/
+/*    top: 20rem;*/
+/*    width: 6rem;*/
+/*    height: 2rem;*/
+/*}*/
+/*#box-dd{*/
+/*    right: 27rem;*/
+/*}*/
+/*#box-mm{*/
+/*    right: 20rem;*/
+/*}*/
+/*#box-yyyy{*/
+/*    right: 13rem;*/
+/*}*/
+
+
+/*.submi-btn*/
+form:has(input.submit-btn) input.submit-btn{
     background-color: #730e31;
-    position: absolute;
+    position: relative;
     color: white;
-    top: 29rem;
-    right: 13rem;
     width: 20rem;
     height: 3rem;
+
+    -webkit-appearance: none;
+    cursor: pointer;
+
 }
 
 .profile-container {
