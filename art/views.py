@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 
 from art.forms.listing_create_form import ListingCreateForm
 from users.models import Seller, Profile
-from art.models import art_listing, ListingImage
+from art.models import ListingImage
 from django.contrib.auth.decorators import login_required
 
 

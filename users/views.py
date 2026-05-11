@@ -1,10 +1,7 @@
-from PIL.DdsImagePlugin import item
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse, JsonResponse
-
+from django.http import HttpResponse
 from art.models import art_listing
 from users.forms.create_user_form import CreateProfileForm
 from users.models import Profile, Seller
