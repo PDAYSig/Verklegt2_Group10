@@ -1,23 +1,23 @@
 {% extends 'base.html' %}
 
 {% block content %}
-     <div class="uppload-image-box-outer">
-        <div class="uppload-image-box-inner">
-            <div class="cross"></div>
-        </div>
-    </div>
-    <div class="box-listing-basic" id="box-title"> Title</div>
-    <div class="box-listing-basic" id="box-medium">medium</div>
-    <div class="box-listing-basic" id="box-height">height</div>
-    <div class="box-listing-basic" id="box-with">width</div>
-    <div class="box-listing-basic" id="box-artist">artist</div>
-    <div class="box-listing-basic" id="box-edition">edition</div>
-    <div class="box-date" id="box-dd">dd</div>
-    <div class="box-date" id="box-mm">mm</div>
-    <div class="box-date" id="box-yyyy">yyyy</div>
-    <div class="box-listing-basic" id="box-SB">Starting Bid:</div>
-    <div class="box-listing-basic" id="box-MB">Min Bid incre:</div>
-    <div class="box-publishlisting">Publish Listing</div>
+{#     <div class="uppload-image-box-outer">#}
+{#        <div class="uppload-image-box-inner">#}
+{#            <div class="cross"></div>#}
+{#        </div>#}
+{#    </div>#}
+{#    <div class="box-listing-basic" id="box-title"> Title</div>#}
+{#    <div class="box-listing-basic" id="box-medium">medium</div>#}
+{#    <div class="box-listing-basic" id="box-height">height</div>#}
+{#    <div class="box-listing-basic" id="box-with">width</div>#}
+{#    <div class="box-listing-basic" id="box-artist">artist</div>#}
+{#    <div class="box-listing-basic" id="box-edition">edition</div>#}
+{#    <div class="box-date" id="box-dd">dd</div>#}
+{#    <div class="box-date" id="box-mm">mm</div>#}
+{#    <div class="box-date" id="box-yyyy">yyyy</div>#}
+{#    <div class="box-listing-basic" id="box-SB">Starting Bid:</div>#}
+{#    <div class="box-listing-basic" id="box-MB">Min Bid increment:</div>#}
+{#    <div class="box-publishlisting">Publish Listing</div>#}
     <form method="POST" action="{% url 'create_listing' %}">
     {% csrf_token %}
     {{ form }}
