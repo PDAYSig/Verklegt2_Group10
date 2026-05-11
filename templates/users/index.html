@@ -6,12 +6,16 @@
     <div class="box">
         <h2 class="box-title">New listings</h2>
         <div class="image-stack">
-            {% for item in items|slice:":3" %}
-                {% if item.id %}
-                    <a href="{% url 'artwork' item.id %}">
-                        <p>{{ item.title }}</p>
-                    </a>
-                {% endif %}
+            {% for item in items %}
+                <a href="{% url 'artwork' item.id %}">
+                    {% with img=item.images.first %}
+                        {% if img %}
+                            <img src="{{ img.image.url }}" width="120">
+                        {% endif %}
+                    {% endwith %}
+
+                    <p>{{ item.title }}</p>
+                </a>
             {% endfor %}
         </div>
     </div>
@@ -34,12 +38,10 @@
     <div class="box">
         <h2 class="box-title">Active bids</h2>
         <div class="image-stack">
-            {% for item in items|slice:":3" %}
-                {% if item.id %}
-                    <a href="{% url 'artwork' item.id %}">
-                        <p>{{ item.title }}</p>
-                    </a>
-                {% endif %}
+            {% for item in items|slice:":3"%}
+                <a href="{% url 'artwork' item.id %}">
+                    <p>{{ item.title }}</p>
+                </a>
             {% endfor %}
         </div>
     </div>

@@ -19,7 +19,7 @@
 {#    <div class="box-listing-basic" id="box-SB">Starting Bid:</div>#}
 {#    <div class="box-listing-basic" id="box-MB">Min Bid incre:</div>#}
 {#    <div class="box-publishlisting">Publish Listing</div>#}
-    <form method="POST" action="{% url 'create_listing' %}">
+    <form method="POST" action="{% url 'create_listing' %}" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form }}
 
