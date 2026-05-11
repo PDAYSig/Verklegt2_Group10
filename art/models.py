@@ -28,6 +28,7 @@ class art_listing(models.Model):
     style = models.CharField(max_length=255, choices=STYLE_CHOICES)
     starting_price = models.IntegerField(default=0)
     medium = models.CharField(max_length=255, choices=MEDIUM_CHOICES)
+    dimension = models.TextField(max_length=255)
     year_created = models.DateField(default=date.today, null=True, blank=True)
     edition = models.CharField(max_length=255, null=True, blank=True)
     provenance = models.TextField(max_length=500, null=True, blank=True)

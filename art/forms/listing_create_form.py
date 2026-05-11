@@ -12,6 +12,7 @@ class ListingCreateForm(ModelForm):
             'artist_name': forms.TextInput(attrs={'class': 'form-control'}),
             'year_created' : forms.DateInput(attrs={'class': 'form-control'}),
             'medium' : forms.Select(attrs={ 'class': 'form-control'}),
+            'dimension': forms.TextInput(attrs={'class': 'form-control', 'placeholder': '?x?'}),
             'style' : forms.Select(attrs={'class': 'form-control'}),
             'minimum_bid' : forms.NumberInput(attrs={'class': 'form-control'}),
             'provenance' : forms.Textarea(attrs={'class': 'form-control'}),
