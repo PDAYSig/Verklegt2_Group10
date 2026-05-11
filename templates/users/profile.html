@@ -2,49 +2,72 @@
 
 {% block content %}
 
-    <div class="profile-header">
+<div class="profile-header">
 
-        <img src="{{ user.profile.profile_image }}" class="profile-big">
-
-        <div class="profile-info">
-            <h2>{{ user.username }}</h2>
-            <p>{{ user.profile.bio|default:"no bio yet" }}</p>
-
-            <div class="profile-actions">
-                <a href="{% url 'edit_profile' %}" class="btn btn-primary">Edit profile</a>
-                <a>hér mun koma favorites</a>
-                <div class="logout">
-                    <form action="{% url 'logout' %}" method="POST">
-                        {% csrf_token %}
-                    <button type="submit" class="btn-primary">Logout</button>
-                    </form>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    <h2 class="section-title">My Bids</h2>
-
-    {% if bids %}
-    <div class="bid-grid">
-        {% for bid in bids %}
-        <div class="bid-card">
-            <a href="{% url 'artwork' bid.item.id %}">
-                <img src="{{ bid.item.image.url }}">
-            </a>
-            <div class="bid-info">
-                <h4>{{ bid.item.title }}</h4>
-                <p class="price-tag">${{ bid.amount }}</p>
-            </div>
-        </div>
-        {% endfor %}
-    </div>
+    {% if user.profile.profile_image %}
+        <img src="{{ user.profile.profile_image.url }}" class="profile-big">
     {% else %}
-        <p>No bids yet</p>
+        <img src="/static/default-profile.png" class="profile-big">
     {% endif %}
 
+    <div class="profile-info">
+        <h2>{{ user.username }}</h2>
+        <p>{{ user.profile.bio|default:"no bio yet" }}</p>
+
+        <div class="profile-actions">
+
+            <a href="{% url 'edit_profile' %}" class="btn btn-primary">
+                Edit profile
+            </a>
+
+            <a class="btn btn-secondary">
+                hér mun koma favorites
+            </a>
+
+            <div class="logout">
+                <form action="{% url 'logout' %}" method="POST">
+                    {% csrf_token %}
+                    <button type="submit" class="btn-primary">
+                        Logout
+                    </button>
+                </form>
+            </div>
+
+        </div>
+    </div>
 </div>
 
+<hr>
 
-{%  endblock%}
+<h2 class="section-title">My Bids</h2>
+
+{% if bids %}
+    <div class="bid-grid">
+
+        {% for bid in bids %}
+            <div class="bid-card">
+
+                <a href="{% url 'artwork' bid.item.id %}">
+
+                    {% if bid.item.images.first %}
+                        <img src="{{ bid.item.images.first.image.url }}">
+                    {% else %}
+                        <img src="/static/no-image.png">
+                    {% endif %}
+
+                </a>
+
+                <div class="bid-info">
+                    <h4>{{ bid.item.title }}</h4>
+                    <p class="price-tag">${{ bid.amount }}</p>
+                </div>
+
+            </div>
+        {% endfor %}
+
+    </div>
+{% else %}
+    <p>No bids yet</p>
+{% endif %}
+
+{% endblock %}
