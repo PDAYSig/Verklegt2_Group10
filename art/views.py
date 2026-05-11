@@ -17,25 +17,24 @@ def index(request):
 def create_listing(request):
     form = ListingCreateForm(request.POST or None, request.FILES or None)
 
-    if request.method == "POST":
-        if form.is_valid():
-            listing = form.save(commit=False)
+    if request.method == "POST" and form.is_valid():
+        listing = form.save(commit=False)
 
-            profile, _ = Profile.objects.get_or_create(user=request.user)
-            seller, _ = Seller.objects.get_or_create(profile=profile)
+        profile, _ = Profile.objects.get_or_create(user=request.user)
+        seller, _ = Seller.objects.get_or_create(profile=profile)
 
-            listing.seller = seller
-            listing.save()
+        listing.seller = seller
+        listing.save()
 
-            images = request.FILES.getlist('images')
-            for image in images:
-                ListingImage.objects.create(
-                    listing=listing,
-                    image=img,
-                    is_primary=(i == 0)
-                )
+        images = request.FILES.getlist('images')
 
+        for i, image in enumerate(images):
+            ListingImage.objects.create(
+                listing=listing,
+                image=image,
+                is_primary=(i == 0)
+            )
 
-            return redirect("artwork")
+        return redirect("artwork", id=listing.id)
 
     return render(request, "art/create_listing.html", {"form": form})

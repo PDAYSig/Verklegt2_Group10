@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 
 from art.models import art_listing
@@ -10,7 +10,7 @@ from users.models import Profile
 # Create your views here.
 
 def index(request):
-    items = art_listing.objects.all()
+    items = art_listing.objects.all().order_by('-date_added')[:3]
     return render(request, "users/index.html", {
         "items": items
     })
@@ -76,7 +76,7 @@ def artwork(request, id):
     return render(request, 'users/artwork.html', {
         'item': item,
         'images': images,
-        'recently_sold_items': recently_sold
+        'recently_sold_items': art_listing.objects.none()
     })
 
 def recently_sold(request):
