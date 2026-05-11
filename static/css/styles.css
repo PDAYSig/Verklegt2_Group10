@@ -518,6 +518,14 @@ body {
     border: 4px solid maroon;
 }
 
+.profile-small {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid maroon;
+}
+
 .profile-info {
     margin-top: 0.5rem;
     color: #555;
