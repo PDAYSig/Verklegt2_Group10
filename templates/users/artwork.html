@@ -1,68 +1,79 @@
 {% extends 'users/../base.html' %}
+{% load static %}
 
 {% block content %}
 
 <div class="artwork-images">
 
-    {% with primary=item.images.all|first %}
-        {% if primary %}
-            <img src="{{ primary.image.url }}" class="main-art-image">
-        {% else %}
-            <p>No images available</p>
-        {% endif %}
-    {% endwith %}
+    <div class="main-image-wrapper">
+        <img id="mainImage"
+             src="{{ item.images.first.image.url }}"
+             class="main-art-image">
+    </div>
 
     <div class="thumbnail-row">
         {% for img in item.images.all %}
-            {% if not img.is_primary %}
-                <img src="{{ img.image.url }}" width="100">
-            {% endif %}
+            <img src="{{ img.image.url }}"
+                 class="thumb"
+                 onclick="changeImage(this.src)">
         {% endfor %}
     </div>
 
-</div>
-
-    <div class="artwork-info">
-
-        <h1>{{ item.title }}</h1>
-
-        <p><strong>Artist:</strong> {{ item.artist_name }}</p>
-        <p><strong>Medium:</strong> {{ item.medium }}</p>
-
-        <p><strong>Year:</strong> {{ item.year_created }}</p>
-
-        <p><strong>Dimensions:</strong> ? x ? cm</p>
-
-        <p>
-            <strong>Seller:</strong>
-            <a href="{% url 'seller_profile' %}">
-                seller_name {# {{ item.seller_ }}#}
-            </a>
-        </p>
-
-        <p><strong>Auction status:</strong> Active</p>
-
-        <hr>
-
-        <p><strong>Starting price:</strong> ${{ item.starting_price }}</p>
-        <p><strong>Current bid:</strong> ${{ item.current_bid }}</p>
-
-        <hr>
-
-        <form method="POST">
-            {% csrf_token %}
-            <input type="number" name="bid_amount" placeholder="Enter amount">
-            <button type="submit">Place bid</button>
-        </form>
-
-    </div>
-
-    <div class="artwork-about">
-        <h2>About the artwork</h2>
-        <p>{{ item.description }}</p>
-        <p>{{ item.provenance }}</p>
+    <div class="gallery-controls">
+        <button onclick="prevImage()">Prev</button>
+        <button onclick="nextImage()">Next</button>
     </div>
 
 </div>
+
+<div class="artwork-info">
+
+    <h1>{{ item.title }}</h1>
+
+    <p><strong>Artist:</strong> {{ item.artist_name }}</p>
+    <p><strong>Medium:</strong> {{ item.medium }}</p>
+    <p><strong>Year:</strong> {{ item.year_created }}</p>
+
+    <p><strong>Dimensions:</strong> ? x ? cm</p>
+
+    <p>
+        <strong>Seller:</strong>
+        <a href="{% url 'seller_profile' %}">
+            View seller profile
+        </a>
+    </p>
+
+    <p><strong>Auction status:</strong> Active</p>
+
+    <hr>
+
+    <p><strong>Starting price:</strong> ${{ item.starting_price }}</p>
+    <p><strong>Current bid:</strong> ${{ item.current_bid }}</p>
+
+    <hr>
+
+    <form method="POST">
+        {% csrf_token %}
+        <input type="number" name="bid_amount" placeholder="Enter amount">
+        <button type="submit">Place bid</button>
+    </form>
+
+</div>
+
+<div class="artwork-about">
+    <h2>About the artwork</h2>
+    <p>{{ item.description }}</p>
+    <p>{{ item.provenance }}</p>
+</div>
+
+<script src="{% static '/gallery.js' %}"></script>
+
+<script>
+    initGallery([
+        {% for img in item.images.all %}
+            "{{ img.image.url }}",
+        {% endfor %}
+    ]);
+</script>
 
 {% endblock %}
