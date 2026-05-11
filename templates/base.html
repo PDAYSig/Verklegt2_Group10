@@ -25,18 +25,19 @@
 
         <div class="header-right">
             {% if user.is_authenticated %}
-                {% if user.profile.profile_image %}
-                        <img src="{{ user.profile.profile_image.url }}" class="profile-small">
-                    {% else %}
-                        <img src="/static/default-profile.png" class="profile-small">
-                {% endif %}
+                <a href="{% url 'profile' %}">
+                    {% if user.profile.profile_image %}
+                            <img src="{{ user.profile.profile_image.url }}" class="profile-small">
+                        {% else %}
+                            <img src="/media/profiles/default_profile.png" class="profile-small">
+                    {% endif %}
+                </a>
             {% else %}
                 <a href="{% url 'login' %}" class="login-btn">Login</a>
             {% endif %}
         </div>
     </header>
     <nav class="nav">
-        <a href="{% url 'profile' %}">profile placeholder</a>
         <a href="{% url 'all_art' %}">view all art</a>
         <a href="{% url 'create_listing' %}" style="background-color: cadetblue">Create listing</a>
     </nav>
