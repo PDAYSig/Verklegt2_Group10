@@ -2,8 +2,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 
+from art.models import art_listing
 from users.forms.create_user_form import CreateProfileForm
 from users.models import Profile
 # Create your views here.
@@ -12,6 +13,18 @@ def index(request):
     return render(request, "users/index.html")
 
 def all_art(request):
+    if 'search_filter' in request.GET:
+        return JsonResponse({
+        'data' : [{
+            'id' : art.id,
+            'title' : art.title,
+            'description' : art.description,
+            'current_bid' : art.current_bid,
+
+
+        } for art in art_listing.objects.filter(title__icontains=request.GET['search_filter']).order_by('title')]
+        }
+        )
     images = [f"https://picsum.photos/300?{i}" for i in range(1, 17)]
     return render(request, "users/all_art.html", {"images": images})
 

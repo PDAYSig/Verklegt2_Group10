@@ -9,7 +9,6 @@ class Profile(models.Model):
     id = models.AutoField(primary_key=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.TextField(max_length=500)
-    password = models.CharField(max_length=255)
     user_address = models.CharField(max_length=255)
     profile_image = models.TextField(max_length=9999)
     is_seller = models.BooleanField(default=False)
