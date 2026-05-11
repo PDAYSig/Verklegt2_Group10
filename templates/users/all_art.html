@@ -8,17 +8,23 @@
 
     <div class="image-grid">
 
-            {% for item in items %}
-                <a href="{% url 'artwork' item.id %}">
-                    {% with img=item.images.first %}
-                        {% if img %}
-                            <img src="{{ img.image.url }}" width="120">
-                        {% endif %}
-                    {% endwith %}
+        {% for listing in listings %}
+            <a href="{% url 'artwork' listing.id %}">
+                <div class="card">
+                    {% if listing.thumbnail_image %}
+                    <img src="{{listing.thumbnail_image.url}}" alt="Thumbnail for {{ listing.title }}">
+                    {% else %}
+                    <img src="img.jpg" alt="Thumbnail for {{ listing.title }} unavailable">
+                    {% endif %}
 
-                    <p>{{ item.title }}</p>
-                </a>
-            {% endfor %}
+                    <h3>{{ listing.title }}</h3>
+                    <p>{{ listing.artist_name }}</p>
+                    <p>${{ listing.current_bid }}</p>
+                </div>
+            </a>
+        {% empty %}
+            <p>No listings found.</p>
+        {% endfor %}
     </div>
 
 </div>
