@@ -38,7 +38,7 @@
 
     <p>
         <strong>Seller:</strong>
-        <a href="{% url 'seller_profile' %}">
+        <a href="{% url 'seller_profile' item.seller.profile.user.id %}">
             View seller profile
         </a>
     </p>

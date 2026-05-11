@@ -1,12 +1,12 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, JsonResponse
 
 from art.models import art_listing
 from users.forms.create_user_form import CreateProfileForm
-from users.models import Profile
+from users.models import Profile, Seller
 # Create your views here.
 
 def index(request):
@@ -66,9 +66,19 @@ def edit_profile(request):
         return redirect("profile")
     return render(request, "users/edit_profile.html")
 
-def seller_profile(request):
-    return render(request, "users/seller_profile.html")
 
+
+def seller_profile(request, id):
+    seller = get_object_or_404(Seller, profile__user__id=id)
+    user = seller.profile.user
+
+    art = art_listing.objects.filter(seller=seller)
+
+    return render(request, 'users/seller_profile.html', {
+        'user': user,
+        'seller': seller,
+        'art': art
+    })
 def artwork(request, id):
     item = art_listing.objects.get(id=id)
     images = item.images.all()
