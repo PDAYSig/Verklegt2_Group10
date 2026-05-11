@@ -1,3 +1,4 @@
+from PIL.DdsImagePlugin import item
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
@@ -16,20 +17,22 @@ def index(request):
     })
 
 def all_art(request):
+    listings = art_listing.objects.all()
     if 'search_filter' in request.GET:
-        return JsonResponse({
-        'data' : [{
-            'id' : art.id,
-            'title' : art.title,
-            'description' : art.description,
-            'current_bid' : art.current_bid,
-
-
-        } for art in art_listing.objects.filter(title__icontains=request.GET['search_filter']).order_by('title')]
+        data = [{
+            'id' : item.id,
+            'title' : item.title,
+            'current_bid' : str(item.current_bid),
+            'thumbnail_image' : item.thumbnail_image.url if item.thumbnail_image else '',
         }
-        )
-    images = [f"https://picsum.photos/300?{i}" for i in range(1, 17)]
-    return render(request, "users/all_art.html", {"images": images})
+        for item in art_listing.objects.filter(title__icontains=request.GET['search_filter']).order_by('title')]
+        return JsonResponse(data, safe=False)
+    if 'medium' in request.GET:
+        data = [{
+            'id' : item.id,
+            'title' : item.title,
+        }]
+    return render(request, "users/all_art.html", {"listings": listings})
 
 def login(request):
     return render(request, "users/login.html")
