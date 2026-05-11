@@ -5,7 +5,7 @@
 <div class="profile-container">
 
     <div class="profile-header">
-        <img src="{{ seller.profile.image }}" class="profile-big">
+        <img src="{{ seller.profile.profile_image }}" class="profile-big">
 
         <div class="profile-info">
             <h2>{{ seller.username }}</h2>
@@ -23,8 +23,8 @@
             <a href="{% url 'artwork' item.id %}">
 
                 {% with img=item.images.first %}
-                    {% if img %}
-                        <img src="{{ img.image.url }}" alt="{{ item.title }}">
+                    {% if img and item.thumbnail_image%}
+                        <img src="{{ item.thumbnail_image.url }}" alt="{{ item.title }}">
                     {% endif %}
                 {% endwith %}
 
