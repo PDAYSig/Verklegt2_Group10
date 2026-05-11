@@ -29,7 +29,7 @@ urlpatterns = [
 
     path('profile/', views.profile, name="profile"),
 
-    path('seller_profile/', views.seller_profile, name="seller_profile"),
+    path("seller/<int:id>/", views.seller_profile, name="seller_profile"),
 
     path('artwork/<int:id>/', views.artwork, name='artwork'),
 
