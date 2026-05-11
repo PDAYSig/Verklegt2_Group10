@@ -79,14 +79,12 @@ def edit_profile(request):
 
 def seller_profile(request, id):
     seller = get_object_or_404(Seller, profile__user__id=id)
-    user = seller.profile.user
 
     art = art_listing.objects.filter(seller=seller)
 
     return render(request, 'users/seller_profile.html', {
-        'user': user,
         'seller': seller,
-        'art': art
+        'art': art,
     })
 def artwork(request, id):
     item = art_listing.objects.get(id=id)
