@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 
 from art.forms.listing_create_form import ListingCreateForm
 from users.models import Seller, Profile
+from art.models import art_listing, ListingImage
 from django.contrib.auth.decorators import login_required
 
 
@@ -25,6 +26,15 @@ def create_listing(request):
 
             listing.seller = seller
             listing.save()
+
+            images = request.FILES.getlist('images')
+            for image in images:
+                ListingImage.objects.create(
+                    listing=listing,
+                    image=img,
+                    is_primary=(i == 0)
+                )
+
 
             return redirect("artwork")
 

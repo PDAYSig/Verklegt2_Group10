@@ -35,14 +35,12 @@ class art_listing(models.Model):
     current_bid = models.IntegerField(default=0)
     mimimum_bid = models.IntegerField(default=0)
     # weight_kg = models.FloatField(default=0)
-    # thumbnail_image_url = models.ForeignKey("art_image", on_delete=models.CASCADE)
+    thumbnail_image = models.ImageField("artwork", upload_to="../static/images", null=True, blank=True)
 
     def __str__(self):
         return f"{self.title} by {self.artist_name} \n{self.medium}"
 
-class art_image(models.Model):
-    id = models.AutoField(primary_key=True)
-    listing = models.ForeignKey(art_listing, on_delete=models.CASCADE)
-    title = models.CharField(max_length=255)
-    is_thumbnail = models.BooleanField(default=False)
-    description = models.TextField(max_length=500)
+class ListingImage(models.Model):
+    listing = models.ForeignKey(art_listing, on_delete=models.CASCADE, related_name='images')
+    image = models.ImageField(upload_to='listing_images/')
+    is_primary = models.BooleanField(default=False)

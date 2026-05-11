@@ -16,5 +16,4 @@ class ListingCreateForm(ModelForm):
             'medium' : forms.Select(attrs={ 'class': 'form-control'}),
             'style' : forms.Select(attrs={'class': 'form-control'}),
             'mimimum_bid' : forms.NumberInput(attrs={'class': 'form-control'}),
-            'image' : forms.ImageField(required=True, widget=forms.FileInput(attrs={'class': 'form-control'}))
         }

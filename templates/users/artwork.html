@@ -2,17 +2,23 @@
 
 {% block content %}
 
-<div class="artwork-container">
+<div class="artwork-images">
 
-    <div class="artwork-images">
-        {% for img in images %}
-            {% if img.is_thumbnail %}
-                <img src="{{ img.image.url }}" alt="{{ img.title }}" class="main-art-image">
-            {% endif %}
-        {% empty %}
+    {% with primary=item.images.all|dictsort:"-is_primary"|first %}
+        {% if primary %}
+            <img src="{{ primary.image.url }}" class="main-art-image">
+        {% else %}
             <p>No images available</p>
+        {% endif %}
+    {% endwith %}
+
+    <div class="thumbnail-row">
+        {% for img in item.images.all %}
+            <img src="{{ img.image.url }}" width="100">
         {% endfor %}
     </div>
+
+</div>
 
     <div class="artwork-info">
 
@@ -41,11 +47,11 @@
 
         <hr>
 
-        <div class="bid-box">
-            <label>Place your bid:</label>
+        <form method="POST">
+            {% csrf_token %}
             <input type="number" name="bid_amount" placeholder="Enter amount">
             <button type="submit">Place bid</button>
-        </div>
+        </form>
 
     </div>
 

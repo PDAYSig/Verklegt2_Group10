@@ -6,17 +6,13 @@
     <div class="box">
         <h2 class="box-title">New listings</h2>
         <div class="image-stack">
-            <a href="{% url 'artwork' %}">
-                <img src="image1.jpg" alt="Image 1">
-            </a>
-
-            <a href="{% url 'artwork' %}">
-                <img src="image2.jpg" alt="Image 2">
-            </a>
-
-            <a href="{% url 'artwork' %}">
-                <img src="image3.jpg" alt="Image 3">
-            </a>
+            {% for item in items|slice:":3" %}
+                {% if item.id %}
+                    <a href="{% url 'artwork' item.id %}">
+                        <p>{{ item.title }}</p>
+                    </a>
+                {% endif %}
+            {% endfor %}
         </div>
     </div>
 
@@ -60,12 +56,10 @@
             <h2 class="sold-title">Recently sold</h2>
         </a>
         <div class="sold-image-row">
-            <a href="{% url 'artwork' %}">
-                <img src="image7.jpg" alt="Image 7">
-            </a>
-            <a href="{% url 'artwork' %}">
-                <img src="image8.jpg" alt="Image 8">
-            </a>
+            {% for item in recently_sold_items %}
+                <a href="{% url 'artwork' item.id %}">
+                </a>
+            {% endfor %}
         </div>
     </div>
 </div>
@@ -73,15 +67,13 @@
     <div class="box">
         <h2 class="box-title">Active bids</h2>
         <div class="image-stack">
-            <a href="{% url 'artwork' %}">
-                <img src="image4.jpg" alt="Image 4">
-            </a>
-            <a href="{% url 'artwork' %}">
-                <img src="image5.jpg" alt="Image 5">
-            </a>
-            <a href="{% url 'artwork' %}">
-                <img src="image6.jpg" alt="Image 6">
-            </a>
+            {% for item in items|slice:":3" %}
+                {% if item.id %}
+                    <a href="{% url 'artwork' item.id %}">
+                        <p>{{ item.title }}</p>
+                    </a>
+                {% endif %}
+            {% endfor %}
         </div>
     </div>
 </div>
