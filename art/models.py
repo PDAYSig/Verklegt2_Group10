@@ -5,18 +5,18 @@ from users.models import Seller
 # Create your models here.
 class art_listing(models.Model):
     MEDIUM_CHOICES = [
-        ('O', 'Oil'),
-        ('S', 'Sculpture'),
-        ('A', 'Acrylic'),
-        ('W', 'Watercolour'),
-        ('P', 'Photography'),
+        ('Oil', 'Oil'),
+        ('Sculpture', 'Sculpture'),
+        ('Acrylic', 'Acrylic'),
+        ('Watercolour', 'Watercolour'),
+        ('Photography', 'Photography'),
     ]
 
     STYLE_CHOICES = [
-        ('M', 'Modern'),
-        ('A', 'Abstract'),
-        ('R', 'Realism'),
-        ('I', 'Impressionism')
+        ('Modern', 'Modern'),
+        ('Abstract', 'Abstract'),
+        ('Realism', 'Realism'),
+        ('Impressionism', 'Impressionism')
     ]
 
     id = models.AutoField(primary_key=True)
