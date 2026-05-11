@@ -34,8 +34,52 @@ form:has(.form-control){
 /*    column-gap: 0.75rem;*!*/
 
 /*}*/
-
-
+/*error windo/button*/
+.error-form{
+    background-color: #e7d0d5;
+    border-radius: 0.5rem;
+    border:0.2rem solid black;
+    padding: 1rem;
+    width: 25rem;
+    height: 13rem;
+    justify-content: center;
+    display: grid;
+    margin: auto
+}
+form:has(input.ok-btn) input.ok-btn{
+    background-color: #730e31;
+    position: relative;
+    color: white;
+    width: 7rem;
+    height: 2rem;
+    -webkit-appearance: none;
+    cursor: pointer;
+}
+.login-form{
+    background-color: #e7d0d5;
+    border-radius: 0.5rem;
+    border:0.2rem solid black;
+    padding: 1rem;
+    width: 25rem;
+    height: 13rem;
+    justify-content: center;
+    display: grid;
+    margin: auto;
+}
+#id-username,
+#id-password{
+    border-radius: 0.5rem;
+    background-color: #e7d0d5;
+}
+form:has(input.submit-L) input.submit-L{
+    background-color: #730e31;
+    position: relative;
+    color: white;
+    width: 7rem;
+    height: 2rem;
+    -webkit-appearance: none;
+    cursor: pointer;
+}
 .a {
     text-decoration: none;
     color: white;
@@ -455,6 +499,7 @@ body {
 .form-control{
     background-color: #e7d0d5;
     border-radius: 0.5rem;
+    border-color: black;
     padding: 0.3rem;
     height: 2rem;
 }
@@ -471,33 +516,30 @@ textarea.form-control{
 }
 /*second row*/
 #id-medium{
-    top: 13rem;
-    right: 27rem;
+
     width: 6rem;
     height: 2rem;
 }
-#box-height{
-    top: 13rem;
-    right: 20rem;
-    width: 6rem;
-    height: 2rem;
-}
-#box-with{
-    top: 13rem;
-    right: 13rem;
-    width: 6rem;
-    height: 2rem;
-}
+/*#box-height{*/
+/*    top: 13rem;*/
+/*    right: 20rem;*/
+/*    width: 6rem;*/
+/*    height: 2rem;*/
+/*}*/
+/*#box-with{*/
+/*    top: 13rem;*/
+/*    right: 13rem;*/
+/*    width: 6rem;*/
+/*    height: 2rem;*/
+/*}*/
 /*third row*/
 #id-artist-name{
-    top:16rem;
-    right: 23.5rem;
+
     width: 9.5rem;
     height: 2rem;
 }
 #id-edition{
-    top: 16rem;
-    right: 13rem;
+
     width: 9.5rem;
     height: 2rem;
 }
@@ -505,44 +547,45 @@ textarea.form-control{
     width: auto;
 }
 #id-starting-price{
-    top:24rem;
-    right: 23.5rem;
+
     width: 9.5rem;
     height: 3rem;
 }
 #id-minimum-bid{
-    top:24rem;
-    right: 13rem;
     width: 9.5rem;
     height: 3rem;
 }
-.box-date{
-    background-color: white;
-    border: 0.1rem solid black;
-    border-radius: 0.5rem;
-    position: absolute;
-    top: 20rem;
-    width: 6rem;
-    height: 2rem;
-}
-#box-dd{
-    right: 27rem;
-}
-#box-mm{
-    right: 20rem;
-}
-#box-yyyy{
-    right: 13rem;
-}
+/*.box-date{*/
+/*    background-color: white;*/
+/*    border: 0.1rem solid black;*/
+/*    border-radius: 0.5rem;*/
+/*    position: absolute;*/
+/*    top: 20rem;*/
+/*    width: 6rem;*/
+/*    height: 2rem;*/
+/*}*/
+/*#box-dd{*/
+/*    right: 27rem;*/
+/*}*/
+/*#box-mm{*/
+/*    right: 20rem;*/
+/*}*/
+/*#box-yyyy{*/
+/*    right: 13rem;*/
+/*}*/
+
+
 /*.submi-btn*/
-.box-publishlisting{
+form:has(input.submit-btn) input.submit-btn{
     background-color: #730e31;
-    position: absolute;
+    position: relative;
     color: white;
-    top: 29rem;
-    right: 13rem;
     width: 20rem;
     height: 3rem;
+
+    -webkit-appearance: none;
+    cursor: pointer;
+
 }
 
 .profile-container {
