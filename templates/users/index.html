@@ -1,4 +1,4 @@
-{% extends 'users/../base.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
 
@@ -16,40 +16,7 @@
         </div>
     </div>
 
-<div class="control-wrapper">
-    <div class="control-panel">
-        <input type="text" class="search-bar" placeholder="Search...">
-        <div class="filter-wrapper">
-            <button class="filter-btn">Filters</button>
-            <div class="filter-panel">
-                <h4>Sort by</h4>
-                <select name="sort">
-                    <option value="">-- Select --</option>
-                    <option value="newest">Newest</option>
-                    <option value="oldest">Oldest</option>
-                </select>
-
-                <h4>Size</h4>
-                <label><input type="checkbox"> <30cm</label>
-                <label><input type="checkbox"> 30-65cm</label>
-                <label><input type="checkbox"> 65-105cm</label>
-                <label><input type="checkbox"> >105cm</label>
-
-                <h4>Medium</h4>
-                <select name="medium">
-                    <option value="">-- Select --</option>
-                    <option value="oil">Oil painting</option>
-                    <option value="acrylic">Acrylic</option>
-                    <option value="digital">Digital</option>
-                </select>
-
-                <h4>Price</h4>
-                <input type="range" min="0" max="1000">
-
-                <button type="submit">Submit</button>
-            </div>
-        </div>
-    </div>
+    {% include 'search_filter.html' %}
 
     <div class="sold-box">
         <a href="{% url 'recently_sold' %}">
