@@ -375,6 +375,11 @@ body {
     border: 2px solid black;
     border-radius: 1rem;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    margin: 2rem auto;
 }
 
 .sold-title {

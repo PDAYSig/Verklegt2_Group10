@@ -2,15 +2,19 @@
 
 {% block content %}
 
-<div class="profile-container">
+ <div class="profile-container">
 
     <div class="profile-header">
-        <img src="{{ seller.profile.profile_image }}" class="profile-big">
+        {% if seller.profile.profile_image %}
+            <img src="{{ seller.profile.profile_image.url }}" class="profile-big">
+        {% else %}
+            <img src="/media/profiles/default_profile.png" class="profile-big">
+        {% endif %}
 
         <div class="profile-info">
-            <h2>{{ seller.username }}</h2>
-            <p class="seller-type">{{ seller.profile.seller_type }}</p>
-            <p>{{ seller.profile.bio|default:"no bio yet" }}</p>
+            <h2>{{ seller.profile.user.username }}</h2>
+            <p class="seller-type">{{ seller.profile.seller_type|default:"Seller" }}</p>
+            <p>{{ seller.profile.bio|default:"No bio yet" }}</p>
         </div>
     </div>
 

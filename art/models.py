@@ -10,6 +10,7 @@ class art_listing(models.Model):
         ('Acrylic', 'Acrylic'),
         ('Watercolour', 'Watercolour'),
         ('Photography', 'Photography'),
+        ('Digital', 'Digital'),
     ]
 
     STYLE_CHOICES = [
