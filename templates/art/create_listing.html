@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
 {#     <div class="uppload-image-box-outer">#}
 {#        <div class="uppload-image-box-inner">#}
 {#            <div class="cross"></div>#}
@@ -17,7 +16,7 @@
 {#    <div class="box-date" id="box-mm">mm</div>#}
 {#    <div class="box-date" id="box-yyyy">yyyy</div>#}
 {#    <div class="box-listing-basic" id="box-SB">Starting Bid:</div>#}
-{#    <div class="box-listing-basic" id="box-MB">Min Bid incre:</div>#}
+{#    <div class="box-listing-basic" id="box-MB">Min Bid increment:</div>#}
 {#    <div class="box-publishlisting">Publish Listing</div>#}
     <form method="POST" action="{% url 'create_listing' %}">
     {% csrf_token %}
