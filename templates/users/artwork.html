@@ -4,7 +4,7 @@
 
 <div class="artwork-images">
 
-    {% with primary=item.images.all|dictsort:"-is_primary"|first %}
+    {% with primary=item.images.all|first %}
         {% if primary %}
             <img src="{{ primary.image.url }}" class="main-art-image">
         {% else %}
@@ -14,7 +14,9 @@
 
     <div class="thumbnail-row">
         {% for img in item.images.all %}
-            <img src="{{ img.image.url }}" width="100">
+            {% if not img.is_primary %}
+                <img src="{{ img.image.url }}" width="100">
+            {% endif %}
         {% endfor %}
     </div>
 
