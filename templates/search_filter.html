@@ -1,36 +1,42 @@
 {% block search %}
-<div class="control-wrapper">
-    <div class="control-panel">
-        <input type="text" class="search-bar" placeholder="Search...">
-        <div class="filter-wrapper">
-            <button class="filter-btn">Filters</button>
-            <div class="filter-panel">
-                <h4>Sort by</h4>
-                <select name="sort">
-                    <option value="">-- Select --</option>
-                    <option value="newest">Newest</option>
-                    <option value="oldest">Oldest</option>
-                </select>
 
-                <h4>Size</h4>
-                <label><input type="checkbox"> <30cm</label>
-                <label><input type="checkbox"> 30-65cm</label>
-                <label><input type="checkbox"> 65-105cm</label>
-                <label><input type="checkbox"> >105cm</label>
+<form method="get" action="{% url 'all_art' %}" class="control-wrapper">
+    <div class="control-wrapper">
 
-                <h4>Medium</h4>
-                <select name="medium">
-                    <option value="">-- Select --</option>
-                    <option value="oil">Oil painting</option>
-                    <option value="acrylic">Acrylic</option>
-                    <option value="digital">Digital</option>
-                </select>
+        <div class="control-panel">
+            <input type="search" class="search-bar" name="search_filter" placeholder="Search...">
 
-                <h4>Price</h4>
-                <input type="range" min="0" max="1000">
+            <div class="filter-wrapper">
+                <button type="button" class="filter-btn">Filters</button>
+                <div class="filter-panel">
+                    <h4>Sort by</h4>
+                    <select name="sort">
+                        <option value="">-- Select --</option>
+                        <option value="newest">Newest</option>
+                        <option value="oldest">Oldest</option>
+                    </select>
 
-                <button type="submit">Submit</button>
+                    <h4>Size</h4>
+                    <label><input type="checkbox" name="size" value="under_30"> <30cm</label>
+                    <label><input type="checkbox" name="size" value="30_65"> 30-65cm</label>
+                    <label><input type="checkbox" name="size" value="65_105"> 65-105cm</label>
+                    <label><input type="checkbox" name="size" value="over_105"> >105cm</label>
+
+                    <h4>Medium</h4>
+                    <select name="medium">
+                        <option value="">-- Select --</option>
+                        <option value="oil">Oil painting</option>
+                        <option value="acrylic">Acrylic</option>
+                        <option value="digital">Digital</option>
+                    </select>
+
+                    <h4>Price</h4>
+                    <input type="range" min="0" max="1000" name="max_price">
+
+                    <button type="submit" id ='submit-button'>Submit</button>
+                </div>
             </div>
         </div>
     </div>
+</form>
 {% endblock %}
