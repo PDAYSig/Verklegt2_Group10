@@ -10,7 +10,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.TextField(max_length=500)
     user_address = models.CharField(max_length=255)
-    profile_image = models.TextField(max_length=9999)
+    profile_image = models.ImageField(upload_to="profiles/", null=True, blank=True)
     is_seller = models.BooleanField(default=False)
     def __str__(self):
         return f" {self.user.username} {self.profile_image}"

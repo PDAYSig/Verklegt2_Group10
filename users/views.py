@@ -36,7 +36,8 @@ def login(request):
 
 @login_required
 def profile(request):
-    user_profile = Profile.objects.filter(user_id=request.user).first()
+    user_profile, created = Profile.objects.get_or_create(user=request.user)
+
     if request.method == "POST":
         form = CreateProfileForm(request.POST, instance=user_profile)
         if form.is_valid():
@@ -46,7 +47,11 @@ def profile(request):
             return redirect("profile")
     else:
         form = CreateProfileForm(instance=user_profile)
-    return render(request, "users/profile.html")
+
+    return render(request, "users/profile.html", {
+        "form": form,
+        "user_profile": user_profile
+    })
 
 @login_required
 def edit_profile(request):
@@ -60,10 +65,11 @@ def edit_profile(request):
             profile.bio = bio
 
         if image:
-            profile.image = image
+            profile.profile_image = image
 
         profile.save()
         return redirect("profile")
+
     return render(request, "users/edit_profile.html")
 
 
