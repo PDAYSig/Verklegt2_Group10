@@ -27,6 +27,7 @@ def all_art(request):
     search_filter = request.GET.get('search_filter')
     medium = request.GET.get('medium')
     sort = request.GET.get('sort')
+    style = request.GET.get('style')
 
     # if user types a name into the searchbar
     if search_filter:
@@ -40,6 +41,16 @@ def all_art(request):
     # if user selects to sort by oldest first
     elif sort == "oldest":
         listings = listings.order_by('date_added')
+
+    if style == "Modern":
+        listings = listings.filter(style='Modern')
+    elif style == "Abstract":
+        listings = listings.filter(style='Abstract')
+    elif style == "Realism":
+        listings = listings.filter(style='Realism')
+    elif style == "Impressionism":
+        listings = listings.filter(style='Impressionism')
+
 
     #TODO add extra filters for size and style
     return render(request, "users/all_art.html", {"listings": listings})
