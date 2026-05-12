@@ -49,6 +49,27 @@ def login(request):
 @login_required
 def profile(request):
     user_profile, created = Profile.objects.get_or_create(user=request.user)
+    seller = Seller.objects.filter(profile=user_profile).first()
+
+    if seller:
+        from django.db.models import Max
+        top_bids = (
+            Bid.objects.filter(bidder=seller)
+            .values('listing')
+            .annotate(max_amount=Max('amount'))
+        )
+        bid_ids = []
+        for b in top_bids:
+            top_bid = Bid.objects.filter(
+                bidder=seller,
+                listing_id=b['listing'],
+                amount=b['max_amount']
+            ).first()
+            if top_bid:
+                bid_ids.append(top_bid.id)
+        bids = Bid.objects.filter(id__in=bid_ids).order_by('-placed_at')
+    else:
+        bids = []
 
     if request.method == "POST":
         form = CreateProfileForm(request.POST, instance=user_profile)
@@ -62,7 +83,8 @@ def profile(request):
 
     return render(request, "users/profile.html", {
         "form": form,
-        "user_profile": user_profile
+        "user_profile": user_profile,
+        "bids": bids,
     })
 
 @login_required
