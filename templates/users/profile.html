@@ -45,14 +45,25 @@
     <div class="image-grid">
 
         {% for bid in bids %}
-            <a href="{% url 'artwork' bid.listing.id %}">
+            <a href="{% url 'artwork' bid.listing.id %}" class="bid-card">
 
                 {% if bid.listing.thumbnail_image %}
                     <img src="{{ bid.listing.thumbnail_image.url }}" alt="{{ bid.listing.title }}">
                 {% endif %}
 
                 <p>{{ bid.listing.title }}</p>
-                <p class="price-tag">${{ bid.amount }}</p>
+                <p><strong>Seller:</strong> {{ bid.listing.seller.profile.user.username }}</p>
+                <p><strong>Bid price:</strong> ${{ bid.amount }}</p>
+                <p><strong>Date placed:</strong> {{ bid.placed_at|date:"M d, Y" }}</p>
+                <p><strong>Expires:</strong> {{ bid.expired_at|date:"M d, Y" }}</p>
+                <p><strong>Status:</strong>
+                    <span class="status-{{ bid.status }}">{{ bid.get_status_display }}</span>
+                </p>
+
+                {% if bid.status == 'accepted' or bid.status == 'contingent' %}
+                    <a href="{% url 'artwork' bid.listing.id %}" class="btn btn-primary">Finalize bid</a>
+                {% endif %}
+
             </a>
         {% endfor %}
 

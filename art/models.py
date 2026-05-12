@@ -51,11 +51,19 @@ class ListingImage(models.Model):
     is_primary = models.BooleanField(default=False)
 
 class Bid(models.Model):
+    STATUS_CHOICES = [
+        ('pending', 'Pending'),
+        ('accepted', 'Accepted'),
+        ('rejected', 'Rejected'),
+        ('contingent', 'Contingent'),
+    ]
+
     listing = models.ForeignKey(art_listing, on_delete=models.CASCADE, related_name='bids')
     bidder = models.ForeignKey(Seller, on_delete=models.CASCADE)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     placed_at = models.DateTimeField(auto_now_add=True)
     expired_at = models.DateTimeField()
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
 
     def save(self, *args, **kwargs):
         if not self.pk:
