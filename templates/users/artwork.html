@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
 
+
 {% block content %}
+<script src="{% static 'js/countdown.js' %}"></script>
 
 <div class="artwork-images">
 
@@ -43,18 +45,22 @@
         </a>
     </p>
 
-    <p><strong>Auction status:</strong> Active</p>
+    <p><strong>Auction status:</strong> {% if auction_active %}Active{% else %}Inactive{% endif %}</p>
 
     <hr>
 
     <p><strong>Starting price:</strong> ${{ item.starting_price }}</p>
     <p><strong>Current bid:</strong> ${{ item.current_bid }}</p>
 
+    {% if latest_bid %}
+        <p><strong>Bid expires:</strong> <span id="countdown" data-expires="{{ latest_bid.expired_at.isoformat }}"></span></p>
+    {% endif %}
+
     <hr>
 
     <form method="POST">
         {% csrf_token %}
-        <input type="number" name="bid_amount" placeholder="Enter amount">
+        <input type="number" name="bid_amount" placeholder="Enter amount" min="{{ item.starting_price }}" step="0.01">
         <button type="submit">Place bid</button>
     </form>
 

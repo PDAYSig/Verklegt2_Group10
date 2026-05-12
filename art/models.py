@@ -2,6 +2,8 @@ from datetime import date
 
 from django.db import models
 from users.models import Seller
+from django.utils import timezone
+from datetime import timedelta
 # Create your models here.
 class art_listing(models.Model):
     MEDIUM_CHOICES = [
@@ -47,3 +49,18 @@ class ListingImage(models.Model):
     listing = models.ForeignKey(art_listing, on_delete=models.CASCADE, related_name='images')
     image = models.ImageField(upload_to='artworks/')
     is_primary = models.BooleanField(default=False)
+
+class Bid(models.Model):
+    listing = models.ForeignKey(art_listing, on_delete=models.CASCADE, related_name='bids')
+    bidder = models.ForeignKey(Seller, on_delete=models.CASCADE)
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    placed_at = models.DateTimeField(auto_now_add=True)
+    expired_at = models.DateTimeField()
+
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            self.expired_at = timezone.now() + timedelta(days=7)
+        super().save(*args, **kwargs)
+
+
+
