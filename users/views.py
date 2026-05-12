@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from art.models import art_listing, Bid
@@ -143,6 +144,9 @@ def artwork(request, id):
             latest_bid = item.bids.last()
             auction_active = True
             user_has_bid = True
+            messages.success(request, f'Your bid of ${bid_amount} was placed successfully!')
+        else:
+            messages.error(request, 'Your bid must be higher than the current bid and at least the starting price.')
 
     return render(request, 'users/artwork.html', {
         'item': item,

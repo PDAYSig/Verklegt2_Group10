@@ -59,10 +59,15 @@
     <hr>
 
     {% if user.is_authenticated %}
+        {% if messages %}
+            {% for message in messages %}
+                <p class="{% if message.tags %}{{ message.tags }}{% endif %}">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
         <form method="POST">
             {% csrf_token %}
             <input type="number" name="bid_amount" placeholder="Enter amount" min="{{ item.starting_price }}" step="0.01">
-            <button type="submit">{% if user_has_bid %}Resubmit bid{% else %}Place bid{% endif %}</button>
+            <button type="submit">{% if user_has_bid %}Resubmit bid{% else %}Submit a bid{% endif %}</button>
         </form>
     {% else %}
         <p><a href="{% url 'login' %}">Log in</a> to place a bid.</p>
