@@ -10,9 +10,9 @@
         <div class="image-stack">
             {% for item in items %}
                 <a href="{% url 'artwork' item.id %}">
-                    {% with img=item.images.first %}
+                    {% with img=item.thumbnail_image %}
                         {% if img %}
-                            <img src="{{ img.image.url }}" width="100">
+                            <img src="{{ img.url }}" width="100">
                         {% endif %}
                     {% endwith %}
                     <p>{{ item.title }}</p>
@@ -33,9 +33,9 @@
             <div class="sold-image-row">
                 {% for item in recently_sold_items %}
                     <a href="{% url 'artwork' item.id %}">
-                        {% with img=item.images.first %}
+                        {% with img=item.thumbnail_image %}
                             {% if img %}
-                                <img src="{{ img.image.url }}" width="100">
+                                <img src="{{ img.url }}" width="100">
                             {% endif %}
                         {% endwith %}
                         <p>{{ item.title }}</p>
@@ -50,9 +50,9 @@
             <h2 class="box-title">Active bids</h2>
             {% for item in active_bid_items %}
                 <a href="{% url 'artwork' item.id %}">
-                    {% with img=item.images.first %}
+                    {% with img=item.thumbnail_image %}
                         {% if img %}
-                            <img src="{{ img.image.url }}" width="100">
+                            <img src="{{ img.url }}" width="100">
                         {% endif %}
                     {% endwith %}
                     <p>{{ item.title }}</p>
