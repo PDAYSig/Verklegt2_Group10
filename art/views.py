@@ -30,6 +30,7 @@ def create_listing(request):
         listing.save()
 
         images = request.FILES.getlist('images')
+        images.insert(0, listing.thumbnail_image)
 
         for i, image in enumerate(images):
             ListingImage.objects.create(
