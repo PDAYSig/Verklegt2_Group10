@@ -41,7 +41,10 @@
     <p>
         <strong>Seller:</strong>
         <a href="{% url 'seller_profile' item.seller.profile.user.id %}">
-            View seller profile
+            {{ item.seller.profile.user.username }}
+            <img
+                src="{{ item.seller.profile.profile_image.url }}" width="40"
+                alt="{{ item.seller.profile.user.username }} profile pic">
         </a>
     </p>
 
