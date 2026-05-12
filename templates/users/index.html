@@ -15,7 +15,7 @@
                             <img src="{{ img.url }}" width="100">
                         {% endif %}
                     {% endwith %}
-                    <p>{{ item.title }}</p>
+                    <p class="link">{{ item.title }}</p>
                 </a>
             {% endfor %}
         </div>
@@ -26,8 +26,8 @@
         {% include 'search_filter.html' %}
 
         <div class="sold-box">
-            <a href="{% url 'recently_sold' %}">
-                <h2 class="sold-title">Recently sold</h2>
+            <a href="{% url 'recently_sold' %}" class="sold-title">
+                <h2>Recently sold</h2>
             </a>
 
             <div class="sold-image-row">
@@ -55,7 +55,7 @@
                             <img src="{{ img.url }}" width="100">
                         {% endif %}
                     {% endwith %}
-                    <p>{{ item.title }}</p>
+                    <p class="link">{{ item.title }}</p>
                 </a>
             {% empty %}
                 <p>No active bids at the moment.</p>

@@ -407,6 +407,11 @@ body {
     color: aliceblue;
     text-align: center;
     margin: 0 0 0.75rem 0;
+    text-decoration: none;
+}
+.link{
+    color: white;
+    text-decoration: none;
 }
 
 .sold-image-row {
