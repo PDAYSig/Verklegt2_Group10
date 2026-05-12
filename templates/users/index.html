@@ -47,9 +47,22 @@
 
     </div>
 
-    <div class="box">
-        <h2 class="box-title">Active bids</h2>
-        <div class="image-stack"></div>
+        <div class="box">
+            <h2 class="box-title">Active bids</h2>
+            {% for item in active_bid_items %}
+                <a href="{% url 'artwork' item.id %}">
+                    {% with img=item.images.first %}
+                        {% if img %}
+                            <img src="{{ img.image.url }}" width="100">
+                        {% endif %}
+                    {% endwith %}
+                    <p>{{ item.title }}</p>
+                </a>
+            {% empty %}
+                <p>No active bids at the moment.</p>
+            {% endfor %}
+            <div class="image-stack"></div>
+        </div>
     </div>
 
 </div>

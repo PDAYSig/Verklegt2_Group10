@@ -2,15 +2,22 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
-from art.models import art_listing
+from art.models import art_listing, Bid
 from users.forms.create_user_form import CreateProfileForm
 from users.models import Profile, Seller
+from decimal import Decimal
+from django.utils import timezone
 # Create your views here.
 
 def index(request):
-    items = art_listing.objects.all().order_by('-date_added')[:3]
+    all_items = art_listing.objects.all().order_by('-date_added')[:3]
+    active_bid_items = art_listing.objects.filter(
+        bids__expired_at__gt=timezone.now()
+    ).distinct()
+
     return render(request, "users/index.html", {
-        "items": items
+        "items": all_items,
+        "active_bid_items": active_bid_items,
     })
 
 def all_art(request):
@@ -88,13 +95,31 @@ def seller_profile(request, id):
         'seller': seller,
         'art': art,
     })
+
+
 def artwork(request, id):
     item = art_listing.objects.get(id=id)
     images = item.images.all()
+    latest_bid = item.bids.last()
+
+    auction_active = latest_bid is not None and latest_bid.expired_at > timezone.now()
+
+    if request.method == 'POST':
+        bid_amount = Decimal(request.POST.get('bid_amount'))
+        if bid_amount > item.current_bid and bid_amount >= item.minimum_bid and bid_amount >= item.starting_price:
+            profile = request.user.profile
+            seller, _ = Seller.objects.get_or_create(profile=profile)
+            Bid.objects.create(listing=item, bidder=seller, amount=bid_amount)
+            item.current_bid = bid_amount
+            item.save()
+            latest_bid = item.bids.last()
+            auction_active = True
 
     return render(request, 'users/artwork.html', {
         'item': item,
         'images': images,
+        'latest_bid': latest_bid,
+        'auction_active': auction_active,
         'recently_sold_items': art_listing.objects.none()
     })
 
