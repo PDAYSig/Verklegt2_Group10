@@ -17,8 +17,8 @@ class Profile(models.Model):
 
 class Seller(models.Model):
     id = models.AutoField(primary_key=True)
-    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     is_gallery = models.BooleanField(default=False)
     rating = models.FloatField(default=0)
     def __str__(self):
-        return f"{self.profile.user.username} {str(self.id)}"
+        return f"{self.user.username} {str(self.id)}"
