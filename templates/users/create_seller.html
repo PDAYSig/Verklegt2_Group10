@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <form method="POST" class="create-seller-form" action={% url 'create_seller' %} >
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" class="submit-L" value="Login">
+
+    </form>
+{% endblock %}

@@ -14,8 +14,10 @@ from django.utils import timezone
 def index(request):
     return HTTPResponse(f"Response from {request.path}")
 
-@login_required
+@login_required(login_url="/login/")
 def create_listing(request):
+    if not request.user.profile.is_seller:
+        return redirect("create_seller")
     form = ListingCreateForm(request.POST or None, request.FILES or None)
 
     if request.method == "POST" and form.is_valid():

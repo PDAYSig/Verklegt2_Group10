@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from art.models import art_listing, Bid
+from users.forms.create_seller_form import CreateSellerForm
 from users.forms.create_user_form import CreateProfileForm
 from users.models import Profile, Seller
 from decimal import Decimal
@@ -39,7 +40,7 @@ def all_art(request):
     # if user selects to sort by oldest first
     elif sort == "oldest":
         listings = listings.order_by('date_added')
-    
+
     #TODO add extra filters for size and style
     return render(request, "users/all_art.html", {"listings": listings})
 
@@ -150,3 +151,20 @@ def register(request):
         "user_form": user_form,
         "profile_form": profile_form,
     })
+@login_required
+def create_seller(request):
+    if request.method == "POST":
+        form = CreateSellerForm(request.POST)
+        if form.is_valid():
+            print('its cool')
+            seller = form.save(commit=False)
+            profile = request.user.profile
+            seller.profile = profile
+            profile.is_seller = True
+            profile.save()
+            seller.save()
+            return redirect("create_listing")
+    else:
+        print('Dumbass')
+        form = CreateSellerForm()
+    return render(request, 'users/create_seller.html', {"form": form})
