@@ -65,7 +65,7 @@
         <form method="POST">
             {% csrf_token %}
             <input type="number" name="bid_amount" placeholder="Enter amount" min="{{ item.starting_price }}" step="0.01">
-            <button type="submit" class="place-bid">{% if user_has_bid %}Resubmit bid{% else %}Place bid{% endif %}</button>
+            <button type="submit">{% if user_has_bid %}Resubmit bid{% else %}Place bid{% endif %}</button>
         </form>
     {% else %}
         <p><a href="{% url 'login' %}">Log in</a> to place a bid.</p>
