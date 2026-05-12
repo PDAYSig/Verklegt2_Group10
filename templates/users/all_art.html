@@ -9,17 +9,18 @@
     <div class="image-grid">
 
         {% for listing in listings %}
-            <a href="{% url 'artwork' listing.id %}">
+            <a href="{% url 'artwork' listing.id %}" class="card-link">
                 <div class="card">
                     {% if listing.thumbnail_image %}
                     <img src="{{listing.thumbnail_image.url}}" alt="Thumbnail for {{ listing.title }}">
                     {% else %}
                     <img src="img.jpg" alt="Thumbnail for {{ listing.title }} unavailable">
                     {% endif %}
-
-                    <h3>{{ listing.title }}</h3>
-                    <p>{{ listing.artist_name }}</p>
-                    <p>${{ listing.current_bid }}</p>
+                    <div class="card-content">
+                        <h3 class="card-title">{{ listing.title }}</h3>
+                        <p>{{ listing.artist_name }}</p>
+                        <p>${{ listing.current_bid }}</p>
+                    </div>
                 </div>
             </a>
         {% empty %}

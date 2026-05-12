@@ -55,6 +55,27 @@ form:has(input.ok-btn) input.ok-btn{
     -webkit-appearance: none;
     cursor: pointer;
 }
+
+.card-link{
+    text-decoration: none;
+    color: inherit;
+}
+.card-content{
+    padding: 1rem;
+}
+.card-title{
+    font-size: 2rem;
+}
+
+.place-bid{
+    background-color: #730e31;
+    position: relative;
+    color: white;
+    width: 7rem;
+    height: 2rem;
+    -webkit-appearance: none;
+    cursor: pointer;
+}
 .login-form{
     background-color: #e7d0d5;
     border-radius: 0.5rem;
