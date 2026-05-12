@@ -56,6 +56,17 @@ form:has(input.ok-btn) input.ok-btn{
     cursor: pointer;
 }
 
+.card-link{
+    text-decoration: none;
+    color: inherit;
+}
+.card-content{
+    padding: 1rem;
+}
+.card-title{
+    font-size: 2rem;
+}
+
 .place-bid{
     background-color: #730e31;
     position: relative;
