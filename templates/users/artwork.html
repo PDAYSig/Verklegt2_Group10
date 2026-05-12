@@ -64,7 +64,7 @@
     <form method="POST">
         {% csrf_token %}
         <input type="number" name="bid_amount" placeholder="Enter amount" min="{{ item.starting_price }}" step="0.01">
-        <button type="submit">Place bid</button>
+        <button type="submit" class="place-bid">Place bid</button>
     </form>
 
 </div>
