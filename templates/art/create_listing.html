@@ -22,7 +22,10 @@
     <form method="POST" action="{% url 'create_listing' %}" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form }}
-
+    <div class="form-group">
+        <label for="images">Upload Images</label>
+        <input type="file" name="images" id="images" multiple class="form-control">
+    </div>
     <input type="submit" class="submit-btn" value="Create Listing" formmethod="POST">
     </form>
 
