@@ -8,11 +8,7 @@
 
 <form method="POST">
     {% csrf_token %}
-    <select name="status">
-        {% for value, label in bid.get_status_choices %}
-            <option value="{{ value }}" {% if bid.status == value %}selected{% endif %}>{{ label }}</option>
-        {% endfor %}
-    </select>
-    <button type="submit">Update status</button>
+    <button type="submit" name="status" value="accepted">Accept</button>
+    <button type="submit" name="status" value="rejected">Reject</button>
 </form>
 {% endblock %}

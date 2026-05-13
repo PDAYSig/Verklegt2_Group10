@@ -75,17 +75,30 @@
     {% if user.is_authenticated %}
         {% if messages %}
             {% for message in messages %}
-                <p class="{% if message.tags %}{{ message.tags }}{% endif %}">{{ message }}</p>
+                <p class="{{ message.tags }}">{{ message }}</p>
             {% endfor %}
         {% endif %}
-        <form method="POST">
-            {% csrf_token %}
-            <input type="number" name="bid_amount" placeholder="Enter amount" min="{{ item.starting_price }}" step="0.01">
-            <button type="submit">{% if user_has_bid %}Resubmit bid{% else %}Submit a bid{% endif %}</button>
-        </form>
-    {% else %}
-        <p><a href="{% url 'login' %}">Log in</a> to place a bid.</p>
+
+        {% if latest_bid and latest_bid.status == 'accepted' and user_is_winner %}
+            <a href="{% url 'payment_info' latest_bid.id %}" class="btn btn-primary">Proceed to payment</a>
+
+        {% elif latest_bid and latest_bid.status == 'rejected' and user_is_winner %}
+            <p class="rejected">Your bid was rejected.</p>
+
+        {% elif auction_active %}
+            <form method="POST">
+                {% csrf_token %}
+                <input type="number" name="bid_amount" placeholder="Enter amount" min="{{ item.starting_price }}" step="0.01">
+                <button type="submit">{% if user_has_bid %}Resubmit bid{% else %}Submit a bid{% endif %}</button>
+            </form>
+
+        {% else %}
+            <p>This auction has ended.</p>
     {% endif %}
+
+{% else %}
+    <p><a href="{% url 'login' %}">Log in</a> to place a bid.</p>
+{% endif %}
 
 </div>
 

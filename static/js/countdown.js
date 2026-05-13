@@ -14,7 +14,7 @@ function initCountdown() {
         const h = Math.floor((diff % 86400000) / 3600000);
         const m = Math.floor((diff % 3600000) / 60000);
         const s = Math.floor((diff % 60000) / 1000);
-        el.textContent = `${h}h ${m}m ${s}s`;
+        el.textContent = `${d}d ${h}h ${m}m ${s}s`;
     }
 
     tick();
