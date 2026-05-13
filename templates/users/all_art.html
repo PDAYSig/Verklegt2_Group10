@@ -11,11 +11,13 @@
         {% for listing in listings %}
             <a href="{% url 'artwork' listing.id %}" class="card-link">
                 <div class="card">
-                    {% if listing.thumbnail_image %}
-                    <img src="{{listing.thumbnail_image.url}}" alt="Thumbnail for {{ listing.title }}">
-                    {% else %}
-                    <img src="img.jpg" alt="Thumbnail for {{ listing.title }} unavailable">
-                    {% endif %}
+                    <div class="card-image-wrapper">
+                        {% if listing.thumbnail_image %}
+                        <img class="cars-image" src="{{listing.thumbnail_image.url}}" alt="Thumbnail for {{ listing.title }}">
+                        {% else %}
+                        <img src="img.jpg" alt="Thumbnail for {{ listing.title }} unavailable">
+                        {% endif %}
+                    </div>
                     <div class="card-content">
                         <h3 class="card-title">{{ listing.title }}</h3>
                         <p>{{ listing.artist_name }}</p>
