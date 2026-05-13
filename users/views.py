@@ -22,6 +22,9 @@ def index(request):
         "active_bid_items": active_bid_items,
     })
 
+def about(request):
+    return render(request, "users/about.html")
+
 def all_art(request):
     listings = art_listing.objects.all()
 
@@ -136,7 +139,7 @@ def artwork(request, id):
     item = art_listing.objects.get(id=id)
     images = item.images.all()
     latest_bid = item.bids.last()
-    auction_active = latest_bid is not None and latest_bid.expired_at > timezone.now()
+    auction_active = latest_bid is None or latest_bid.expired_at > timezone.now()
     user_has_bid = False
     user_is_winner = False
 
@@ -162,9 +165,6 @@ def artwork(request, id):
             bid = Bid.objects.create(listing=item, bidder=seller, amount=bid_amount)
             item.current_bid = bid_amount
             item.save()
-            latest_bid = bid
-            auction_active = True
-            user_has_bid = True
             messages.success(request, f'Your bid of ${bid_amount} was placed successfully!')
         else:
             messages.error(request, 'Bid must be higher than current bid and at least the starting price.')

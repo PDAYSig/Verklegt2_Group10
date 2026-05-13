@@ -62,19 +62,6 @@
                     <p>No active bids at the moment.</p>
                 {% endfor %}
             </div>
-            {% for item in active_bid_items %}
-                <a href="{% url 'artwork' item.id %}">
-                    {% with img=item.thumbnail_image %}
-                        {% if img %}
-                            <img src="{{ img.url }}" width="100">
-                        {% endif %}
-                    {% endwith %}
-                    <p class="link">{{ item.title }}</p>
-                </a>
-            {% empty %}
-                <p>No active bids at the moment.</p>
-            {% endfor %}
-            <div class="image-stack"></div>
         </div>
     </div>
 

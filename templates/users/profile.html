@@ -20,10 +20,6 @@
                 Edit profile
             </a>
 
-            <a class="btn btn-secondary">
-                hér mun koma favorites
-            </a>
-
             <div class="logout">
                 <form action="{% url 'logout' %}" method="POST">
                     {% csrf_token %}
@@ -51,7 +47,7 @@
                     <img src="{{ bid.listing.thumbnail_image.url }}" alt="{{ bid.listing.title }}">
                 {% endif %}
 
-                <p>{{ bid.listing.title }}</p>
+                <p><strong>Title:</strong> {{ bid.listing.title }}</p>
                 <p><strong>Seller:</strong> {{ bid.listing.seller.profile.user.username }}</p>
                 <p><strong>Bid price:</strong> ${{ bid.amount }}</p>
                 <p><strong>Date placed:</strong> {{ bid.placed_at|date:"M d, Y" }}</p>
@@ -60,9 +56,6 @@
                     <span class="status-{{ bid.status }}">{{ bid.get_status_display }}</span>
                 </p>
 
-                {% if bid.status == 'accepted' or bid.status == 'contingent' %}
-                    <a href="{% url 'artwork' bid.listing.id %}" class="btn btn-primary">Finalize bid</a>
-                {% endif %}
 
             </a>
         {% endfor %}

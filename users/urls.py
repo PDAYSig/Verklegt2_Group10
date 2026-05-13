@@ -32,6 +32,8 @@ urlpatterns = [
 
     path("seller/<int:id>/", views.seller_profile, name="seller_profile"),
 
+    path('about/' , views.about, name='about'),
+
     path('artwork/<int:id>/', views.artwork, name='artwork'),
 
     path('edit_profile/', views.edit_profile, name="edit_profile"),

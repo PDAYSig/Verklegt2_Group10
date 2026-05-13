@@ -11,6 +11,7 @@ class ListingCreateForm(ModelForm):
             'starting_price': forms.NumberInput(attrs={'class': 'form-control'}),
             'artist_name': forms.TextInput(attrs={'class': 'form-control'}),
             'year_created' : forms.DateInput(attrs={'class': 'form-control'}),
+            #'year_created' : forms.DateField(widget=forms.SelectDateWidget(attrs={'class': 'form-control', 'type' : 'date'},)),
             'Edition' : forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}), required=False),
             'medium' : forms.Select(attrs={ 'class': 'form-control'}),
             'dimension': forms.TextInput(attrs={'class': 'form-control', 'placeholder': '?x?'}),
