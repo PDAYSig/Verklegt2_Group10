@@ -37,6 +37,11 @@ urlpatterns = [
     path('edit_profile/', views.edit_profile, name="edit_profile"),
 
     path('recently_sold/', views.recently_sold, name="recently_sold"),
+
+    path('bid/<int:bid_id>/status/', views.update_bid_status, name='update_bid_status'),
+
+    path('bid/<int:bid_id>/payment/', views.payment_info, name='payment_info'),
+
     path('<int:id>', views.user_by_id, name='user_by_id'),
 
     path('login/register/', views.register, name='register'),

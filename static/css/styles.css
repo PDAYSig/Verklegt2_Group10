@@ -2,6 +2,7 @@ html, body {
     margin: 0;
     font-family: Times New Roman, sans-serif;
     height: 100%;
+    min-width: 995px;
 }
 
 form:has(.form-control){
@@ -233,6 +234,7 @@ body {
     align-items: center;
     justify-content: space-between;
     padding: 2rem;
+    min-width: 995px;
 }
 
 .control-wrapper {
@@ -879,4 +881,5 @@ form:has(input.submit-btn) input.submit-btn{
     opacity: 1;
     transform: scale(1.05);
 }
+
 

@@ -7,6 +7,7 @@ function initCountdown() {
         const diff = expires - new Date();
         if (diff <= 0) {
             el.textContent = 'Expired';
+            clearInterval(timer);
             return;
         }
         const d = Math.floor(diff / 86400000);
@@ -17,7 +18,7 @@ function initCountdown() {
     }
 
     tick();
-    setInterval(tick, 1000);
+    const timer = setInterval(tick, 1000);
 }
 
 document.addEventListener('DOMContentLoaded', initCountdown);

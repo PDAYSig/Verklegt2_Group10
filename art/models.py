@@ -1,6 +1,7 @@
 from datetime import date
 
 from django.db import models
+from django.contrib.auth.models import User
 from users.models import Seller
 from django.utils import timezone
 from datetime import timedelta
@@ -67,8 +68,23 @@ class Bid(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.pk:
-            self.expired_at = timezone.now() + timedelta(days=7)
+            existing_bid = Bid.objects.filter(listing=self.listing).last()
+            if existing_bid:
+                self.expired_at = existing_bid.expired_at
+            else:
+                self.expired_at = timezone.now() + timedelta(days=1)
         super().save(*args, **kwargs)
 
 
 
+class Sale(models.Model):
+    PAYMENT_CHOICES = [
+        ('Card', 'Card'),
+        ('Bank Transfer', 'Bank Transfer'),
+        ('Wire Transfer', 'Wire Transfer'),]
+    id = models.AutoField(primary_key=True)
+    listing = models.OneToOneField(art_listing, on_delete=models.CASCADE, related_name='sales')
+    seller = models.OneToOneField(Seller, on_delete=models.CASCADE)
+    buyer = models.OneToOneField(User, on_delete=models.CASCADE)
+    payment_method = models.CharField(max_length=255, choices=PAYMENT_CHOICES)
+    buyer_billing_address = models.CharField(max_length=255, null=True, blank=True)
