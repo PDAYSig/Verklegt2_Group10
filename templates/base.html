@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Temp landing page name</title>
+    <title>ArtVault</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <script src="{% static 'js/search_filter.js' %}"></script>
@@ -20,7 +20,7 @@
 
         <div class="header-center">
             <a class="a" href="{% url 'users-index' %}">
-                <h1>Title card</h1>
+                <h1>ArtVault</h1>
             </a>
         </div>
 
@@ -39,8 +39,9 @@
         </div>
     </header>
     <nav class="nav">
+        <a href="{% url 'about' %}">About</a>
         <a href="{% url 'all_art' %}">view all art</a>
-        <a href="{% url 'create_listing' %}" style="background-color: cadetblue">Create listing</a>
+        <a href="{% url 'create_listing' %}" style="background-color: slategray">Create listing</a>
     </nav>
 
     {% block content %}

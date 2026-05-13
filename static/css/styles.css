@@ -18,24 +18,6 @@ form:has(.form-control){
     position: relative;
 
 }
-/*form > div:has(.form-control){*/
-/*    border-radius: 1rem;*/
-/*    padding: 0.75rem 0.5rem 0.4rem;*/
-/*}*/
-/*form > div > label:has(.form-control){*/
-/*    position: relative;*/
-/*    !*font-size: 0.8rem;*!*/
-/*    display: grid;*/
-/*    !*align-items: center;*!*/
-/*    margin-right:auto ;*/
-/*    padding: 0 0.25rem;*/
-/*    pointer-events: none;*/
-
-/*    !*grid-template-columns: auto 1fr;*/
-/*    column-gap: 0.75rem;*!*/
-
-/*}*/
-/*error windo/button*/
 .error-form{
     background-color: #e7d0d5;
     border-radius: 0.5rem;
@@ -519,10 +501,7 @@ body {
     background-color: #e7d0d5;
     position: relative;
 }
-/*#id-username-helptext{
-    width: 20rem;
-    height: 2rem;
-}*/
+
 .register{
     background-color: #730e31;
     color: white;
