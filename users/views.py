@@ -6,6 +6,7 @@ from django.http import HttpResponse, Http404
 from art.models import art_listing, Bid
 from users.forms.create_seller_form import CreateSellerForm
 from users.forms.create_user_form import CreateProfileForm
+from art.forms.complete_payment_form import CompletePaymentForm
 from users.models import Profile, Seller
 from decimal import Decimal
 from django.utils import timezone
@@ -212,7 +213,6 @@ def create_seller(request):
     if request.method == "POST":
         form = CreateSellerForm(request.POST)
         if form.is_valid():
-            print('its cool')
             seller = form.save(commit=False)
             profile = request.user.profile
             seller.profile = profile
@@ -221,7 +221,7 @@ def create_seller(request):
             seller.save()
             return redirect("create_listing")
     else:
-        print('Dumbass')
+
         form = CreateSellerForm()
     return render(request, 'users/create_seller.html', {"form": form})
 
@@ -245,4 +245,18 @@ def update_bid_status(request, bid_id):
 @login_required
 def payment_info(request, bid_id):
     bid = get_object_or_404(Bid, id=bid_id)
-    return render(request, 'payment_info.html', {'bid': bid})
+    if request.method == "POST":
+        form = CompletePaymentForm(request.POST)
+        if form.is_valid():
+            sale = form.save(commit=False)
+            sale.listing = bid.listing
+            sale.buyer = request.user
+            sale.seller = bid.listing.seller
+            sale.save()
+            return redirect('artwork', id=bid.listing.id)
+    else:
+        form = CompletePaymentForm()
+    return render(request, 'payment_info.html', {
+        'bid': bid,
+        'form' : form
+    })

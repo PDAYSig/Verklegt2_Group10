@@ -48,6 +48,8 @@ urlpatterns = [
 
     path('login/register/', views.register, name='register'),
 
+    path('payment/', views.payment_info, name='payment_info'),
+
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
