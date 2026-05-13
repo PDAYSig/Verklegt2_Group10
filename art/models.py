@@ -67,7 +67,11 @@ class Bid(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.pk:
-            self.expired_at = timezone.now() + timedelta(days=7)
+            existing_bid = Bid.objects.filter(listing=self.listing).last()
+            if existing_bid:
+                self.expired_at = existing_bid.expired_at
+            else:
+                self.expired_at = timezone.now() + timedelta(days=1)
         super().save(*args, **kwargs)
 
 

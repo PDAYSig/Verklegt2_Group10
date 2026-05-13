@@ -12,7 +12,7 @@ from django.utils import timezone
 # Create your views here.
 
 def index(request):
-    all_items = art_listing.objects.all().order_by('-date_added')[:3]
+    all_items = art_listing.objects.all().order_by('-date_added')[:6]
     active_bid_items = art_listing.objects.filter(
         bids__expired_at__gt=timezone.now()
     ).distinct()
@@ -211,3 +211,20 @@ def create_seller(request):
         print('Dumbass')
         form = CreateSellerForm()
     return render(request, 'users/create_seller.html', {"form": form})
+
+
+@login_required
+def update_bid_status(request, bid_id):
+    bid = get_object_or_404(Bid, id=bid_id)
+
+    if bid.listing.seller.profile.user != request.user:
+        return redirect('artwork', id=bid.listing.id)
+
+    if request.method == 'POST':
+        status = request.POST.get('status')
+        if status in dict(Bid.STATUS_CHOICES):
+            bid.status = status
+            bid.save()
+            return redirect('artwork', id=bid.listing.id)
+
+    return render(request, 'users/update_bid_status.html', {'bid': bid})

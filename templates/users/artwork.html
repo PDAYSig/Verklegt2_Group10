@@ -59,6 +59,17 @@
         <p><strong>Bid expires:</strong> <span id="countdown" data-expires="{{ latest_bid.expired_at.isoformat }}"></span></p>
     {% endif %}
 
+    {% if latest_bid %}
+        {% if request.user == item.seller.profile.user %}
+            <p>
+                <a href="{% url 'update_bid_status' latest_bid.id %}">
+                    Update bid status (current: {{ latest_bid.get_status_display }})
+                </a>
+            </p>
+        {% endif %}
+    {% endif %}
+
+
     <hr>
 
     {% if user.is_authenticated %}
