@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Update bid status for {{ bid.listing.title }}</h2>
+<p><strong>Bidder:</strong> {{ bid.bidder.profile.user.username }}</p>
+<p><strong>Amount:</strong> ${{ bid.amount }}</p>
+<p><strong>Current status:</strong> {{ bid.get_status_display }}</p>
+
+<form method="POST">
+    {% csrf_token %}
+    <select name="status">
+        {% for value, label in bid.get_status_choices %}
+            <option value="{{ value }}" {% if bid.status == value %}selected{% endif %}>{{ label }}</option>
+        {% endfor %}
+    </select>
+    <button type="submit">Update status</button>
+</form>
+{% endblock %}
