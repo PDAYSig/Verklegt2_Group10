@@ -475,10 +475,6 @@ body {
     content: "";
     position: absolute;
     background: black;
-
-    /*top: 50%;
-    left: 50%;
-    transform-origin: center;*/
 }
 
 .cross::before {
@@ -534,18 +530,7 @@ textarea.form-control{
     width: 6rem;
     height: 2rem;
 }
-/*#box-height{*/
-/*    top: 13rem;*/
-/*    right: 20rem;*/
-/*    width: 6rem;*/
-/*    height: 2rem;*/
-/*}*/
-/*#box-with{*/
-/*    top: 13rem;*/
-/*    right: 13rem;*/
-/*    width: 6rem;*/
-/*    height: 2rem;*/
-/*}*/
+
 /*third row*/
 #id-artist-name{
 
@@ -569,25 +554,6 @@ textarea.form-control{
     width: 9.5rem;
     height: 3rem;
 }
-/*.box-date{*/
-/*    background-color: white;*/
-/*    border: 0.1rem solid black;*/
-/*    border-radius: 0.5rem;*/
-/*    position: absolute;*/
-/*    top: 20rem;*/
-/*    width: 6rem;*/
-/*    height: 2rem;*/
-/*}*/
-/*#box-dd{*/
-/*    right: 27rem;*/
-/*}*/
-/*#box-mm{*/
-/*    right: 20rem;*/
-/*}*/
-/*#box-yyyy{*/
-/*    right: 13rem;*/
-/*}*/
-
 
 /*.submi-btn*/
 form:has(input.submit-btn) input.submit-btn{
