@@ -82,9 +82,19 @@ class Sale(models.Model):
         ('Card', 'Card'),
         ('Bank Transfer', 'Bank Transfer'),
         ('Wire Transfer', 'Wire Transfer'),]
+    # Sale information
     id = models.AutoField(primary_key=True)
     listing = models.OneToOneField(art_listing, on_delete=models.CASCADE, related_name='sales')
     seller = models.OneToOneField(Seller, on_delete=models.CASCADE)
-    buyer = models.OneToOneField(User, on_delete=models.CASCADE)
+
     payment_method = models.CharField(max_length=255, choices=PAYMENT_CHOICES)
-    buyer_billing_address = models.CharField(max_length=255, null=True, blank=True)
+
+    # Buyer information
+    buyer = models.OneToOneField(User, on_delete=models.CASCADE)
+    buyer_nid = models.CharField(max_length=10)
+
+    # Billing address
+    buyer_country = models.CharField(max_length=255)
+    buyer_city = models.CharField(max_length=255)
+    buyer_street = models.CharField(max_length=255)
+    buyer_postal_code = models.CharField(max_length=10)
