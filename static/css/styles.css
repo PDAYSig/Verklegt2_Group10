@@ -67,7 +67,20 @@ form:has(input.ok-btn) input.ok-btn{
 .card-title{
     font-size: 2rem;
 }
-
+.card{
+    height: 25rem;
+}
+/*ef tími finst til að gera myndirnar-stuf*/
+/*.card-image{*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*    object-fit: cover;*/
+/*}*/
+/*.card-image-wrapper{*/
+/*    width: 100%;*/
+/*    height: 15rem;*/
+/*    overflow: hidden;*/
+/*}*/
 .place-bid{
     background-color: #730e31;
     position: relative;
