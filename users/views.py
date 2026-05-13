@@ -138,26 +138,38 @@ def artwork(request, id):
     latest_bid = item.bids.last()
     auction_active = latest_bid is not None and latest_bid.expired_at > timezone.now()
     user_has_bid = False
+    user_is_winner = False
 
     if request.user.is_authenticated:
         profile = request.user.profile
         seller, _ = Seller.objects.get_or_create(profile=profile)
         user_has_bid = Bid.objects.filter(listing=item, bidder=seller).exists()
 
+        if latest_bid and latest_bid.bidder == seller:
+            user_is_winner = True
+
     if request.method == 'POST':
         if not request.user.is_authenticated:
             return redirect('login')
+
+        if not auction_active:
+            messages.error(request, 'This auction has ended.')
+            return redirect('artwork', id=id)
+
         bid_amount = Decimal(request.POST.get('bid_amount'))
+
         if bid_amount > item.current_bid and bid_amount >= item.minimum_bid and bid_amount >= item.starting_price:
-            Bid.objects.create(listing=item, bidder=seller, amount=bid_amount)
+            bid = Bid.objects.create(listing=item, bidder=seller, amount=bid_amount)
             item.current_bid = bid_amount
             item.save()
-            latest_bid = item.bids.last()
+            latest_bid = bid
             auction_active = True
             user_has_bid = True
             messages.success(request, f'Your bid of ${bid_amount} was placed successfully!')
         else:
-            messages.error(request, 'Your bid must be higher than the current bid and at least the starting price.')
+            messages.error(request, 'Bid must be higher than current bid and at least the starting price.')
+
+        return redirect('artwork', id=id)
 
     return render(request, 'users/artwork.html', {
         'item': item,
@@ -165,6 +177,7 @@ def artwork(request, id):
         'latest_bid': latest_bid,
         'auction_active': auction_active,
         'user_has_bid': user_has_bid,
+        'user_is_winner': user_is_winner,
         'recently_sold_items': art_listing.objects.none()
     })
 def recently_sold(request):
@@ -228,3 +241,8 @@ def update_bid_status(request, bid_id):
             return redirect('artwork', id=bid.listing.id)
 
     return render(request, 'users/update_bid_status.html', {'bid': bid})
+
+@login_required
+def payment_info(request, bid_id):
+    bid = get_object_or_404(Bid, id=bid_id)
+    return render(request, 'payment_info.html', {'bid': bid})
