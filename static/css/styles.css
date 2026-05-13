@@ -39,6 +39,24 @@ form:has(input.ok-btn) input.ok-btn{
     cursor: pointer;
 }
 
+.create-seller-form{
+    background-color: #e7d0d5;
+    border-radius: 0.5rem;
+    border:0.2rem solid black;
+    padding: 1rem;
+    width: 25rem;
+    height: 13rem;
+    justify-content: center;
+    display: grid;
+    margin: auto
+}
+.type-select{
+    width: 8rem;
+    height: 2rem;
+    border-radius: 0.5rem;
+}
+
+
 .card-link{
     text-decoration: none;
     color: inherit;
@@ -75,7 +93,8 @@ form:has(input.ok-btn) input.ok-btn{
     border-radius: 0.5rem;
     background-color: #e7d0d5;
 }
-form:has(input.submit-L) input.submit-L{
+
+.submit-L{
     background-color: #730e31;
     position: relative;
     color: white;
@@ -391,6 +410,11 @@ body {
     color: aliceblue;
     text-align: center;
     margin: 0 0 0.75rem 0;
+    text-decoration: none;
+}
+.link{
+    color: white;
+    text-decoration: none;
 }
 
 .sold-image-row {
