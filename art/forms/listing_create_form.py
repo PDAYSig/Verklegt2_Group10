@@ -2,6 +2,8 @@ from django.forms import ModelForm
 from django import forms
 from art.models import art_listing
 class ListingCreateForm(ModelForm):
+    date_added = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}), input_formats=['%y-%m-%d'])
+
     class Meta:
         model = art_listing
         exclude = ['id', 'seller']
@@ -18,4 +20,5 @@ class ListingCreateForm(ModelForm):
             'style' : forms.Select(attrs={'class': 'form-control'}),
             'minimum_bid' : forms.NumberInput(attrs={'class': 'form-control'}),
             'provenance' : forms.Textarea(attrs={'class': 'form-control'}),
+            'date_added': forms.DateInput(attrs={'type': 'date'}),
         }
