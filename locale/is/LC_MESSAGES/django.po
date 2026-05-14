@@ -417,3 +417,15 @@ msgstr "Ódýrast"
 
 msgid "About"
 msgstr "Um okkur"
+
+msgid "Type"
+msgstr "Tegund"
+
+msgid "Street"
+msgstr "Gata"
+
+msgid "City"
+msgstr "Borg"
+
+msgid "Postal code"
+msgstr "Póstnúmer"
