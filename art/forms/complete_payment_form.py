@@ -3,12 +3,12 @@ from django_countries.fields import CountryField
 from django import forms
 from art.models import Sale
 class CompletePaymentForm(forms.ModelForm):
+    buyer_country = CountryField(blank_label='Select Country').formfield()
     class Meta:
         model = Sale
         exclude = ['id', 'seller', 'buyer', 'listing']
         widgets = {
             'buyer_city' : forms.TextInput(attrs={'class': 'form-control'}),
-            'buyer_country' : CountryField(attrs={'class': 'form-control'}),
             'buyer_street' : forms.TextInput(attrs={'class': 'form-control'}),
             'buyer_postal_code' : forms.TextInput(attrs={'class': 'form-control'}),
             'payment_method' : forms.Select(attrs={'class': 'form-control'}),

@@ -48,7 +48,9 @@ urlpatterns = [
     path('<int:id>', views.user_by_id, name='user_by_id'),
 
     path('login/register/', views.register, name='register'),
-    path('artworks/',artwork_list, name='artwork_list'),
+
+    path('payment/', views.payment_info, name='payment_info'),
+
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
