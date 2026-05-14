@@ -1,3 +1,5 @@
+from multiprocessing import context
+
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
@@ -10,6 +12,7 @@ from art.forms.complete_payment_form import CompletePaymentForm
 from users.models import Profile, Seller
 from decimal import Decimal
 from django.utils import timezone
+from django.db.models import Min, Max
 # Create your views here.
 
 def index(request):
@@ -26,9 +29,19 @@ def index(request):
 def about(request):
     return render(request, "users/about.html")
 
+def artwork_list(request):
+    price_range = art_listing.objects.aggregate(
+        min_price=Min('price'),
+        max_price=Max('price'),
+    )
+
+    context = {
+        "min_price": price_range['min_price'] or 0,
+        "max_price": price_range['max_price'] or 0,
+    }
+    return render(request, 'users/all_art.html', context)
 def all_art(request):
     listings = art_listing.objects.all()
-
     search_filter = request.GET.get('search_filter')
     medium = request.GET.get('medium')
     sort = request.GET.get('sort')
