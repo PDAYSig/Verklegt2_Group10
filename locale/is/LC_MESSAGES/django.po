@@ -408,3 +408,9 @@ msgstr "Búa til skráningu"
 
 msgid "Contact us"
 msgstr "Hafðu samband"
+
+msgid "Most Expensive"
+msgstr "Dýrast"
+
+msgid "Least Expensive"
+msgstr "Ódýrast"

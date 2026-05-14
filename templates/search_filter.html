@@ -1,5 +1,4 @@
 {% load i18n %}
-
 {% block search %}
 
 <form method="get" action="{% url 'all_art' %}" class="control-wrapper">
@@ -16,7 +15,10 @@
                         <option value="">{% trans "-- Select --" %}</option>
                         <option value="newest">{% trans "Newest" %}</option>
                         <option value="oldest">{% trans "Oldest" %}</option>
+                        <option value="most_expensive">{% trans "Most Expensive" %}</option>
+                        <option value="least_expensive">{% trans "Least Expensive" %}</option>
                     </select>
+
                     <h4>{% trans "Style" %}</h4>
                     <select name="style">
                         <option value="">{% trans "-- Select --" %}</option>
