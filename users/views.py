@@ -11,7 +11,7 @@ from users.forms.create_user_form import CreateProfileForm
 from art.forms.complete_payment_form import CompletePaymentForm
 from users.models import Profile, Seller
 from decimal import Decimal
-from django.utils import timezone
+from django.utils import timezone, translation
 from django.db.models import Min, Max
 # Create your views here.
 

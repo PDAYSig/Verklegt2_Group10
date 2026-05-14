@@ -1,45 +1,47 @@
+{% load i18n %}
+
 {% block search %}
 
 <form method="get" action="{% url 'all_art' %}" class="control-wrapper">
     <div class="control-wrapper">
 
         <div class="control-panel">
-            <input type="search" class="search-bar" name="search_filter" placeholder="Search...">
+            <input type="search" class="search-bar" name="search_filter" placeholder="{% trans 'Search...' %}">
 
             <div class="filter-wrapper">
-                <button type="button" class="filter-btn">Filters</button>
+                <button type="button" class="filter-btn">{% trans "Filters" %}</button>
                 <div class="filter-panel">
-                    <h4>Sort by</h4>
+                    <h4>{% trans "Sort by" %}</h4>
                     <select name="sort">
-                        <option value="">-- Select --</option>
-                        <option value="newest">Newest</option>
-                        <option value="oldest">Oldest</option>
+                        <option value="">{% trans "-- Select --" %}</option>
+                        <option value="newest">{% trans "Newest" %}</option>
+                        <option value="oldest">{% trans "Oldest" %}</option>
                     </select>
-                    <h4>Style</h4>
+                    <h4>{% trans "Style" %}</h4>
                     <select name="style">
-                        <option value="">-- Select --</option>
-                        <option value="Modern">Modern</option>
-                        <option value="Abstract">Abstract</option>
-                        <option value="Realism">Realism</option>
-                        <option value="Impressionism">Impressionism</option>
+                        <option value="">{% trans "-- Select --" %}</option>
+                        <option value="Modern">{% trans "Modern" %}</option>
+                        <option value="Abstract">{% trans "Abstract" %}</option>
+                        <option value="Realism">{% trans "Realism" %}</option>
+                        <option value="Impressionism">{% trans "Impressionism" %}</option>
                     </select>
 
-                    <h4>Medium</h4>
+                    <h4>{% trans "Medium" %}</h4>
                     <select name="medium">
-                        <option value="">-- Select --</option>
-                        <option value="Oil">Oil painting</option>
-                        <option value="Acrylic">Acrylic</option>
-                        <option value="Digital">Digital</option>
-                        <option value="Sculpture">Sculpture</option>
-                        <option value="Photography">Photography</option>
-                        <option value="Watercolour">Watercolour</option>
+                        <option value="">{% trans "-- Select --" %}</option>
+                        <option value="Oil">{% trans "Oil painting" %}</option>
+                        <option value="Acrylic">{% trans "Acrylic" %}</option>
+                        <option value="Digital">{% trans "Digital" %}</option>
+                        <option value="Sculpture">{% trans "Sculpture" %}</option>
+                        <option value="Photography">{% trans "Photography" %}</option>
+                        <option value="Watercolour">{% trans "Watercolour" %}</option>
                     </select>
 
-                    <h4>Price</h4>
+                    <h4>{% trans "Price" %}</h4>
                     <input type="range" name="max_price" min="{{ min_price }}" max="{{ max_price }}" value="{{ max_price }}" oninput="priceOutput.value = this.value">
                     <output id="priceOutput">{{ max_price }}</output>
 
-                    <button type="submit" id ='submit-button'>Submit</button>
+                    <button type="submit" id="submit-button">{% trans "Submit" %}</button>
                 </div>
             </div>
         </div>

@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block content %}
 
@@ -12,19 +13,19 @@
 
     <div class="profile-info">
         <h2>{{ user.username }}</h2>
-        <p>{{ user.profile.bio|default:"no bio yet" }}</p>
+        <p>{{ user.profile.bio|default:_("no bio yet") }}</p>
 
         <div class="profile-actions">
 
             <a href="{% url 'edit_profile' %}" class="btn btn-primary">
-                Edit profile
+                {% trans "Edit profile" %}
             </a>
 
             <div class="logout">
                 <form action="{% url 'logout' %}" method="POST">
                     {% csrf_token %}
                     <button type="submit" class="btn-primary">
-                        Logout
+                        {% trans "Logout" %}
                     </button>
                 </form>
             </div>
@@ -35,7 +36,7 @@
 
 <hr>
 
-<h2 class="section-title">My Bids</h2>
+<h2 class="section-title">{% trans "My Bids" %}</h2>
 
 {% if bids %}
     <div class="image-grid">
@@ -47,22 +48,21 @@
                     <img src="{{ bid.listing.thumbnail_image.url }}" alt="{{ bid.listing.title }}">
                 {% endif %}
 
-                <p><strong>Title:</strong> {{ bid.listing.title }}</p>
-                <p><strong>Seller:</strong> {{ bid.listing.seller.profile.user.username }}</p>
-                <p><strong>Bid price:</strong> ${{ bid.amount }}</p>
-                <p><strong>Date placed:</strong> {{ bid.placed_at|date:"M d, Y" }}</p>
-                <p><strong>Expires:</strong> {{ bid.expired_at|date:"M d, Y" }}</p>
-                <p><strong>Status:</strong>
+                <p><strong>{% trans "Title" %}:</strong> {{ bid.listing.title }}</p>
+                <p><strong>{% trans "Seller" %}:</strong> {{ bid.listing.seller.profile.user.username }}</p>
+                <p><strong>{% trans "Bid price" %}:</strong> ${{ bid.amount }}</p>
+                <p><strong>{% trans "Date placed" %}:</strong> {{ bid.placed_at|date:"M d, Y" }}</p>
+                <p><strong>{% trans "Expires" %}:</strong> {{ bid.expired_at|date:"M d, Y" }}</p>
+                <p><strong>{% trans "Status" %}:</strong>
                     <span class="status-{{ bid.status }}">{{ bid.get_status_display }}</span>
                 </p>
-
 
             </a>
         {% endfor %}
 
     </div>
 {% else %}
-    <p>No bids yet</p>
+    <p>{% trans "No bids yet" %}</p>
 {% endif %}
 
 {% endblock %}

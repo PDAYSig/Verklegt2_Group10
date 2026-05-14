@@ -23,5 +23,7 @@ import users
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('users.urls')),
-    path( '',include('art.urls'))
+    path( '',include('art.urls')),
+
+    path('i18n/', include('django.conf.urls.i18n')),
 ]

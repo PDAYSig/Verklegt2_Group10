@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block content %}
 
 <div class="profile-container">
 
-    <h2 class="section-title">Edit Profile</h2>
+    <h2 class="section-title">{% trans "Edit Profile" %}</h2>
 
     <div class="edit-profile-box">
-
 
         <div class="edit-preview">
             {% if user.profile.image %}
@@ -19,16 +19,15 @@
         <form method="POST" enctype="multipart/form-data" class="edit-form">
             {% csrf_token %}
 
-            <label>Profile Picture</label>
+            <label>{% trans "Profile Picture" %}</label>
             <input type="file" name="image">
 
-            <label>Bio</label>
+            <label>{% trans "Bio" %}</label>
             <textarea name="bio" rows="4">{{ user.profile.bio|default:'' }}</textarea>
 
-
             <div class="edit-actions">
-                <button type="submit" class="btn-primary">Save Changes</button>
-                <a href="{% url 'profile' %}" class="btn-secondary">Cancel</a>
+                <button type="submit" class="btn-primary">{% trans "Save Changes" %}</button>
+                <a href="{% url 'profile' %}" class="btn-secondary">{% trans "Cancel" %}</a>
             </div>
 
         </form>
