@@ -32,7 +32,7 @@ msgstr "Hlaða upp myndum"
 
 #: .\templates\art\create_listing.html:12
 msgid "Create Listing"
-msgstr "Búa til skráningu"
+msgstr "Skrá nýja list"
 
 #: .\templates\payment_info.html:8 .\templates\search_filter.html:44
 msgid "Submit"
@@ -61,7 +61,7 @@ msgstr "Nýjast"
 
 #: .\templates\search_filter.html:18
 msgid "Oldest"
-msgstr "Elst"
+msgstr "Elsta"
 
 #: .\templates\search_filter.html:20
 msgid "Style"
@@ -142,9 +142,9 @@ msgid ""
 msgstr ""
 "\n"
 "            ArtVault er kraftmikill markaðsstaður tileinkað uppboði og sölu "
-"á framúrskarandi listaverkum frá öllum heimshornum. ArtVault sameinar "
+"á framúrskarandi listaverkum. ArtVault sameinar "
 "fágun hefðbundinna uppboðshúsa og aðgengi nútímalegra stafræna kerfa og "
-"tengir safnara, listamenn og áhugamenn í þægilegu og traustu umhverfi.\n"
+"tengir listasöfnuði, listamenn og áhugamenn í þægilegu og traustu umhverfi.\n"
 "\n"
 "ArtVault er knúið áfram af ástríðu fyrir list og skuldbindingu um "
 "áreiðanleika. Hvert verk á pallinum er vandlega valið til að tryggja "
@@ -298,7 +298,7 @@ msgstr "Engin virk boð eins og er."
 
 #: .\templates\users\login.html:9
 msgid "Login"
-msgstr "Innskrá"
+msgstr "Skrá Inn"
 
 #: .\templates\users\login.html:10
 msgid "Don't have an account? Register"
@@ -314,7 +314,7 @@ msgstr "Breyta prófíl"
 
 #: .\templates\users\profile.html:28
 msgid "Logout"
-msgstr "Útskrá"
+msgstr "Skrá út"
 
 #: .\templates\users\profile.html:39
 msgid "My Bids"
@@ -327,7 +327,7 @@ msgstr "Titill"
 
 #: .\templates\users\profile.html:53
 msgid "Bid price"
-msgstr "Boðsverð"
+msgstr "Tilboðsverð"
 
 #: .\templates\users\profile.html:54
 msgid "Date placed"
@@ -414,3 +414,6 @@ msgstr "Dýrast"
 
 msgid "Least Expensive"
 msgstr "Ódýrast"
+
+msgid "About"
+msgstr "Um okkur"

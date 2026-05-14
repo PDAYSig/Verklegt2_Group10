@@ -866,4 +866,37 @@ form:has(input.submit-btn) input.submit-btn{
     transform: scale(1.05);
 }
 
+.lang-btn {
+    background: none;
+    border: 1px solid white;
+    color: white;
+    padding: 4px 8px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.lang-active {
+    background-color: white;
+    color: black;
+}
+
+.lang-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.flag-icon {
+    width: 5rem;
+    height: 2.5rem;
+    object-fit: cover;
+    border-radius: 3px;
+    opacity: 0.6;
+}
+
+.lang-active .flag-icon {
+    opacity: 1;
+    outline: 2px solid white;
+}
 

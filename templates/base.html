@@ -26,18 +26,23 @@
         </div>
 
         <div class="header-right">
-            {% get_current_language as LANGUAGE_CODE %}
-            <form action="{% url 'set_language' %}" method="post" style="display:inline;">
-                {% csrf_token %}
-                <input name="next" type="hidden" value="{{ request.get_full_path }}">
-                {% if LANGUAGE_CODE == 'is' %}
-                    <input name="language" type="hidden" value="en">
-                    <button type="submit" class="lang-btn">EN</button>
-                {% else %}
-                    <input name="language" type="hidden" value="is">
-                    <button type="submit" class="lang-btn">IS</button>
-                {% endif %}
-            </form>
+        {% get_current_language as LANGUAGE_CODE %}
+        <form action="{% url 'set_language' %}" method="post" style="display:inline;">
+            {% csrf_token %}
+            <input name="next" type="hidden" value="{{ request.get_full_path }}">
+            <input name="language" type="hidden" value="en">
+            <button type="submit" class="lang-btn {% if LANGUAGE_CODE == 'en' %}lang-active{% endif %}">
+                <img src="/media/langbutton/us-eng%20flag.png" alt="EN" class="flag-icon">
+            </button>
+        </form>
+        <form action="{% url 'set_language' %}" method="post" style="display:inline;">
+            {% csrf_token %}
+            <input name="next" type="hidden" value="{{ request.get_full_path }}">
+            <input name="language" type="hidden" value="is">
+            <button type="submit" class="lang-btn {% if LANGUAGE_CODE == 'is' %}lang-active{% endif %}">
+                <img src="/media/langbutton/icelandic-flag.png" alt="IS" class="flag-icon">
+            </button>
+        </form>
 
             {% if user.is_authenticated %}
                 <a href="{% url 'profile' %}">
@@ -53,7 +58,7 @@
         </div>
     </header>
     <nav class="nav">
-        <a href="{% url 'about' %}">About</a>
+        <a href="{% url 'about' %}">{% trans "About" %}</a>
         <a href="{% url 'all_art' %}">{% trans "view all art" %}</a>
         <a href="{% url 'create_listing' %}" style="background-color: slategray">{% trans "Create listing" %}</a>
     </nav>
