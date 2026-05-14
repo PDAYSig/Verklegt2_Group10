@@ -1,14 +1,15 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block content %}
-<h2>Update bid status for {{ bid.listing.title }}</h2>
-<p><strong>Bidder:</strong> {{ bid.bidder.profile.user.username }}</p>
-<p><strong>Amount:</strong> ${{ bid.amount }}</p>
-<p><strong>Current status:</strong> {{ bid.get_status_display }}</p>
+<h2>{% blocktrans with title=bid.listing.title %}Update bid status for {{ title }}{% endblocktrans %}</h2>
+<p><strong>{% trans "Bidder" %}:</strong> {{ bid.bidder.profile.user.username }}</p>
+<p><strong>{% trans "Amount" %}:</strong> ${{ bid.amount }}</p>
+<p><strong>{% trans "Current status" %}:</strong> {{ bid.get_status_display }}</p>
 
 <form method="POST">
     {% csrf_token %}
-    <button type="submit" name="status" value="accepted">Accept</button>
-    <button type="submit" name="status" value="rejected">Reject</button>
+    <button type="submit" name="status" value="accepted">{% trans "Accept" %}</button>
+    <button type="submit" name="status" value="rejected">{% trans "Reject" %}</button>
 </form>
 {% endblock %}

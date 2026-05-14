@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
+{% load i18n %}
 {% block content %}
 
 <div class="main-content">
 
-    <h2 class="text-center">Recently Sold</h2>
+    <h2 class="text-center">{% trans "Recently Sold" %}</h2>
 
     <div class="image-grid">
         {% for item in items %}
@@ -13,18 +14,18 @@
                         {% if item.thumbnail_image %}
                             <img class="cars-image" src="{{ item.thumbnail_image.url }}" alt="{{ item.title }}">
                         {% else %}
-                            <img src="img.jpg" alt="Thumbnail for {{ item.title }} unavailable">
+                            <img src="img.jpg" alt="{{ item.title }}">
                         {% endif %}
                     </div>
                     <div class="card-content">
                         <h3 class="card-title">{{ item.title }}</h3>
                         <p>{{ item.artist_name }}</p>
-                        <p class="sold-tag">Sold for ${{ item.current_bid }}</p>
+                        <p class="sold-tag">{% blocktrans with bid=item.current_bid %}Sold for ${{ bid }}{% endblocktrans %}</p>
                     </div>
                 </div>
             </a>
         {% empty %}
-            <p>No sold artwork found.</p>
+            <p>{% trans "No sold artwork found." %}</p>
         {% endfor %}
     </div>
 

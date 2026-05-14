@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-
+{% load i18n %}
 
 {% block content %}
 <script src="{% static 'js/countdown.js' %}"></script>
@@ -22,8 +22,8 @@
     </div>
 
     <div class="gallery-controls">
-        <button onclick="prevImage()">Prev</button>
-        <button onclick="nextImage()">Next</button>
+        <button onclick="prevImage()">{% trans "Prev" %}</button>
+        <button onclick="nextImage()">{% trans "Next" %}</button>
     </div>
 
 </div>
@@ -32,43 +32,40 @@
 
     <h1>{{ item.title }}</h1>
 
-    <p><strong>Artist:</strong> {{ item.artist_name }}</p>
-    <p><strong>Medium:</strong> {{ item.medium }}</p>
-    <p><strong>Year:</strong> {{ item.year_created }}</p>
-
-    <p><strong>Dimensions:</strong>{{ item.dimension }}</p>
+    <p><strong>{% trans "Artist" %}:</strong> {{ item.artist_name }}</p>
+    <p><strong>{% trans "Medium" %}:</strong> {{ item.medium }}</p>
+    <p><strong>{% trans "Year" %}:</strong> {{ item.year_created }}</p>
+    <p><strong>{% trans "Dimensions" %}:</strong> {{ item.dimension }}</p>
 
     <p>
-        <strong>Seller:</strong>
+        <strong>{% trans "Seller" %}:</strong>
         <a href="{% url 'seller_profile' item.seller.profile.user.id %}">
             {{ item.seller.profile.user.username }}
-            <img
-                src="{{ item.seller.profile.profile_image.url }}" width="40"
-                alt="{{ item.seller.profile.user.username }} profile pic">
+            <img src="{{ item.seller.profile.profile_image.url }}" width="40"
+                alt="{{ item.seller.profile.user.username }}">
         </a>
     </p>
 
-    <p><strong>Auction status:</strong> {% if auction_active %}Active{% else %}Inactive{% endif %}</p>
+    <p><strong>{% trans "Auction status" %}:</strong> {% if auction_active %}{% trans "Active" %}{% else %}{% trans "Inactive" %}{% endif %}</p>
 
     <hr>
 
-    <p><strong>Starting price:</strong> ${{ item.starting_price }}</p>
-    <p><strong>Current bid:</strong> ${{ item.current_bid }}</p>
+    <p><strong>{% trans "Starting price" %}:</strong> ${{ item.starting_price }}</p>
+    <p><strong>{% trans "Current bid" %}:</strong> ${{ item.current_bid }}</p>
 
     {% if latest_bid %}
-        <p><strong>Bid expires:</strong> <span id="countdown" data-expires="{{ latest_bid.expired_at.isoformat }}"></span></p>
+        <p><strong>{% trans "Bid expires" %}:</strong> <span id="countdown" data-expires="{{ latest_bid.expired_at.isoformat }}"></span></p>
     {% endif %}
 
     {% if latest_bid %}
         {% if request.user == item.seller.profile.user %}
             <p>
                 <a href="{% url 'update_bid_status' latest_bid.id %}">
-                    Update bid status (current: {{ latest_bid.get_status_display }})
+                    {% blocktrans with status=latest_bid.get_status_display %}Update bid status (current: {{ status }}){% endblocktrans %}
                 </a>
             </p>
         {% endif %}
     {% endif %}
-
 
     <hr>
 
@@ -80,30 +77,30 @@
         {% endif %}
 
         {% if latest_bid and latest_bid.status == 'accepted' and user_is_winner %}
-            <a href="{% url 'payment_info' latest_bid.id %}" class="btn btn-primary">Proceed to payment</a>
+            <a href="{% url 'payment_info' latest_bid.id %}" class="btn btn-primary">{% trans "Proceed to payment" %}</a>
 
         {% elif latest_bid and latest_bid.status == 'rejected' and user_is_winner %}
-            <p class="rejected">Your bid was rejected.</p>
+            <p class="rejected">{% trans "Your bid was rejected." %}</p>
 
         {% elif auction_active %}
             <form method="POST">
                 {% csrf_token %}
-                <input type="number" name="bid_amount" placeholder="Enter amount" min="{{ item.starting_price }}" step="0.01">
-                <button type="submit">{% if user_has_bid %}Resubmit bid{% else %}Submit a bid{% endif %}</button>
+                <input type="number" name="bid_amount" placeholder="{% trans 'Enter amount' %}" min="{{ item.starting_price }}" step="0.01">
+                <button type="submit">{% if user_has_bid %}{% trans "Resubmit bid" %}{% else %}{% trans "Submit a bid" %}{% endif %}</button>
             </form>
 
         {% else %}
-            <p>This auction has ended.</p>
-    {% endif %}
+            <p>{% trans "This auction has ended." %}</p>
+        {% endif %}
 
-{% else %}
-    <p><a href="{% url 'login' %}">Log in</a> to place a bid.</p>
-{% endif %}
+    {% else %}
+        <p><a href="{% url 'login' %}">{% trans "Log in" %}</a> {% trans "to place a bid." %}</p>
+    {% endif %}
 
 </div>
 
 <div class="artwork-about">
-    <h2>About the artwork</h2>
+    <h2>{% trans "About the artwork" %}</h2>
     <p>{{ item.description }}</p>
     <p>{{ item.provenance }}</p>
 </div>

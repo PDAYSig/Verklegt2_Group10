@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block content %}
 
- <div class="profile-container">
+<div class="profile-container">
 
     <div class="profile-header">
         {% if seller.profile.profile_image %}
@@ -13,12 +14,12 @@
 
         <div class="profile-info">
             <h2>{{ seller.profile.user.username }}</h2>
-            <p class="seller-type">{{ seller.profile.seller_type|default:"Seller" }}</p>
-            <p>{{ seller.profile.bio|default:"No bio yet" }}</p>
+            <p class="seller-type">{{ seller.profile.seller_type|default:_("Seller") }}</p>
+            <p>{{ seller.profile.bio|default:_("No bio yet") }}</p>
         </div>
     </div>
 
-    <h2 class="section-title">My Art</h2>
+    <h2 class="section-title">{% trans "My Art" %}</h2>
 
     {% if art %}
     <div class="image-grid">
@@ -27,7 +28,7 @@
             <a href="{% url 'artwork' item.id %}">
 
                 {% with img=item.images.first %}
-                    {% if img and item.thumbnail_image%}
+                    {% if img and item.thumbnail_image %}
                         <img src="{{ item.thumbnail_image.url }}" alt="{{ item.title }}">
                     {% endif %}
                 {% endwith %}
@@ -38,7 +39,7 @@
 
     </div>
     {% else %}
-        <p>No art listed yet</p>
+        <p>{% trans "No art listed yet" %}</p>
     {% endif %}
 </div>
 

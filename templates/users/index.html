@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block content %}
 
 <div class="container">
 
     <div class="box">
-        <h2 class="box-title">New listings</h2>
+        <h2 class="box-title">{% trans "New listings" %}</h2>
 
         <div class="image-stack">
             {% for item in items %}
@@ -27,7 +28,7 @@
 
         <div class="sold-box">
             <a href="{% url 'recently_sold' %}">
-                <h2 class="sold-title">Recently sold</h2>
+                <h2 class="sold-title">{% trans "Recently sold" %}</h2>
             </a>
 
             <div class="sold-image-row">
@@ -46,22 +47,21 @@
 
     </div>
 
-        <div class="box">
-            <h2 class="box-title">Active bids</h2>
-            <div class="image-stack">
-                {% for item in active_bid_items %}
-                    <a href="{% url 'artwork' item.id %}">
-                        {% with img=item.thumbnail_image %}
-                            {% if img %}
-                                <img src="{{ img.url }}" width="100">
-                            {% endif %}
-                        {% endwith %}
-                        <p>{{ item.title }}</p>
-                    </a>
-                {% empty %}
-                    <p>No active bids at the moment.</p>
-                {% endfor %}
-            </div>
+    <div class="box">
+        <h2 class="box-title">{% trans "Active bids" %}</h2>
+        <div class="image-stack">
+            {% for item in active_bid_items %}
+                <a href="{% url 'artwork' item.id %}">
+                    {% with img=item.thumbnail_image %}
+                        {% if img %}
+                            <img src="{{ img.url }}" width="100">
+                        {% endif %}
+                    {% endwith %}
+                    <p>{{ item.title }}</p>
+                </a>
+            {% empty %}
+                <p>{% trans "No active bids at the moment." %}</p>
+            {% endfor %}
         </div>
     </div>
 

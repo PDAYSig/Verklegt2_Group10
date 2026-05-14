@@ -1,0 +1,416 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-14 14:09+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: is\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n % 10 != 1 || n % 100 == 11);\n"
+
+#: .\Art_auctions\settings.py:39
+msgid "English"
+msgstr "Enska"
+
+#: .\Art_auctions\settings.py:40
+msgid "Icelandic"
+msgstr "Íslenska"
+
+#: .\templates\art\create_listing.html:9
+msgid "Upload Images"
+msgstr "Hlaða upp myndum"
+
+#: .\templates\art\create_listing.html:12
+msgid "Create Listing"
+msgstr "Búa til skráningu"
+
+#: .\templates\payment_info.html:8 .\templates\search_filter.html:44
+msgid "Submit"
+msgstr "Senda inn"
+
+#: .\templates\search_filter.html:9
+msgid "Search..."
+msgstr "Leita..."
+
+#: .\templates\search_filter.html:12
+msgid "Filters"
+msgstr "Síur"
+
+#: .\templates\search_filter.html:14
+msgid "Sort by"
+msgstr "Raða eftir"
+
+#: .\templates\search_filter.html:16 .\templates\search_filter.html:22
+#: .\templates\search_filter.html:31
+msgid "-- Select --"
+msgstr "-- Veldu --"
+
+#: .\templates\search_filter.html:17
+msgid "Newest"
+msgstr "Nýjast"
+
+#: .\templates\search_filter.html:18
+msgid "Oldest"
+msgstr "Elst"
+
+#: .\templates\search_filter.html:20
+msgid "Style"
+msgstr "Stíll"
+
+#: .\templates\search_filter.html:23
+msgid "Modern"
+msgstr "Nútímalegt"
+
+#: .\templates\search_filter.html:24
+msgid "Abstract"
+msgstr "Abstrakt"
+
+#: .\templates\search_filter.html:25
+msgid "Realism"
+msgstr "Raunsæi"
+
+#: .\templates\search_filter.html:26
+msgid "Impressionism"
+msgstr "Impressjónismi"
+
+#: .\templates\search_filter.html:29 .\templates\users\artwork.html:36
+msgid "Medium"
+msgstr "Miðill"
+
+#: .\templates\search_filter.html:32
+msgid "Oil painting"
+msgstr "Olíumálverk"
+
+#: .\templates\search_filter.html:33
+msgid "Acrylic"
+msgstr "Akrýl"
+
+#: .\templates\search_filter.html:34
+msgid "Digital"
+msgstr "Stafrænt"
+
+#: .\templates\search_filter.html:35
+msgid "Sculpture"
+msgstr "Skúlptúr"
+
+#: .\templates\search_filter.html:36
+msgid "Photography"
+msgstr "Ljósmyndun"
+
+#: .\templates\search_filter.html:37
+msgid "Watercolour"
+msgstr "Vatnslitir"
+
+#: .\templates\search_filter.html:40
+msgid "Price"
+msgstr "Verð"
+
+#: .\templates\users\about.html:12
+msgid ""
+"\n"
+"            ArtVault is a dynamic marketplace dedicated to the auction and "
+"sale of exceptional artwork from around the world. Blending the "
+"sophistication of traditional auction houses with the accessibility of "
+"modern digital platforms, ArtVault connects collectors, artists, and "
+"enthusiasts in a seamless, trusted environment.\n"
+"\n"
+"At its core, ArtVault is driven by a passion for art and a commitment to "
+"authenticity. Each piece featured on the platform is carefully curated, "
+"ensuring quality, provenance, and artistic value. From emerging talents to "
+"established masters, ArtVault offers a diverse portfolio that caters to both "
+"seasoned collectors and first-time buyers.\n"
+"\n"
+"Through innovative auction experiences and direct sales, ArtVault empowers "
+"users to discover, bid on, and acquire artwork with confidence. Its "
+"transparent processes, secure transactions, and expert-backed insights "
+"create a reliable space where art and investment intersect.\n"
+"\n"
+"ArtVault is more than a marketplace—it is a gateway to the global art "
+"community, where creativity is celebrated and ownership of meaningful works "
+"is made accessible.\n"
+"        "
+msgstr ""
+"\n"
+"            ArtVault er kraftmikill markaðsstaður tileinkað uppboði og sölu "
+"á framúrskarandi listaverkum frá öllum heimshornum. ArtVault sameinar "
+"fágun hefðbundinna uppboðshúsa og aðgengi nútímalegra stafræna kerfa og "
+"tengir safnara, listamenn og áhugamenn í þægilegu og traustu umhverfi.\n"
+"\n"
+"ArtVault er knúið áfram af ástríðu fyrir list og skuldbindingu um "
+"áreiðanleika. Hvert verk á pallinum er vandlega valið til að tryggja "
+"gæði, uppruna og listagildi. Frá nýliðum til þekktra meistara býður "
+"ArtVault upp á fjölbreyttar safnmyndir sem höfða til bæði vanra safnara "
+"og fyrstu kaupenda.\n"
+"\n"
+"Með nýstárlegum uppboðsupplifunum og beinni sölu gefur ArtVault notendum "
+"tækifæri til að uppgötva, bjóða í og eignast listaverk með fullnægjandi "
+"öryggi. Gegnsæar ferlar, öruggar viðskipti og sérfræðiráðgjöf skapar "
+"áreiðanlegt rými þar sem list og fjárfesting mætast.\n"
+"\n"
+"ArtVault er meira en markaðsstaður — það er gátt að alþjóðlegu "
+"listasamfélagi, þar sem sköpunargáfa er metin að verðleikum og eignarhald "
+"á merkingarbærum verkum er gert aðgengilegt.\n"
+"        "
+
+#: .\templates\users\all_art.html:29
+msgid "No listings found."
+msgstr "Engar skráningar fundust."
+
+#: .\templates\users\artwork.html:25
+msgid "Prev"
+msgstr "Fyrri"
+
+#: .\templates\users\artwork.html:26
+msgid "Next"
+msgstr "Næsta"
+
+#: .\templates\users\artwork.html:35
+msgid "Artist"
+msgstr "Listamaður"
+
+#: .\templates\users\artwork.html:37
+msgid "Year"
+msgstr "Ár"
+
+#: .\templates\users\artwork.html:38
+msgid "Dimensions"
+msgstr "Stærð"
+
+#: .\templates\users\artwork.html:41 .\templates\users\profile.html:52
+#: .\templates\users\seller_profile.html:17
+msgid "Seller"
+msgstr "Seljandi"
+
+#: .\templates\users\artwork.html:49
+msgid "Auction status"
+msgstr "Uppboðsstaða"
+
+#: .\templates\users\artwork.html:49
+msgid "Active"
+msgstr "Virkt"
+
+#: .\templates\users\artwork.html:49
+msgid "Inactive"
+msgstr "Óvirkt"
+
+#: .\templates\users\artwork.html:53
+msgid "Starting price"
+msgstr "Upphafsverð"
+
+#: .\templates\users\artwork.html:54
+msgid "Current bid"
+msgstr "Núverandi boð"
+
+#: .\templates\users\artwork.html:57
+msgid "Bid expires"
+msgstr "Boð rennur út"
+
+#: .\templates\users\artwork.html:64
+#, python-format
+msgid "Update bid status (current: %(status)s)"
+msgstr "Uppfæra stöðu boðs (núverandi: %(status)s)"
+
+#: .\templates\users\artwork.html:80
+msgid "Proceed to payment"
+msgstr "Fara í greiðslu"
+
+#: .\templates\users\artwork.html:83
+msgid "Your bid was rejected."
+msgstr "Boði þínu var hafnað."
+
+#: .\templates\users\artwork.html:88
+msgid "Enter amount"
+msgstr "Sláðu inn upphæð"
+
+#: .\templates\users\artwork.html:89
+msgid "Resubmit bid"
+msgstr "Endursenda boð"
+
+#: .\templates\users\artwork.html:89
+msgid "Submit a bid"
+msgstr "Gera boð"
+
+#: .\templates\users\artwork.html:93
+msgid "This auction has ended."
+msgstr "Þessu uppboði er lokið."
+
+#: .\templates\users\artwork.html:97
+msgid "Log in"
+msgstr "Skrá inn"
+
+#: .\templates\users\artwork.html:97
+msgid "to place a bid."
+msgstr "til að gera boð."
+
+#: .\templates\users\artwork.html:103
+msgid "About the artwork"
+msgstr "Um listaverkið"
+
+#: .\templates\users\create_seller.html:9
+msgid "Create Seller"
+msgstr "Búa til seljanda"
+
+#: .\templates\users\edit_profile.html:8
+msgid "Edit Profile"
+msgstr "Breyta prófíl"
+
+#: .\templates\users\edit_profile.html:22
+msgid "Profile Picture"
+msgstr "Prófílmynd"
+
+#: .\templates\users\edit_profile.html:25
+msgid "Bio"
+msgstr "Um mig"
+
+#: .\templates\users\edit_profile.html:29
+msgid "Save Changes"
+msgstr "Vista breytingar"
+
+#: .\templates\users\edit_profile.html:30
+msgid "Cancel"
+msgstr "Hætta við"
+
+#: .\templates\users\index.html:9
+msgid "New listings"
+msgstr "Nýjar skráningar"
+
+#: .\templates\users\index.html:31
+msgid "Recently sold"
+msgstr "Nýlega selt"
+
+#: .\templates\users\index.html:51
+msgid "Active bids"
+msgstr "Virk boð"
+
+#: .\templates\users\index.html:63
+msgid "No active bids at the moment."
+msgstr "Engin virk boð eins og er."
+
+#: .\templates\users\login.html:9
+msgid "Login"
+msgstr "Innskrá"
+
+#: .\templates\users\login.html:10
+msgid "Don't have an account? Register"
+msgstr "Ertu ekki með aðgang? Skráðu þig"
+
+#: .\templates\users\profile.html:16
+msgid "no bio yet"
+msgstr "Engar upplýsingar enn"
+
+#: .\templates\users\profile.html:21
+msgid "Edit profile"
+msgstr "Breyta prófíl"
+
+#: .\templates\users\profile.html:28
+msgid "Logout"
+msgstr "Útskrá"
+
+#: .\templates\users\profile.html:39
+msgid "My Bids"
+msgstr "Mín boð"
+
+#: .\templates\users\profile.html:51
+msgid "Title"
+msgstr "Titill"
+
+
+#: .\templates\users\profile.html:53
+msgid "Bid price"
+msgstr "Boðsverð"
+
+#: .\templates\users\profile.html:54
+msgid "Date placed"
+msgstr "Dagsetning boðs"
+
+#: .\templates\users\profile.html:55
+msgid "Expires"
+msgstr "Rennur út"
+
+#: .\templates\users\profile.html:56
+msgid "Status"
+msgstr "Staða"
+
+#: .\templates\users\profile.html:65
+msgid "No bids yet"
+msgstr "Engin boð enn"
+
+#: .\templates\users\recently_sold.html:7
+msgid "Recently Sold"
+msgstr "Nýlega selt"
+
+#: .\templates\users\recently_sold.html:23
+#, python-format
+msgid "Sold for $%(bid)s"
+msgstr "Selt fyrir $%(bid)s"
+
+#: .\templates\users\recently_sold.html:28
+msgid "No sold artwork found."
+msgstr "Ekkert selt listaverk fannst."
+
+#: .\templates\users\register.html:8
+msgid "Register"
+msgstr "Skráðu þig"
+
+
+#: .\templates\users\seller_profile.html:18
+msgid "No bio yet"
+msgstr "Engar upplýsingar enn"
+
+#: .\templates\users\seller_profile.html:22
+msgid "My Art"
+msgstr "Listverk mín"
+
+#: .\templates\users\seller_profile.html:42
+msgid "No art listed yet"
+msgstr "Engin listverk skráð enn"
+
+#: .\templates\users\update_bid_status.html:5
+#, python-format
+msgid "Update bid status for %(title)s"
+msgstr "Uppfæra stöðu boðs fyrir %(title)s"
+
+#: .\templates\users\update_bid_status.html:6
+msgid "Bidder"
+msgstr "Bjóðandi"
+
+#: .\templates\users\update_bid_status.html:7
+msgid "Amount"
+msgstr "Upphæð"
+
+#: .\templates\users\update_bid_status.html:8
+msgid "Current status"
+msgstr "Núverandi staða"
+
+#: .\templates\users\update_bid_status.html:12
+msgid "Accept"
+msgstr "Samþykkja"
+
+#: .\templates\users\update_bid_status.html:13
+msgid "Reject"
+msgstr "Hafna"
+
+msgid "view all art"
+msgstr "Skoða alla list"
+
+msgid "Create listing"
+msgstr "Búa til skráningu"
+
+msgid "Contact us"
+msgstr "Hafðu samband"
+
+msgid "Most Expensive"
+msgstr "Dýrast"
+
+msgid "Least Expensive"
+msgstr "Ódýrast"

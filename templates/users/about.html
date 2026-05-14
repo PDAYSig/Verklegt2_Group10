@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load i18n %}
 
 {% block content %}
 
@@ -8,7 +9,7 @@
 
     <div class="profile-info">
         <h1>ArtVault</h1>
-        <p>
+        <p>{% blocktrans %}
             ArtVault is a dynamic marketplace dedicated to the auction and sale of exceptional artwork from around the world. Blending the sophistication of traditional auction houses with the accessibility of modern digital platforms, ArtVault connects collectors, artists, and enthusiasts in a seamless, trusted environment.
 
 At its core, ArtVault is driven by a passion for art and a commitment to authenticity. Each piece featured on the platform is carefully curated, ensuring quality, provenance, and artistic value. From emerging talents to established masters, ArtVault offers a diverse portfolio that caters to both seasoned collectors and first-time buyers.
@@ -16,10 +17,8 @@ At its core, ArtVault is driven by a passion for art and a commitment to authent
 Through innovative auction experiences and direct sales, ArtVault empowers users to discover, bid on, and acquire artwork with confidence. Its transparent processes, secure transactions, and expert-backed insights create a reliable space where art and investment intersect.
 
 ArtVault is more than a marketplace—it is a gateway to the global art community, where creativity is celebrated and ownership of meaningful works is made accessible.
-        </p>
+        {% endblocktrans %}</p>
     </div>
-
-
 
 </div>
 

@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block content %}
 
-    <form method="POST" class="create-seller-form" action={% url 'create_seller' %} >
+    <form method="POST" class="create-seller-form" action="{% url 'create_seller' %}">
         {% csrf_token %}
         {{ form }}
-        <input type="submit" class="submit-L" value="Login">
-
+        <input type="submit" class="submit-L" value="{% trans 'Create Seller' %}">
     </form>
+
 {% endblock %}
