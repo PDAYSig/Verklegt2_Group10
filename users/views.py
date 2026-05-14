@@ -67,6 +67,10 @@ def all_art(request):
     # if user selects to sort by oldest first
     elif sort == "oldest":
         listings = listings.order_by('date_added')
+    elif sort == "least_expensive":
+        listings = listings.order_by('current_bid')
+    elif sort == "most_expensive":
+        listings = listings.order_by('-current_bid')
 
     if style == "Modern":
         listings = listings.filter(style='Modern')
@@ -282,7 +286,7 @@ def payment_info(request, bid_id):
             return redirect('artwork', id=bid.listing.id)
     else:
         form = CompletePaymentForm()
-    return render(request, 'payment_info.html', {
+    return render(request, 'payments/payment_info.html', {
         'bid': bid,
         'form' : form
     })
