@@ -52,6 +52,9 @@
 
     <p><strong>{% trans "Starting price" %}:</strong> ${{ item.starting_price }}</p>
     <p><strong>{% trans "Current bid" %}:</strong> ${{ item.current_bid }}</p>
+    {% if highest_bid %}
+        <p><strong>{% trans "Top bidder" %}:</strong> {{ highest_bid.bidder.profile.user.username }} (${{ highest_bid.amount }})</p>
+    {% endif %}
 
     {% if latest_bid %}
         <p><strong>{% trans "Bid expires" %}:</strong> <span id="countdown" data-expires="{{ latest_bid.expired_at.isoformat }}"></span></p>

@@ -165,6 +165,7 @@ def artwork(request, id):
     item = art_listing.objects.get(id=id)
     images = item.images.all()
     latest_bid = item.bids.last()
+    highest_bid = item.bids.order_by('-amount').first()
     auction_active = latest_bid is None or latest_bid.expired_at > timezone.now()
     user_has_bid = False
     user_is_winner = False
@@ -174,7 +175,7 @@ def artwork(request, id):
         seller, _ = Seller.objects.get_or_create(profile=profile)
         user_has_bid = Bid.objects.filter(listing=item, bidder=seller).exists()
 
-        if latest_bid and latest_bid.bidder == seller:
+        if highest_bid and highest_bid.bidder == seller:
             user_is_winner = True
 
     if request.method == 'POST':
@@ -201,6 +202,7 @@ def artwork(request, id):
         'item': item,
         'images': images,
         'latest_bid': latest_bid,
+        'highest_bid': highest_bid,
         'auction_active': auction_active,
         'user_has_bid': user_has_bid,
         'user_is_winner': user_is_winner,
