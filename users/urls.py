@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import path
 from . import views
+from .views import artwork_list
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -47,7 +48,7 @@ urlpatterns = [
     path('<int:id>', views.user_by_id, name='user_by_id'),
 
     path('login/register/', views.register, name='register'),
-
+    path('artworks/',artwork_list, name='artwork_list'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
