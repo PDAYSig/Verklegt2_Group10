@@ -1,4 +1,3 @@
-from django.forms import ModelForm
 from django_countries.fields import CountryField
 from django import forms
 from art.models import Sale

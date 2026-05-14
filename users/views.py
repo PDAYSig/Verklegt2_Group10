@@ -5,10 +5,11 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, Http404
-from art.models import art_listing, Bid
+from art.models import art_listing, Bid, Sale
 from users.forms.create_seller_form import CreateSellerForm
 from users.forms.create_user_form import CreateProfileForm
 from art.forms.complete_payment_form import CompletePaymentForm
+from art.forms.payment_type_forms import CreditCardForm, BankTransferForm, WireTransferForm
 from users.models import Profile, Seller
 from decimal import Decimal
 from django.utils import timezone, translation
@@ -16,6 +17,7 @@ from django.db.models import Min, Max
 # Create your views here.
 
 def index(request):
+    all_items = art_listing.objects.all().order_by('-date_added')[:6]
     active_bid_items = art_listing.objects.filter(
         bids__expired_at__gt=timezone.now()
     ).distinct()
@@ -283,11 +285,33 @@ def payment_info(request, bid_id):
             sale.buyer = request.user
             sale.seller = bid.listing.seller
             sale.save()
-            return redirect('artwork', id=bid.listing.id)
+            return redirect('payment_details', id=bid.listing.id)
     else:
         form = CompletePaymentForm()
     return render(request, 'payments/payment_info.html', {
         'bid': bid,
         'form' : form
     })
+
+def payment_details(request, bid_id):
+    PAYMENT_FORMS = {
+        "card" : CreditCardForm(),
+        "bank_transfer": BankTransferForm(),
+        "wire_transfer": WireTransferForm(),
+    }
+
+    if request.method == "POST":
+        return redirect('artwork', id=bid_id)
+
+    else:
+        c = 'Card'
+        return render('payments/payment_details.html', {'form' : PAYMENT_FORMS.get(c, "")})
+
+
+def payment_review():
+    pass
+
+
+
+
 
