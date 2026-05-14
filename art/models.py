@@ -79,18 +79,19 @@ class Bid(models.Model):
 
 class Sale(models.Model):
     PAYMENT_CHOICES = [
-        ('Card', 'Card'),
-        ('Bank Transfer', 'Bank Transfer'),
-        ('Wire Transfer', 'Wire Transfer'),]
+        ('Card', 'card'),
+        ('Bank Transfer', 'bank_transfer'),
+        ('Wire Transfer', 'wire_transfer'),]
+
     # Sale information
     id = models.AutoField(primary_key=True)
     listing = models.OneToOneField(art_listing, on_delete=models.CASCADE, related_name='sales')
-    seller = models.OneToOneField(Seller, on_delete=models.CASCADE)
+    seller = models.ForeignKey(Seller, on_delete=models.CASCADE)
 
     payment_method = models.CharField(max_length=255, choices=PAYMENT_CHOICES)
 
     # Buyer information
-    buyer = models.OneToOneField(User, on_delete=models.CASCADE)
+    buyer = models.ForeignKey(User, on_delete=models.CASCADE)
     buyer_nid = models.CharField(max_length=10)
 
     # Billing address
