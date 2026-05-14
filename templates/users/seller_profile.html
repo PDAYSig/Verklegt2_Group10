@@ -6,7 +6,14 @@
 <div class="profile-container">
 
     <div class="profile-header">
-        {% if seller.profile.profile_image %}
+
+        {% if seller.cover_image %}
+            <img src="{{ seller.cover_image.url }}" class="cover-image">
+        {% endif %}
+
+        {% if seller.logo %}
+            <img src="{{ seller.logo.url }}" class="seller-logo">
+        {% elif seller.profile.profile_image %}
             <img src="{{ seller.profile.profile_image.url }}" class="profile-big">
         {% else %}
             <img src="/media/profiles/default_profile.png" class="profile-big">
@@ -14,7 +21,16 @@
 
         <div class="profile-info">
             <h2>{{ seller.profile.user.username }}</h2>
-            <p class="seller-type">{{ seller.profile.seller_type|default:_("Seller") }}</p>
+            <p class="seller-type"><strong>{% trans "Type" %}:</strong> {{ seller.get_type_display }}</p>
+
+            {% if seller.type == 'Gallery' %}
+                <div class="seller-address">
+                    <p><strong>{% trans "Street" %}:</strong> {{ seller.street|default:"-" }}</p>
+                    <p><strong>{% trans "City" %}:</strong> {{ seller.city|default:"-" }}</p>
+                    <p><strong>{% trans "Postal code" %}:</strong> {{ seller.postal_code|default:"-" }}</p>
+                </div>
+            {% endif %}
+
             <p>{{ seller.profile.bio|default:_("No bio yet") }}</p>
         </div>
     </div>
@@ -23,24 +39,19 @@
 
     {% if art %}
     <div class="image-grid">
-
         {% for item in art %}
             <a href="{% url 'artwork' item.id %}">
-
-                {% with img=item.images.first %}
-                    {% if img and item.thumbnail_image %}
-                        <img src="{{ item.thumbnail_image.url }}" alt="{{ item.title }}">
-                    {% endif %}
-                {% endwith %}
-
+                {% if item.thumbnail_image %}
+                    <img src="{{ item.thumbnail_image.url }}" alt="{{ item.title }}">
+                {% endif %}
                 <p>{{ item.title }}</p>
             </a>
         {% endfor %}
-
     </div>
     {% else %}
         <p>{% trans "No art listed yet" %}</p>
     {% endif %}
+
 </div>
 
 {% endblock %}
