@@ -16,14 +16,22 @@ from django.db.models import Min, Max
 # Create your views here.
 
 def index(request):
-    all_items = art_listing.objects.all().order_by('-date_added')[:6]
     active_bid_items = art_listing.objects.filter(
         bids__expired_at__gt=timezone.now()
     ).distinct()
 
+    recently_sold_items = art_listing.objects.filter(
+        bids__expired_at__lte=timezone.now()
+    ).distinct()[:2]
+
+    all_items = art_listing.objects.exclude(
+        id__in=recently_sold_items.values('id')
+    ).order_by('-date_added')[:6]
+
     return render(request, "users/index.html", {
         "items": all_items,
         "active_bid_items": active_bid_items,
+        "recently_sold_items": recently_sold_items,
     })
 
 def about(request):
@@ -195,7 +203,12 @@ def artwork(request, id):
         'recently_sold_items': art_listing.objects.none()
     })
 def recently_sold(request):
-    return render(request, "users/recently_sold.html")
+    recently_sold_items = art_listing.objects.filter(
+        bids__expired_at__lte=timezone.now()
+    ).distinct()
+    return render(request, "users/recently_sold.html", {
+        "items": recently_sold_items,
+    })
 def user_by_id(request, id):
     return HttpResponse(f"response from {request.path} with id {id}")
 
@@ -273,3 +286,4 @@ def payment_info(request, bid_id):
         'bid': bid,
         'form' : form
     })
+
