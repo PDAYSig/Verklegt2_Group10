@@ -9,7 +9,7 @@ from art.models import art_listing, Bid, Sale
 from users.forms.create_seller_form import CreateSellerForm
 from users.forms.create_user_form import CreateProfileForm
 from art.forms.complete_payment_form import CompletePaymentForm
-from art.forms.payment_type_forms import CreditCardForm, BankTransferForm, WireTransferForm
+#from art.forms.payment_type_forms import CreditCardForm, BankTransferForm, WireTransferForm
 from users.models import Profile, Seller
 from decimal import Decimal
 from django.utils import timezone, translation

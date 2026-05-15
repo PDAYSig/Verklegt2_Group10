@@ -1,6 +1,10 @@
 from django_countries.fields import CountryField
 from django import forms
 from art.models import Sale
+
+"""
+class for the form of completing a payment with every info which is needed to do that
+"""
 class CompletePaymentForm(forms.ModelForm):
     buyer_country = CountryField(blank_label='Select Country').formfield()
     class Meta:

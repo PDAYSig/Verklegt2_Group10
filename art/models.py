@@ -6,6 +6,10 @@ from users.models import Seller
 from django.utils import timezone
 from datetime import timedelta
 # Create your models here.
+
+"""
+model class for art listing 
+"""
 class art_listing(models.Model):
     MEDIUM_CHOICES = [
         ('Oil', 'Oil'),
@@ -46,6 +50,10 @@ class art_listing(models.Model):
     def __str__(self):
         return f"{self.title} by {self.artist_name} \n{self.medium}"
 
+
+"""
+model class for listing images
+"""
 class ListingImage(models.Model):
     listing = models.ForeignKey(art_listing, on_delete=models.CASCADE, related_name='images')
     image = models.ImageField(upload_to='artworks/')
