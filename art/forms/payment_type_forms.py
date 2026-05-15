@@ -13,14 +13,14 @@ class CreditCardForm(forms.Form):
     card_type = forms.CharField(
         widget=forms.Select(
             attrs={
-                'class': 'form-control',
+                'class': 'form-control-c',
                 },
         choices=CARD_CHOICES))
 
     card_number = forms.CharField(
         widget=forms.TextInput(
             attrs={
-                'class': 'form-control',
+                'class': 'form-control-c',
                 'placeholder':'e.g. 1234-1234-1234'
             }))
 
@@ -28,21 +28,21 @@ class CreditCardForm(forms.Form):
         input_formats=['%m/%y'],
         widget=forms.DateInput(
             attrs={
-                'class': 'form-control',
+                'class': 'form-control-c',
                 'placeholder':'MM/YY'}))
-    cvc = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    cvc = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control-c'}))
 
 
 """
 class for bank transfer form
 """
 class BankTransferForm(forms.Form):
-    iban = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    iban = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control-c'}))
 
 """
 class for wire transfer form
 """
 class WireTransferForm(forms.Form):
-    sending_bank = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
-    routing_number = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
-    account_number = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    sending_bank = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control-c'}))
+    routing_number = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control-c'}))
+    account_number = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control-c'}))
