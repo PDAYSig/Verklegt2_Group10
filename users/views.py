@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse
 from art.models import art_listing, Bid, Sale
 from users.forms.create_seller_form import CreateSellerForm
 from users.forms.create_user_form import CreateProfileForm
@@ -12,7 +12,7 @@ from art.forms.complete_payment_form import CompletePaymentForm
 from art.forms.payment_type_forms import CreditCardForm, BankTransferForm, WireTransferForm
 from users.models import Profile, Seller
 from decimal import Decimal
-from django.utils import timezone, translation
+from django.utils import timezone
 from django.db.models import Min, Max
 # Create your views here.
 
@@ -247,13 +247,11 @@ def recently_sold(request):
     return render(request, "users/recently_sold.html", {
         "items": recently_sold_items,
     })
-def user_by_id(request, id):
-    return HttpResponse(f"response from {request.path} with id {id}")
 
 def register(request):
     if request.method == "POST":
         user_form = UserCreationForm(request.POST)
-        profile_form = CreateProfileForm(request.POST)
+        profile_form = CreateProfileForm(request.POST, request.FILES)
         if user_form.is_valid() and profile_form.is_valid():
             user = user_form.save()
             users_profile = profile_form.save(commit=False)
