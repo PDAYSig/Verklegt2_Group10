@@ -306,7 +306,6 @@ def payment_info(request, bid_id):
             request.session['payment_method'] = cleaned_data['payment_method']
             return redirect('payment_details', bid_id = bid_id)
     else:
-        print('what is this diddy blud doing')
         form = CompletePaymentForm()
     return render(request, 'payments/payment_info.html', {
         'bid': bid,
