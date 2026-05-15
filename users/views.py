@@ -286,10 +286,6 @@ def payment_info(request, bid_id):
     if request.method == "POST":
         form = CompletePaymentForm(request.POST)
         if form.is_valid():
-            print('hey you valid')
-            # sale = form.save(commit=False)
-            # sale.listing = bid.listing
-            # sale.buyer = request.user
             # Save the session
             cleaned_data = form.cleaned_data
             request.session['payment_info'] = cleaned_data
@@ -320,20 +316,58 @@ def payment_details(request, bid_id):
     payment_method = request.session['payment_method']
     if request.method == "POST":
         # fetch the correct value and initialize it as a form object
-        form = PAYMENT_FORMS[payment_method](request.POST)
+        payment_form = PAYMENT_FORMS[payment_method]
+        form = payment_form(request.POST)
 
         if form.is_valid():
-            request.session['payment_details'] = form.cleaned_data['payment_details']
-            return redirect('payment_review', bid_id=bid_id)
+            if payment_method == 'card':
+                expiration_date = form.cleaned_data['expiration_date']
+                request.session['payment_details'] = {
+                    'card_number' : form.cleaned_data['card_number'][-4:],
+                    'expiration_date' : str(expiration_date),
+                }
+            else:
+                request.session['payment_details'] = form.cleaned_data
 
-        return redirect('artwork', id=bid_id.listing.id)
+            return redirect('payment_review', bid_id=bid_id)
+        # If the form has the wrong format, present the form again
+        return redirect('payment_details', bid_id=bid_id)
 
     else:
         form = PAYMENT_FORMS[payment_method]
         return render(request, 'payments/payment_details.html', {'form' : form()})
 
-def payment_review():
-    pass
+def payment_review(request, bid_id):
+    bid = get_object_or_404(Bid, id=bid_id)
+    info = request.session['payment_info']
+    details = request.session['payment_details']
+    if request.method == "POST":
+        # Create the new object
+        sale = Sale.objects.create(
+            listing = bid.listing,
+            buyer = request.user,
+            seller = bid.listing.seller,
+            payment_method=info["payment_method"],
+            buyer_country=info["buyer_country"],
+            buyer_city=info["buyer_city"],
+            buyer_street=info["buyer_street"],
+            buyer_postal_code=info["buyer_postal_code"],
+            buyer_nid=info["buyer_nid"],
+        )
+        # Save the object
+        sale.save()
+
+        # Delete the session data
+        del request.session['payment_details']
+        del request.session['payment_info']
+        del request.session['payment_method']
+
+        return redirect('artwork', id=bid.listing.id)
+    else:
+        return render(request, 'payments/payment_review.html', {
+        'info': info,
+        'details': details
+    })
 
 
 
