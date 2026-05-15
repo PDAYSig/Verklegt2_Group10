@@ -86,11 +86,15 @@
             <p class="rejected">{% trans "Your bid was rejected." %}</p>
 
         {% elif auction_active %}
-            <form method="POST">
-                {% csrf_token %}
-                <input type="number" name="bid_amount" placeholder="{% trans 'Enter amount' %}" min="{{ item.starting_price }}" step="0.01">
-                <button type="submit">{% if user_has_bid %}{% trans "Resubmit bid" %}{% else %}{% trans "Submit a bid" %}{% endif %}</button>
-            </form>
+            {% if request.user == item.seller.profile.user %}
+                <p>{% trans "You cannot bid on your own listing" %}</p>
+            {% else %}
+                <form method="POST">
+                    {% csrf_token %}
+                    <input type="number" name="bid_amount" placeholder="{% trans 'Enter amount' %}" min="{{ item.starting_price }}" step="0.01">
+                    <button type="submit">{% if user_has_bid %}{% trans "Resubmit bid" %}{% else %}{% trans "Submit a bid" %}{% endif %}</button>
+                </form>
+            {% endif %}
 
         {% else %}
             <p>{% trans "This auction has ended." %}</p>

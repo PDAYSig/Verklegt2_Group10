@@ -200,6 +200,10 @@ def artwork(request, id):
             messages.error(request, 'This auction has ended.')
             return redirect('artwork', id=id)
 
+        if item.seller == seller:
+            messages.error(request, 'You cannot bid on this item.')
+            return redirect('artwork', id=id)
+
         bid_amount = Decimal(request.POST.get('bid_amount'))
 
         if bid_amount > item.current_bid and bid_amount >= item.minimum_bid and bid_amount >= item.starting_price:
