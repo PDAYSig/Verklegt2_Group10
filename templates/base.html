@@ -62,6 +62,11 @@
         <a href="{% url 'all_art' %}">{% trans "view all art" %}</a>
         <a href="{% url 'create_listing' %}" style="background-color: slategray">{% trans "Create listing" %}</a>
     </nav>
+    {% if messages %}
+        {% for message in messages %}
+            <p class="{{ message.tags }}" style="background: #d4edda; padding: 1rem; margin: 0.5rem 1rem; border-radius: 0.5rem; color: #155724;">{{ message }}</p>
+        {% endfor %}
+    {% endif %}
 
     {% block content %}
         <!--page specific HTML here-->

@@ -107,6 +107,10 @@
         <p><a href="{% url 'login' %}">{% trans "Log in" %}</a> {% trans "to place a bid." %}</p>
     {% endif %}
 
+    {% if request.user == item.seller.profile.user %}
+        <a href="{% url 'delete_listing' item.id %}" class="btn-primary">{% trans "Delete listing" %}</a>
+    {% endif %}
+
 </div>
 
 <div class="artwork-about">
