@@ -68,6 +68,8 @@ def all_art(request):
     medium = request.GET.get('medium')
     sort = request.GET.get('sort')
     style = request.GET.get('style')
+    min_price = request.GET.get('min_price')
+    max_price = request.GET.get('max_price')
 
     # if user types a name into the searchbar
     if search_filter:
@@ -95,8 +97,18 @@ def all_art(request):
     elif style == "Impressionism":
         listings = listings.filter(style='Impressionism')
 
+    if min_price:
+        try:
+            listings = listings.filter(current_bid__gte=int(min_price))
+        except ValueError:
+            pass
+    if max_price:
+        try:
+            listings = listings.filter(current_bid__lte=int(max_price))
+        except ValueError:
+            pass
 
-    #TODO add extra filters for size and style
+
     return render(request, "users/all_art.html", {"listings": listings})
 
 def login(request):
