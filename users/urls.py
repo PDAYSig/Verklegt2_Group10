@@ -43,13 +43,14 @@ urlpatterns = [
 
     path('bid/<int:bid_id>/status/', views.update_bid_status, name='update_bid_status'),
 
-    path('bid/<int:bid_id>/payment/', views.payment_info, name='payment_info'),
+    path('bid/<int:bid_id>/payment_info/', views.payment_info, name='payment_info'),
 
+    path('bid/<int:bid_id>/payment_details/:payment_method', views.payment_details, name='payment_details'),
     path('<int:id>', views.user_by_id, name='user_by_id'),
 
     path('login/register/', views.register, name='register'),
 
-    path('payment/', views.payment_info, name='payment_info'),
+
 
 ]
 if settings.DEBUG:

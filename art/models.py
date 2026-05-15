@@ -87,9 +87,9 @@ class Bid(models.Model):
 
 class Sale(models.Model):
     PAYMENT_CHOICES = [
-        ('Card', 'card'),
-        ('Bank Transfer', 'bank_transfer'),
-        ('Wire Transfer', 'wire_transfer'),]
+        ('card', 'Card'),
+        ('bank_transfer', 'Bank Transfer'),
+        ('wire_transfer', 'Wire Transfer'),]
 
     # Sale information
     id = models.AutoField(primary_key=True)

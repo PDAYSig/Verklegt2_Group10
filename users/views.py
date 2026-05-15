@@ -278,40 +278,65 @@ def update_bid_status(request, bid_id):
 
 @login_required
 def payment_info(request, bid_id):
+    '''
+    :param request:
+    :param bid_id:
+    User enters billing address, national id (SSN/'kennitala') and selects preferred payment method
+    and gets redirected to the payment_details page
+    '''
     bid = get_object_or_404(Bid, id=bid_id)
     if request.method == "POST":
         form = CompletePaymentForm(request.POST)
         if form.is_valid():
-            sale = form.save(commit=False)
-            sale.listing = bid.listing
-            sale.buyer = request.user
-            sale.seller = bid.listing.seller
-            sale.save()
-            return redirect('payment_details', id=bid.listing.id)
+            print('hey you valid')
+            # sale = form.save(commit=False)
+            # sale.listing = bid.listing
+            # sale.buyer = request.user
+            # Save the session
+            cleaned_data = form.cleaned_data
+            request.session['payment_info'] = cleaned_data
+            request.session['payment_method'] = cleaned_data['payment_method']
+            return redirect('payment_details', bid_id = bid_id)
     else:
+        print('what is this diddy blud doing')
         form = CompletePaymentForm()
     return render(request, 'payments/payment_info.html', {
         'bid': bid,
         'form' : form
     })
-
 def payment_details(request, bid_id):
+    '''
+    :param request:
+    :param bid_id:
+    Renders the payment details page where the user enters the card/bank details for the payment step
+    and gets redirected to the payment_review page
+    '''
+
+    # Declaring the appropriate forms
     PAYMENT_FORMS = {
-        "card" : CreditCardForm(),
-        "bank_transfer": BankTransferForm(),
-        "wire_transfer": WireTransferForm(),
+        "card" : CreditCardForm,
+        "bank_transfer": BankTransferForm,
+        "wire_transfer": WireTransferForm,
     }
 
+    payment_method = request.session['payment_method']
     if request.method == "POST":
-        return redirect('artwork', id=bid_id)
+        # fetch the correct value and initialize it as a form object
+        form = PAYMENT_FORMS[payment_method](request.POST)
+
+        if form.is_valid():
+            request.session['payment_details'] = form.cleaned_data['payment_details']
+            return redirect('payment_review', bid_id=bid_id)
+
+        return redirect('artwork', id=bid_id.listing.id)
 
     else:
-        c = 'Card'
-        return render('payments/payment_details.html', {'form' : PAYMENT_FORMS.get(c, "")})
-
+        form = PAYMENT_FORMS[payment_method]
+        return render(request, 'payments/payment_details.html', {'form' : form()})
 
 def payment_review():
     pass
+
 
 
 
