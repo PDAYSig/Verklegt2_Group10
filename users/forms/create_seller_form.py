@@ -2,6 +2,9 @@ from django import forms
 
 from users.models import Seller
 
+"""
+class for a creating a seller form
+"""
 class CreateSellerForm(forms.ModelForm):
     class Meta:
         model = Seller

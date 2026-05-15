@@ -1,6 +1,8 @@
 from django import forms
 
-
+"""
+class for credit card form
+"""
 class CreditCardForm(forms.Form):
     CARD_CHOICES = (
     ('Visa', 'Visa'),
@@ -11,9 +13,16 @@ class CreditCardForm(forms.Form):
     expiration_date = forms.DateField(widget=forms.DateInput(attrs={'class': 'form-control'}))
     cvc = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
 
+
+"""
+class for bank transfer form
+"""
 class BankTransferForm(forms.Form):
     iban = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
 
+"""
+class for wire transfer form
+"""
 class WireTransferForm(forms.Form):
     sending_bank = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
     routing_number = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))

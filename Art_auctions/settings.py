@@ -32,6 +32,8 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
+
+#settings for language changing
 LANGUAGE_COOKIE_NAME = 'django_language'
 
 LOCALE_PATHS = [

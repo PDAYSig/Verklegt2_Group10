@@ -59,6 +59,10 @@ class ListingImage(models.Model):
     image = models.ImageField(upload_to='artworks/')
     is_primary = models.BooleanField(default=False)
 
+
+"""
+model class for bids and bid functionality
+"""
 class Bid(models.Model):
     STATUS_CHOICES = [
         ('pending', 'Pending'),
@@ -84,7 +88,9 @@ class Bid(models.Model):
         super().save(*args, **kwargs)
 
 
-
+"""
+Model class for sales
+"""
 class Sale(models.Model):
     PAYMENT_CHOICES = [
         ('card', 'Card'),

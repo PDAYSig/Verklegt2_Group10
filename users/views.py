@@ -9,26 +9,38 @@ from art.models import art_listing, Bid, Sale
 from users.forms.create_seller_form import CreateSellerForm
 from users.forms.create_user_form import CreateProfileForm
 from art.forms.complete_payment_form import CompletePaymentForm
-#from art.forms.payment_type_forms import CreditCardForm, BankTransferForm, WireTransferForm
+from art.forms.payment_type_forms import CreditCardForm, BankTransferForm, WireTransferForm
 from users.models import Profile, Seller
 from decimal import Decimal
 from django.utils import timezone, translation
 from django.db.models import Min, Max
 # Create your views here.
 
+"""
+this show our landing page with new listing which should only show the newest art and has not expired
+there also is the recently sold which shows 2 recently sold artwork
+and there is also the function which shows active bids
+"""
 def index(request):
-    all_items = art_listing.objects.all().order_by('-date_added')[:6]
+    #shows active bids
     active_bid_items = art_listing.objects.filter(
         bids__expired_at__gt=timezone.now()
     ).distinct()
 
+    #shows the 2 most recently sold artwork
     recently_sold_items = art_listing.objects.filter(
         bids__expired_at__lte=timezone.now()
-    ).distinct()[:2]
+    ).distinct().order_by('-bids__expired_at')[:2]
 
+    # collects all artwork with expired bids
+    expired_listing_ids = art_listing.objects.filter(
+        bids__expired_at__lte=timezone.now()
+    ).values_list('id', flat=True)
+
+    #makes sure to show the new listing which don't have expired bids
     all_items = art_listing.objects.exclude(
-        id__in=recently_sold_items.values('id')
-    ).order_by('-date_added')[:6]
+        id__in=expired_listing_ids
+    ).order_by('-date_added').distinct()[:6]
 
     return render(request, "users/index.html", {
         "items": all_items,
