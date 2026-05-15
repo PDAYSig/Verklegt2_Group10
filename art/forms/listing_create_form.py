@@ -4,6 +4,9 @@ from art.models import art_listing
 class ListingCreateForm(ModelForm):
     date_added = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}), input_formats=['%y-%m-%d'])
 
+    """
+    class for listing forms that with everything you can give a value in the form
+    """
     class Meta:
         model = art_listing
         exclude = ['id', 'seller']
