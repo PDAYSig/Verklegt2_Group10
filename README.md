@@ -66,11 +66,44 @@
 
 1. Clone the repository:
 ```bash
-git clone <>
-cd art-vault
+git clone <https://github.com/PDAYSig/Verklegt2_Group10.git>
 ```
 
 ### Install dependencies
 ```bash
 pip install -r requirements.txt
 ```
+
+### Enviorment variables
+```bash
+DB_PASSWORD=your_password
+DB_ENGINE=your_db_engine
+DB_NAME=your_db_name
+DB_USER=your_db_user
+DB_HOST=your_host
+DB_PORT=your_port
+```
+
+### Database setup
+```bash
+python manage.py migrate
+```
+
+### Run the project 
+```bash
+python manage.py runserver
+```
+and then open
+```bash
+http://127.0.0.1:8000/
+```
+
+### Known issues
+setja hér ef það er eitthvað
+
+
+### Group members
+#### Daníel Darri Ragnarsson
+#### Patrik Dagur Sigurðsson
+#### Nanna Katrín Snorradóttir
+
