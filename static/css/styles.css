@@ -880,12 +880,6 @@ form:has(input.submit-btn) input.submit-btn{
     color: black;
 }
 
-.lang-btn {
-    background: none;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-}
 
 .flag-icon {
     width: 5rem;
