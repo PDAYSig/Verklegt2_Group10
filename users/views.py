@@ -195,6 +195,7 @@ def artwork(request, id):
     auction_active = latest_bid is None or latest_bid.expired_at > timezone.now()
     user_has_bid = False
     user_is_winner = False
+    sale_exists = Sale.objects.filter(listing=item).exists()
 
     if request.user.is_authenticated:
         profile = request.user.profile
@@ -236,7 +237,8 @@ def artwork(request, id):
         'auction_active': auction_active,
         'user_has_bid': user_has_bid,
         'user_is_winner': user_is_winner,
-        'recently_sold_items': art_listing.objects.none()
+        'recently_sold_items': art_listing.objects.none(),
+        'sale_exists': sale_exists,
     })
 def recently_sold(request):
     recently_sold_items = art_listing.objects.filter(
