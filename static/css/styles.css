@@ -785,6 +785,20 @@ form:has(input.submit-btn) input.submit-btn{
     font-size: 1rem;
 }
 
+.price-inputs {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.price-inputs input {
+    width: 6rem;
+    padding: 0.3rem;
+    border: 1px solid #ccc;
+    border-radius: 0.4rem;
+}
+
 .bid-box {
     margin-top: 1rem;
     display: flex;
