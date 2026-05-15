@@ -429,3 +429,40 @@ msgstr "Borg"
 
 msgid "Postal code"
 msgstr "Póstnúmer"
+
+msgid "Top bidder"
+msgstr "hæsti tilbjóðandi"
+
+msgid "Provenance"
+msgstr "Uppruni"
+
+msgid "Edit seller profile"
+msgstr "Breyta seljanda prófíl"
+
+msgid "Expired"
+msgstr "Útrunnið"
+
+msgid "Accepted"
+msgstr "Samþykkt"
+
+msgid "Payment method"
+msgstr "Greiðslumáti"
+
+msgid "Buyer city"
+msgstr "Borg"
+
+msgid "Buyer street"
+msgstr "gata"
+
+msgid "Buyer postal code"
+msgstr "Póstnúmer"
+
+msgid "Buyer country"
+msgstr "Land"
+
+msgid "Buyer nid"
+msgstr "Kennitala"
+
+msgid "Proceed to Checkout"
+msgstr "halda áfram"
+
