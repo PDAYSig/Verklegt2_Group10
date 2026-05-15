@@ -350,7 +350,23 @@ def payment_review():
     pass
 
 
+@login_required
+def edit_seller_profile(request):
+    profile = request.user.profile
+    seller = get_object_or_404(Seller, profile=profile)
 
+    if request.method == "POST":
+        seller.type = request.POST.get("seller_type", seller.type)
+        seller.street = request.POST.get("street", seller.street)
+        seller.city = request.POST.get("city", seller.city)
+        seller.postal_code = request.POST.get("postal_code", seller.postal_code)
+        if request.FILES.get("logo"):
+            seller.logo = request.FILES.get("logo")
+        if request.FILES.get("cover_image"):
+            seller.cover_image = request.FILES.get("cover_image")
+        seller.save()
+        return redirect('profile')
 
+    return render(request, "users/edit_seller_profile.html", {'seller': seller})
 
 
