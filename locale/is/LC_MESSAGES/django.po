@@ -369,11 +369,11 @@ msgstr "Engar upplýsingar enn"
 
 #: .\templates\users\seller_profile.html:22
 msgid "My Art"
-msgstr "Listverk mín"
+msgstr "Listaverk mín"
 
 #: .\templates\users\seller_profile.html:42
 msgid "No art listed yet"
-msgstr "Engin listverk skráð enn"
+msgstr "Engin listaverk skráð enn"
 
 #: .\templates\users\update_bid_status.html:5
 #, python-format
