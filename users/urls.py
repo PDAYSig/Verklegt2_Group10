@@ -55,6 +55,8 @@ urlpatterns = [
 
     path('login/register/', views.register, name='register'),
 
+    path('artwork/<int:id>/delete/', views.delete_listing, name='delete_listing'),
+
 
 
 ]

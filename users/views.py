@@ -421,3 +421,16 @@ def edit_seller_profile(request):
     return render(request, "users/edit_seller_profile.html", {'seller': seller})
 
 
+@login_required
+def delete_listing(request, id):
+    item = get_object_or_404(art_listing, id=id)
+
+    if item.seller.profile.user != request.user:
+        return redirect('artwork', id=id)
+
+    if request.method == 'POST':
+        item.delete()
+        messages.success(request, ' deleted successfully.')
+        return redirect('users-index')
+
+    return render(request, 'users/delete_listing.html', {'item': item})

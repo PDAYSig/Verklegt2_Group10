@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+<div class="profile-container">
+    <h2>{% trans "Are you sure?" %}</h2>
+    <p>{% blocktrans with title=item.title %}You are about to delete "{{ title }}". This cannot be undone.{% endblocktrans %}</p>
+
+    {% if item.thumbnail_image %}
+        <img src="{{ item.thumbnail_image.url }}" width="200">
+    {% endif %}
+
+    <div style="display:flex; gap:1rem; margin-top:1rem;">
+        <form method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn-primary" style="background:red; color:white;">{% trans "Yes, delete" %}</button>
+        </form>
+        <a href="{% url 'artwork' item.id %}" class="btn-secondary">{% trans "Cancel" %}</a>
+    </div>
+</div>
+{% endblock %}
