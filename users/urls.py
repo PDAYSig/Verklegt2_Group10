@@ -17,7 +17,6 @@ Including another URLconf
 from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import path
 from . import views
-from .views import artwork_list
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -50,8 +49,6 @@ urlpatterns = [
     path('bid/<int:bid_id>/payment_details/', views.payment_details, name='payment_details'),
 
     path('bid/<int:bid_id>/payment_review/', views.payment_review, name='payment_review'),
-
-    path('<int:id>', views.user_by_id, name='user_by_id'),
 
     path('login/register/', views.register, name='register'),
 
