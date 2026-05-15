@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% for key, value in info.items %}
+        <p>{{ key }}: {{ value }}</p>
+    {% endfor %}
+    {% for key, value in details.items %}
+        <p>{{ key }}: {{ value }}</p>
+    {% endfor %}
+    <label for="submit-payment-btn" class="submit-payment-btn">Submit</label>
+    <form method="POST">
+    {% csrf_token %}
+    <input type='submit' class='btn-primary' value="Submit">
+    </form>
+    <button type="button" id="back-btn" class='btn-primary' value="Back" onclick="window.history.back()">Back</button>
+{% endblock %}

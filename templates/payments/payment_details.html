@@ -5,6 +5,7 @@
     <form method="POST">
         {% csrf_token %}
         {{ form }}
+        <input id='back' type="button" class="proceed-back" value="Back" onclick="window.history.back()">
         <label for="proceed" class="block text-sm font-medium text-gray-700"></label>
         <input id='proceed' type="submit" class="proceed-btn" value="Submit">
     </form>

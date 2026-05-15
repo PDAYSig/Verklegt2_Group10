@@ -47,7 +47,10 @@ urlpatterns = [
 
     path('bid/<int:bid_id>/payment_info/', views.payment_info, name='payment_info'),
 
-    path('bid/<int:bid_id>/payment_details/:payment_method', views.payment_details, name='payment_details'),
+    path('bid/<int:bid_id>/payment_details/', views.payment_details, name='payment_details'),
+
+    path('bid/<int:bid_id>/payment_review/', views.payment_review, name='payment_review'),
+
     path('<int:id>', views.user_by_id, name='user_by_id'),
 
     path('login/register/', views.register, name='register'),
