@@ -27,6 +27,8 @@ def create_listing(request):
         seller, _ = Seller.objects.get_or_create(profile=profile)
 
         listing.seller = seller
+        listing.date_added = timezone.now()
+        listing.current_bid = listing.starting_bid
         listing.save()
 
         images = request.FILES.getlist('images')

@@ -7,10 +7,10 @@ from django.utils import timezone
 from datetime import timedelta
 # Create your models here.
 
-"""
-model class for art listing 
-"""
 class art_listing(models.Model):
+    """
+    model class for art listing
+    """
     MEDIUM_CHOICES = [
         ('Oil', 'Oil'),
         ('Sculpture', 'Sculpture'),
@@ -44,26 +44,25 @@ class art_listing(models.Model):
     starting_price = models.IntegerField(default=0)
     date_added = models.DateField(default=date.today)
     current_bid = models.IntegerField(default=starting_price)
-    minimum_bid = models.IntegerField(default=0)
     thumbnail_image = models.ImageField(upload_to='artworks/')
 
     def __str__(self):
         return f"{self.title} by {self.artist_name} \n{self.medium}"
 
 
-"""
-model class for listing images
-"""
 class ListingImage(models.Model):
+    """
+    model class for listing images
+    """
     listing = models.ForeignKey(art_listing, on_delete=models.CASCADE, related_name='images')
     image = models.ImageField(upload_to='artworks/')
     is_primary = models.BooleanField(default=False)
 
 
-"""
-model class for bids and bid functionality
-"""
 class Bid(models.Model):
+    """
+    model class for bids and bid functionality
+    """
     STATUS_CHOICES = [
         ('pending', 'Pending'),
         ('accepted', 'Accepted'),
@@ -88,10 +87,10 @@ class Bid(models.Model):
         super().save(*args, **kwargs)
 
 
-"""
-Model class for sales
-"""
 class Sale(models.Model):
+    """
+    Model class for sales
+    """
     PAYMENT_CHOICES = [
         ('card', 'Card'),
         ('bank_transfer', 'Bank Transfer'),
