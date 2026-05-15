@@ -47,21 +47,16 @@ def index(request):
         "active_bid_items": active_bid_items,
         "recently_sold_items": recently_sold_items,
     })
-
+"""
+shows the about page
+"""
 def about(request):
     return render(request, "users/about.html")
 
-def artwork_list(request):
-    price_range = art_listing.objects.aggregate(
-        min_price=Min('price'),
-        max_price=Max('price'),
-    )
 
-    context = {
-        "min_price": price_range['min_price'] or 0,
-        "max_price": price_range['max_price'] or 0,
-    }
-    return render(request, 'users/all_art.html', context)
+"""
+function for the all art page which has all the filters that are needed
+"""
 def all_art(request):
     listings = art_listing.objects.all()
     search_filter = request.GET.get('search_filter')
@@ -83,11 +78,14 @@ def all_art(request):
     # if user selects to sort by oldest first
     elif sort == "oldest":
         listings = listings.order_by('date_added')
+    # if user wants the least expensive first
     elif sort == "least_expensive":
         listings = listings.order_by('current_bid')
+    # if user wants the most expensive first
     elif sort == "most_expensive":
         listings = listings.order_by('-current_bid')
 
+    # couple of if and else for filtering which style the artwork should be
     if style == "Modern":
         listings = listings.filter(style='Modern')
     elif style == "Abstract":
@@ -97,6 +95,7 @@ def all_art(request):
     elif style == "Impressionism":
         listings = listings.filter(style='Impressionism')
 
+    # filtering for min and max price
     if min_price:
         try:
             listings = listings.filter(current_bid__gte=int(min_price))
@@ -114,18 +113,28 @@ def all_art(request):
 def login(request):
     return render(request, "users/login.html")
 
+"""
+profile function which holds all info needed for the profile
+"""
 @login_required(login_url="/login/")
 def profile(request):
+    # Get or create a profile for the logged-in user
     user_profile, created = Profile.objects.get_or_create(user=request.user)
+
+    # Check if the user is a seller
     seller = Seller.objects.filter(profile=user_profile).first()
 
     if seller:
         from django.db.models import Max
+
+        # Get the highest bid per listing for this seller
         top_bids = (
             Bid.objects.filter(bidder=seller)
             .values('listing')
             .annotate(max_amount=Max('amount'))
         )
+
+        # Collect the actual bid objects that match the highest amount per listing
         bid_ids = []
         for b in top_bids:
             top_bid = Bid.objects.filter(
@@ -135,11 +144,15 @@ def profile(request):
             ).first()
             if top_bid:
                 bid_ids.append(top_bid.id)
+
+        # Get the final list of top bids ordered by most recent
         bids = Bid.objects.filter(id__in=bid_ids).order_by('-placed_at')
     else:
+        # User is not a seller so no bids to show
         bids = []
 
     if request.method == "POST":
+        # Handle profile form submission
         form = CreateProfileForm(request.POST, instance=user_profile)
         if form.is_valid():
             instance = form.save(commit=False)
@@ -147,6 +160,7 @@ def profile(request):
             instance.save()
             return redirect("profile")
     else:
+        # Pre-fill form with existing profile data
         form = CreateProfileForm(instance=user_profile)
 
     return render(request, "users/profile.html", {
@@ -155,30 +169,40 @@ def profile(request):
         "bids": bids,
     })
 
+"""
+function to edit profile
+"""
 @login_required
 def edit_profile(request):
+    # Get the profile of the logged-in user
     profile = request.user.profile
 
     if request.method == "POST":
+        # Get bio and image from the submitted form
         bio = request.POST.get("bio")
         image = request.FILES.get("image")
 
+        # Update bio if provided
         if bio is not None:
             profile.bio = bio
 
+        # Update profile image if a new one was uploaded
         if image:
             profile.profile_image = image
 
         profile.save()
         return redirect("profile")
 
+    # Render the edit profile form
     return render(request, "users/edit_profile.html")
 
 
 
 def seller_profile(request, id):
+    # get the profile of the seller
     seller = get_object_or_404(Seller, profile__user__id=id)
 
+    # show all art of the seller
     art = art_listing.objects.filter(seller=seller)
 
     return render(request, 'users/seller_profile.html', {
@@ -186,39 +210,57 @@ def seller_profile(request, id):
         'art': art,
     })
 
-
+"""
+function with all the handling for artwork
+"""
 def artwork(request, id):
+    # Get the artwork listing or return 404
     item = art_listing.objects.get(id=id)
     images = item.images.all()
+
+    # Get the most recent bid and the highest bid for this listing
     latest_bid = item.bids.last()
     highest_bid = item.bids.order_by('-amount').first()
+
+    # Auction is active if there are no bids yet, or the latest bid hasn't expired
     auction_active = latest_bid is None or latest_bid.expired_at > timezone.now()
+
     user_has_bid = False
     user_is_winner = False
+
+    # Check if a sale has already been completed for this listing
     sale_exists = Sale.objects.filter(listing=item).exists()
 
     if request.user.is_authenticated:
         profile = request.user.profile
+        # Get or create a seller profile for the logged-in user
         seller, _ = Seller.objects.get_or_create(profile=profile)
+
+        # Check if the current user has already placed a bid
         user_has_bid = Bid.objects.filter(listing=item, bidder=seller).exists()
 
+        # Check if the current user is the highest bidder
         if highest_bid and highest_bid.bidder == seller:
             user_is_winner = True
 
     if request.method == 'POST':
+        # Redirect to login if user is not authenticated
         if not request.user.is_authenticated:
             return redirect('login')
 
+        # Block bidding if the auction has ended
         if not auction_active:
             messages.error(request, 'This auction has ended.')
             return redirect('artwork', id=id)
 
+        # Prevent the seller from bidding on their own listing
         if item.seller == seller:
             messages.error(request, 'You cannot bid on this item.')
             return redirect('artwork', id=id)
 
         bid_amount = Decimal(request.POST.get('bid_amount'))
 
+        # Validate the bid amount
         if bid_amount > item.current_bid and bid_amount >= item.minimum_bid and bid_amount >= item.starting_price:
             bid = Bid.objects.create(listing=item, bidder=seller, amount=bid_amount)
             item.current_bid = bid_amount
@@ -240,7 +282,12 @@ def artwork(request, id):
         'recently_sold_items': art_listing.objects.none(),
         'sale_exists': sale_exists,
     })
+
+"""
+function to handle recently sold items
+"""
 def recently_sold(request):
+    # filters all distinct art which has expired
     recently_sold_items = art_listing.objects.filter(
         bids__expired_at__lte=timezone.now()
     ).distinct()
@@ -272,38 +319,59 @@ def register(request):
         "user_form": user_form,
         "profile_form": profile_form,
     })
+
+"""
+function to create a seller
+"""
 @login_required
 def create_seller(request):
     if request.method == "POST":
         form = CreateSellerForm(request.POST)
         if form.is_valid():
+            # Save the seller without committing to the database yet
             seller = form.save(commit=False)
+
+            # Link the seller to the logged-in user's profile
             profile = request.user.profile
             seller.profile = profile
+
+            # Mark the profile as a seller
             profile.is_seller = True
             profile.save()
+
             seller.save()
+
+            # Redirect to create listing after becoming a seller
             return redirect("create_listing")
     else:
-
+        # Render empty seller creation form
         form = CreateSellerForm()
+
     return render(request, 'users/create_seller.html', {"form": form})
 
 
+"""
+function to update bid status
+"""
 @login_required
 def update_bid_status(request, bid_id):
+    # Get the bid or return 404 if it doesn't exist
     bid = get_object_or_404(Bid, id=bid_id)
 
+    # Only allow the seller of the listing to update the bid status
     if bid.listing.seller.profile.user != request.user:
         return redirect('artwork', id=bid.listing.id)
 
     if request.method == 'POST':
         status = request.POST.get('status')
+
+        # Validate that the status is one of the allowed choices
         if status in dict(Bid.STATUS_CHOICES):
             bid.status = status
             bid.save()
             return redirect('artwork', id=bid.listing.id)
 
+    # Render the status update form
     return render(request, 'users/update_bid_status.html', {'bid': bid})
 
 @login_required
@@ -401,36 +469,55 @@ def payment_review(request, bid_id):
     })
 
 
+"""
+function for editing seller profile
+"""
 @login_required
 def edit_seller_profile(request):
+    # Get the profile and seller for the logged-in user
     profile = request.user.profile
     seller = get_object_or_404(Seller, profile=profile)
 
     if request.method == "POST":
+        # Update seller fields from the submitted form
         seller.type = request.POST.get("seller_type", seller.type)
         seller.street = request.POST.get("street", seller.street)
         seller.city = request.POST.get("city", seller.city)
         seller.postal_code = request.POST.get("postal_code", seller.postal_code)
+
+        # Update logo if a new one was uploaded
         if request.FILES.get("logo"):
             seller.logo = request.FILES.get("logo")
+
+        # Update cover image if a new one was uploaded
         if request.FILES.get("cover_image"):
             seller.cover_image = request.FILES.get("cover_image")
+
         seller.save()
         return redirect('profile')
 
+    # Render the edit seller profile form with current seller data
     return render(request, "users/edit_seller_profile.html", {'seller': seller})
 
 
+"""
+function to delete listing
+"""
 @login_required
 def delete_listing(request, id):
+    # Get the listing or return 404 if it doesn't exist
     item = get_object_or_404(art_listing, id=id)
 
+    # Only allow the seller who owns the listing to delete it
     if item.seller.profile.user != request.user:
         return redirect('artwork', id=id)
 
     if request.method == 'POST':
+        # Store the title before deleting for the confirmation message
+        title = item.title
         item.delete()
-        messages.success(request, ' deleted successfully.')
+        messages.success(request, f'"{title}" deleted successfully.')
         return redirect('users-index')
 
+    # Render the confirmation page before deleting
     return render(request, 'users/delete_listing.html', {'item': item})
