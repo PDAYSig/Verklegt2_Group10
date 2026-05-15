@@ -1,6 +1,6 @@
 from http.client import HTTPResponse
 
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 
 from art.forms.listing_create_form import ListingCreateForm
 from users.models import Seller, Profile
@@ -42,16 +42,3 @@ def create_listing(request):
         return redirect("artwork", id=listing.id)
 
     return render(request, "art/create_listing.html", {"form": form})
-
-def listing_detail(request, pk):
-    item = get_object_or_404(ArtListing, pk=pk)
-
-    if request.method == 'POST':
-        bid_amount = Decimal(request.POST.get('bid_amount'))
-        if bid_amount > item.current_bid and bid_amount >= item.minimum_bid:
-            profile = request.user.profile
-            Bid.objects.create(listing=item, bidder=profile, amount=bid_amount)
-            item.current_bid = bid_amount
-            item.save()
-
-    return render(request, 'your_template.html', {'item': item})

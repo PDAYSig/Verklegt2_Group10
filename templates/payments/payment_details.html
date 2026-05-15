@@ -1,0 +1,12 @@
+
+
+{% block content %}
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ form }}
+        <label for="proceed" class="block text-sm font-medium text-gray-700"></label>
+        <input id='proceed' type="submit" class="proceed-btn" value="Submit">
+    </form>
+
+{% endblock %}
