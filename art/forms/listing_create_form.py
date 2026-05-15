@@ -2,14 +2,12 @@ from django.forms import ModelForm
 from django import forms
 from art.models import art_listing
 class ListingCreateForm(ModelForm):
-    date_added = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}), input_formats=['%y-%m-%d'])
-
     """
     class for listing forms that with everything you can give a value in the form
     """
     class Meta:
         model = art_listing
-        exclude = ['id', 'seller', 'date_added', 'current_bid']
+        exclude = ['id', 'seller', 'current_bid', 'date_added']
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
             'description': forms.Textarea(attrs={'class': 'form-control'}),
@@ -21,4 +19,5 @@ class ListingCreateForm(ModelForm):
             'dimension': forms.TextInput(attrs={'class': 'form-control', 'placeholder': '?x?'}),
             'style' : forms.Select(attrs={'class': 'form-control'}),
             'provenance' : forms.Textarea(attrs={'class': 'form-control'}),
+            'thumbnail_image': forms.FileInput(attrs={'class': 'form-control'}),
         }

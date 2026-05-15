@@ -28,7 +28,7 @@ def create_listing(request):
 
         listing.seller = seller
         listing.date_added = timezone.now()
-        listing.current_bid = listing.starting_bid
+        listing.current_bid = listing.starting_price
         listing.save()
 
         images = request.FILES.getlist('images')
