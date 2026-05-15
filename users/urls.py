@@ -50,8 +50,6 @@ urlpatterns = [
 
     path('bid/<int:bid_id>/payment_review/', views.payment_review, name='payment_review'),
 
-    path('<int:id>', views.user_by_id, name='user_by_id'),
-
     path('login/register/', views.register, name='register'),
 
     path('artwork/<int:id>/delete/', views.delete_listing, name='delete_listing'),
