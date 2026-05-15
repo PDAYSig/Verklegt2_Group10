@@ -11,6 +11,7 @@ class CompletePaymentForm(forms.ModelForm):
         model = Sale
         exclude = ['id', 'seller', 'buyer', 'listing']
         widgets = {
+            'buyer_nid': forms.TextInput(attrs={'class': 'form-control'}),
             'buyer_city' : forms.TextInput(attrs={'class': 'form-control'}),
             'buyer_street' : forms.TextInput(attrs={'class': 'form-control'}),
             'buyer_postal_code' : forms.TextInput(attrs={'class': 'form-control'}),
