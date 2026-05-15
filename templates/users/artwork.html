@@ -80,8 +80,11 @@
         {% endif %}
 
         {% if latest_bid and latest_bid.status == 'accepted' and user_is_winner %}
-            <a href="{% url 'payment_info' latest_bid.id %}" class="btn btn-primary">{% trans "Proceed to payment" %}</a>
-
+            {% if not sale_exists %}
+                <a href="{% url 'payment_info' latest_bid.id %}" class="btn btn-primary">{% trans "Proceed to payment" %}</a>
+            {% else %}
+                <p><strong>Payment complete</strong></p>
+            {% endif %}
         {% elif latest_bid and latest_bid.status == 'rejected' and user_is_winner %}
             <p class="rejected">{% trans "Your bid was rejected." %}</p>
 
