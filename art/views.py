@@ -10,10 +10,6 @@ from django.utils import timezone
 
 
 # Create your views here.
-
-def index(request):
-    return HTTPResponse(f"Response from {request.path}")
-
 @login_required(login_url="/login/")
 def create_listing(request):
     if not request.user.profile.is_seller:

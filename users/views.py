@@ -4,7 +4,6 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse
 from art.models import art_listing, Bid, Sale
 from users.forms.create_seller_form import CreateSellerForm
 from users.forms.create_user_form import CreateProfileForm
@@ -13,15 +12,14 @@ from art.forms.payment_type_forms import CreditCardForm, BankTransferForm, WireT
 from users.models import Profile, Seller
 from decimal import Decimal
 from django.utils import timezone
-from django.db.models import Min, Max
 # Create your views here.
 
-"""
-this show our landing page with new listing which should only show the newest art and has not expired
-there also is the recently sold which shows 2 recently sold artwork
-and there is also the function which shows active bids
-"""
 def index(request):
+    """
+    this show our landing page with new listing which should only show the newest art and has not expired
+    there also is the recently sold which shows 2 recently sold artwork
+    and there is also the function which shows active bids
+    """
     #shows active bids
     active_bid_items = art_listing.objects.filter(
         bids__expired_at__gt=timezone.now()
@@ -47,17 +45,17 @@ def index(request):
         "active_bid_items": active_bid_items,
         "recently_sold_items": recently_sold_items,
     })
-"""
-shows the about page
-"""
 def about(request):
+    """
+    shows the about page
+    """
     return render(request, "users/about.html")
 
 
-"""
-function for the all art page which has all the filters that are needed
-"""
 def all_art(request):
+    """
+    function for the all art page which has all the filters that are needed
+    """
     listings = art_listing.objects.all()
     search_filter = request.GET.get('search_filter')
     medium = request.GET.get('medium')
@@ -111,13 +109,16 @@ def all_art(request):
     return render(request, "users/all_art.html", {"listings": listings})
 
 def login(request):
+    """
+    Login page
+    """
     return render(request, "users/login.html")
 
-"""
-profile function which holds all info needed for the profile
-"""
 @login_required(login_url="/login/")
 def profile(request):
+    """
+    profile function which holds all info needed for the profile
+    """
     # Get or create a profile for the logged-in user
     user_profile, created = Profile.objects.get_or_create(user=request.user)
 
@@ -169,11 +170,11 @@ def profile(request):
         "bids": bids,
     })
 
-"""
-function to edit profile
-"""
 @login_required
 def edit_profile(request):
+    """
+    function to edit profile
+    """
     # Get the profile of the logged-in user
     profile = request.user.profile
 
@@ -199,6 +200,9 @@ def edit_profile(request):
 
 
 def seller_profile(request, id):
+    """
+    Render seller profile page
+    """
     # get the profile of the seller
     seller = get_object_or_404(Seller, profile__user__id=id)
 
@@ -210,10 +214,10 @@ def seller_profile(request, id):
         'art': art,
     })
 
-"""
-function with all the handling for artwork
-"""
 def artwork(request, id):
+    """
+    function with all the handling for artwork
+    """
     # Get the artwork listing or return 404
     item = art_listing.objects.get(id=id)
     images = item.images.all()
@@ -283,10 +287,10 @@ def artwork(request, id):
         'sale_exists': sale_exists,
     })
 
-"""
-function to handle recently sold items
-"""
 def recently_sold(request):
+    """
+    function to handle recently sold items
+    """
     # filters all distinct art which has expired
     recently_sold_items = art_listing.objects.filter(
         bids__expired_at__lte=timezone.now()
@@ -296,9 +300,15 @@ def recently_sold(request):
     })
 
 def register(request):
+    """
+    Render register page
+    """
     if request.method == "POST":
+        # declare the forms
         user_form = UserCreationForm(request.POST)
         profile_form = CreateProfileForm(request.POST, request.FILES)
+
+        # Validate the forms and submitting the data
         if user_form.is_valid() and profile_form.is_valid():
             user = user_form.save()
             users_profile = profile_form.save(commit=False)
@@ -306,6 +316,7 @@ def register(request):
             users_profile.save()
             return redirect("login")
         else:
+            # Render the register form
             return render(request, "users/register.html", {
                 "user_form": user_form,
                 "profile_form": profile_form,
@@ -498,11 +509,11 @@ def edit_seller_profile(request):
     return render(request, "users/edit_seller_profile.html", {'seller': seller})
 
 
-"""
-function to delete listing
-"""
 @login_required
 def delete_listing(request, id):
+    """
+    function to delete listing
+    """
     # Get the listing or return 404 if it doesn't exist
     item = get_object_or_404(art_listing, id=id)
 

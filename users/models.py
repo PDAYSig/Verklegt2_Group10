@@ -6,6 +6,9 @@ from django.contrib.auth.models import User
 
 
 class Profile(models.Model):
+    """
+    Model class for the user profile
+    """
     id = models.AutoField(primary_key=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.TextField(max_length=500)
@@ -16,6 +19,9 @@ class Profile(models.Model):
         return f" {self.user.username} {self.profile_image}"
 
 class Seller(models.Model):
+    """
+    Model class for the seller profile
+    """
     TYPE_CHOICES = [
         ('Individual', 'individual'),
         ('Gallery', 'gallery'),
