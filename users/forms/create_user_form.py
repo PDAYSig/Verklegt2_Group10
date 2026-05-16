@@ -2,10 +2,10 @@ from django import forms
 
 from users.models import Profile
 
-"""
-class for creating a profile form
-"""
 class CreateProfileForm(forms.ModelForm):
+    """
+    class for creating a profile form
+    """
     class Meta:
         model = Profile
         exclude = ['user', 'id', 'password', 'is_seller']

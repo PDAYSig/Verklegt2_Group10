@@ -1,11 +1,9 @@
-from email.policy import default
-
 from django import forms
 
-"""
-class for credit card form
-"""
 class CreditCardForm(forms.Form):
+    """
+    class for credit card form
+    """
     CARD_CHOICES = (
     ('Visa', 'Visa'),
     ('Mastercard', 'Mastercard'),
@@ -33,16 +31,16 @@ class CreditCardForm(forms.Form):
     cvc = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control-c'}))
 
 
-"""
-class for bank transfer form
-"""
 class BankTransferForm(forms.Form):
+    """
+    class for bank transfer form
+    """
     iban = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control-c'}))
 
-"""
-class for wire transfer form
-"""
 class WireTransferForm(forms.Form):
+    """
+    class for wire transfer form
+    """
     sending_bank = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control-c'}))
     routing_number = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control-c'}))
     account_number = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control-c'}))
