@@ -261,7 +261,7 @@ def artwork(request, id):
         bid_amount = Decimal(request.POST.get('bid_amount'))
 
         # Validate the bid amount
-        if bid_amount > item.current_bid and bid_amount >= item.minimum_bid and bid_amount >= item.starting_price:
+        if bid_amount > item.current_bid and bid_amount >= item.starting_price:
             bid = Bid.objects.create(listing=item, bidder=seller, amount=bid_amount)
             item.current_bid = bid_amount
             item.save()
